@@ -18,7 +18,7 @@ func initialize(mapping_contexts:Array[GUIDEMappingContext], remapping_config:GU
 	
 	for mapping_context in mapping_contexts:
 		if not is_instance_valid(mapping_context):
-			push_error("Cannot add null mapping context. Ignoring.")
+			#push_error("Cannot add null mapping context. Ignoring.")
 			return
 		_mapping_contexts.append(mapping_context)
 			
