@@ -6,6 +6,7 @@ var _audio_bus_name_idx_mapping: Dictionary = {}
 func _ready() -> void:
 	Settings.load_settings()
 	%Back.pressed.connect(go_back)
+	$VBoxContainer/ResetControls.pressed.connect(Settings.reset_controls)
 	call_deferred("_update_audio_sliders")
 
 	for idx: int in range(0, AudioServer.bus_count):

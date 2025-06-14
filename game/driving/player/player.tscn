@@ -1,0 +1,74 @@
+[gd_scene load_steps=12 format=3 uid="uid://dv61y0i4k1uj4"]
+
+[ext_resource type="Script" uid="uid://b3ny8358o0ae0" path="res://game/driving/player/player.gd" id="1_5movi"]
+[ext_resource type="Resource" uid="uid://c6tovgnwacf3x" path="res://input/move.tres" id="2_taihn"]
+[ext_resource type="Resource" uid="uid://u57h3v2w73ya" path="res://input/boost.tres" id="3_lcp04"]
+[ext_resource type="Resource" uid="uid://0l46x8suo47" path="res://input/accelerate.tres" id="4_kf1fs"]
+[ext_resource type="Resource" uid="uid://bame6gk4n45wc" path="res://input/brake.tres" id="5_2sqmf"]
+[ext_resource type="Resource" uid="uid://b5g5x82md43g0" path="res://input/shoot.tres" id="6_el7td"]
+
+[sub_resource type="Curve" id="Curve_taihn"]
+_data = [Vector2(0, 0), 0.0, 2.9593, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_5movi"]
+size = Vector3(2, 0.2, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_uch2k"]
+size = Vector3(2.5, 0.25, 0.865)
+
+[sub_resource type="BoxMesh" id="BoxMesh_52gg4"]
+size = Vector3(0.72, 0.19, 0.515)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_taihn"]
+radius = 1.0
+
+[node name="Player" type="PathFollow3D" node_paths=PackedStringArray("mesh_container", "player", "player_target", "boost_timer", "hurt_box", "camera")]
+script = ExtResource("1_5movi")
+direction_input = ExtResource("2_taihn")
+boost_input = ExtResource("3_lcp04")
+acceleration_input = ExtResource("4_kf1fs")
+braking_input = ExtResource("5_2sqmf")
+shoot_input = ExtResource("6_el7td")
+movement_limits = Vector2(5, 1)
+speed_curve = SubResource("Curve_taihn")
+mesh_container = NodePath("CharacterBody3D/MeshContainer")
+player = NodePath("CharacterBody3D")
+player_target = NodePath("Player_target")
+boost_timer = NodePath("BoostTimer")
+hurt_box = NodePath("")
+camera = NodePath("Camera3D")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+
+[node name="MeshContainer" type="Node3D" parent="CharacterBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/MeshContainer"]
+mesh = SubResource("BoxMesh_5movi")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CharacterBody3D/MeshContainer/MeshInstance3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("BoxMesh_uch2k")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="CharacterBody3D/MeshContainer/MeshInstance3D"]
+transform = Transform3D(1.91069e-15, -1, -4.37114e-08, -4.37114e-08, -4.37114e-08, 1, -1, 0, -4.37114e-08, 0, 0.226751, 0.848582)
+mesh = SubResource("BoxMesh_52gg4")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("SphereShape3D_taihn")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+current = true
+fov = 90.0
+
+[node name="BoostTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CollisionTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Player_target" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)

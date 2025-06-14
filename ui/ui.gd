@@ -1,5 +1,9 @@
 extends CanvasLayer
 
+@export var mapping_contexts : Array[GUIDEMappingContext]
+@export var change_mapping : GUIDEAction
+
+var current_active_mapping : int = 0
 
 # TODO: consider using the hide_ui and show_ui functions to add ui animation
 func hide_ui(page: Variant = null) -> void:
@@ -66,6 +70,8 @@ func _ready() -> void:
 
 
 func late_ready() -> void:
+	GUIDE.enable_mapping_context(mapping_contexts[current_active_mapping])
+	change_mapping.triggered.connect(change_mappings)
 	hide()
 	for child: Node in get_children():
 		if child is UiPage:
@@ -102,6 +108,11 @@ func _unhandled_input(event: InputEvent) -> void:
 				get_viewport().set_input_as_handled()
 				break
 
+func change_mappings() -> void:
+	print_debug("changed mapping")
+	GUIDE.disable_mapping_context(mapping_contexts[current_active_mapping])
+	current_active_mapping = (current_active_mapping + 1)%mapping_contexts.size()
+	GUIDE.enable_mapping_context(mapping_contexts[current_active_mapping])
 
 func _focus_something() -> void:
 	for child: Node in get_children():
