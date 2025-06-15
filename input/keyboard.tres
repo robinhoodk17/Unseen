@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=51 format=3 uid="uid://b0o7i73e4lrpm"]
+[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=60 format=3 uid="uid://b0o7i73e4lrpm"]
 
 [ext_resource type="Script" uid="uid://dg14s44mi7afd" path="res://addons/guide/guide_action_mapping.gd" id="1_srvgb"]
 [ext_resource type="Resource" uid="uid://0l46x8suo47" path="res://input/accelerate.tres" id="2_fon5c"]
@@ -18,6 +18,8 @@
 [ext_resource type="Resource" uid="uid://diop7pt8pl55a" path="res://input/pause.tres" id="13_vpsrf"]
 [ext_resource type="Resource" uid="uid://e1tjyui4y8wi" path="res://input/change_mapping.tres" id="14_uyqtg"]
 [ext_resource type="Script" uid="uid://e37v3rpkiqjw" path="res://addons/guide/inputs/guide_input_any.gd" id="15_aluir"]
+[ext_resource type="Resource" uid="uid://dq10pdwoyx1kv" path="res://input/Jump.tres" id="18_3hdr6"]
+[ext_resource type="Resource" uid="uid://bq8qp6wd1vl60" path="res://input/climb.tres" id="20_iwnfj"]
 
 [sub_resource type="Resource" id="Resource_gb5w4"]
 script = ExtResource("4_46e60")
@@ -201,7 +203,7 @@ triggers = Array[ExtResource("6_ki67m")]([])
 script = ExtResource("1_srvgb")
 action = ExtResource("10_24bhi")
 input_mappings = Array[ExtResource("3_t3ofx")]([SubResource("Resource_ck3pw"), SubResource("Resource_8frnn"), SubResource("Resource_mx0eh"), SubResource("Resource_be3e4")])
-metadata/_guide_input_mappings_collapsed = false
+metadata/_guide_input_mappings_collapsed = true
 
 [sub_resource type="Resource" id="Resource_sm5bi"]
 script = ExtResource("12_viv15")
@@ -275,8 +277,62 @@ action = ExtResource("14_uyqtg")
 input_mappings = Array[ExtResource("3_t3ofx")]([SubResource("Resource_ssyps")])
 metadata/_guide_input_mappings_collapsed = true
 
+[sub_resource type="Resource" id="Resource_8r66d"]
+script = ExtResource("4_46e60")
+key = 32
+shift = false
+control = false
+alt = false
+meta = false
+allow_additional_modifiers = true
+
+[sub_resource type="Resource" id="Resource_24bhi"]
+script = ExtResource("8_iwnfj")
+actuation_threshold = 0.5
+
+[sub_resource type="Resource" id="Resource_io6u4"]
+script = ExtResource("3_t3ofx")
+override_action_settings = false
+is_remappable = false
+display_name = ""
+display_category = ""
+input = SubResource("Resource_8r66d")
+modifiers = Array[ExtResource("5_3hdr6")]([])
+triggers = Array[ExtResource("6_ki67m")]([SubResource("Resource_24bhi")])
+
+[sub_resource type="Resource" id="Resource_viv15"]
+script = ExtResource("1_srvgb")
+action = ExtResource("18_3hdr6")
+input_mappings = Array[ExtResource("3_t3ofx")]([SubResource("Resource_io6u4")])
+metadata/_guide_input_mappings_collapsed = true
+
+[sub_resource type="Resource" id="Resource_f4ktc"]
+script = ExtResource("4_46e60")
+key = 4194326
+shift = false
+control = false
+alt = false
+meta = false
+allow_additional_modifiers = true
+
+[sub_resource type="Resource" id="Resource_iksp3"]
+script = ExtResource("3_t3ofx")
+override_action_settings = false
+is_remappable = false
+display_name = ""
+display_category = ""
+input = SubResource("Resource_f4ktc")
+modifiers = Array[ExtResource("5_3hdr6")]([])
+triggers = Array[ExtResource("6_ki67m")]([])
+
+[sub_resource type="Resource" id="Resource_nqrep"]
+script = ExtResource("1_srvgb")
+action = ExtResource("20_iwnfj")
+input_mappings = Array[ExtResource("3_t3ofx")]([SubResource("Resource_iksp3")])
+metadata/_guide_input_mappings_collapsed = true
+
 [resource]
 script = ExtResource("2_hg2fb")
 display_name = ""
-mappings = Array[ExtResource("1_srvgb")]([SubResource("Resource_6er2n"), SubResource("Resource_3x8yp"), SubResource("Resource_3iuxo"), SubResource("Resource_hkoea"), SubResource("Resource_wycca"), SubResource("Resource_ls5vo"), SubResource("Resource_gn0fx")])
+mappings = Array[ExtResource("1_srvgb")]([SubResource("Resource_6er2n"), SubResource("Resource_3x8yp"), SubResource("Resource_3iuxo"), SubResource("Resource_hkoea"), SubResource("Resource_wycca"), SubResource("Resource_ls5vo"), SubResource("Resource_gn0fx"), SubResource("Resource_viv15"), SubResource("Resource_nqrep")])
 metadata/_custom_type_script = "uid://bxl2p20uj1xj7"
