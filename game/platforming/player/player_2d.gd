@@ -16,22 +16,22 @@ signal break_interaction
 @export var landing_time : float = .15
 @export_subgroup("running")
 ##player max speed
-@export var speed : float = 20.0
+@export var speed : float = 100.0
 @export_subgroup("jump")
-@export var invisibility_delay : float = 0.1
-@export var jump_velocity : float = -300.0
-@export var jump_floatiness : float = 0.15
+@export var invisibility_delay : float = 0.05
+@export var jump_velocity : float = -200.0
+@export var jump_floatiness : float = 0.18
 ##how big is gravity
 @export var going_down_speed : float = 1.0
 @export_subgroup("wall jump")
 ##the velocity in x repulsing the player from the wall
-@export var wall_jump_repulsion : float = 12.5
+@export var wall_jump_repulsion : float = 100.0
 @export var wall_jump_time : float = 0.375
-@export var wall_slide_break_time : float = .1
+@export var wall_slide_break_time : float = .05
 ##when the player is pressing against a wall, how much it stops falling
-@export var wall_slide_gravity : float = 0.75
-@export var dash_velocity : float = 30.0
-@export var dash_duration : float = 0.25
+@export var wall_slide_gravity : float = 0.6
+@export var dash_velocity : float = 300.0
+@export var dash_duration : float = 0.15
 @export var coyote_time : float = 0.25
 
 @export_group("Nodes")

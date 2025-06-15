@@ -190,15 +190,6 @@ tile_set = SubResource("TileSet_xncqr")
 
 [node name="Player" parent="." instance=ExtResource("2_ujv01")]
 position = Vector2(24, -12)
-speed = 100.0
-invisibility_delay = 0.05
-jump_velocity = -200.0
-jump_floatiness = 0.18
-wall_jump_repulsion = 100.0
-wall_slide_break_time = 0.05
-wall_slide_gravity = 0.6
-dash_velocity = 300.0
-dash_duration = 0.15
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(116, -132)
