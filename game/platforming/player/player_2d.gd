@@ -90,7 +90,8 @@ func _ready() -> void:
 	dash_action.triggered.connect(queue_dash)
 	checkpoint = global_position
 	checkpoint_box.area_entered.connect(store_checkpoint)
-	hurtbox.area_entered.connect(take_damage_and_respawn)
+	hurtbox.area_entered.connect(respawn)
+	Signalbus.playerspotted.connect(respawn)
 
 
 func queue_dash() -> void:
@@ -319,10 +320,7 @@ func state_machine(delta: float) -> void:
 func change_state(new_state : state) -> void: 
 	current_state = new_state
 
-func take_damage_and_respawn(_body : Node2D) -> void:
-	await Ui.fade_to_black(0.25)
-	current_state = state.BLOCKED
-	velocity = Vector2.ZERO
-	global_position = checkpoint
-	await Ui.fade_to_clear(0.25)
-	current_state = state.IDLE
+func respawn(_body : Node2D = null) -> void:
+	await Ui.fade_to_black(0.01)
+	get_tree().reload_current_scene()
+	await Ui.fade_to_clear(0.01)

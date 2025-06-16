@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bjk3ls1owsaib"]
+[gd_scene load_steps=12 format=4 uid="uid://bjk3ls1owsaib"]
 
 [ext_resource type="Texture2D" uid="uid://gts3t1lstmvw" path="res://game/platforming/assets/brackeys_platformer_assets/sprites/world_tileset.png" id="1_lvfh6"]
 [ext_resource type="Script" uid="uid://clj5jgt5wlei2" path="res://game/platforming/scenes/trial_scene.gd" id="1_xncqr"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://u57h3v2w73ya" path="res://input/boost.tres" id="6_frs7f"]
 [ext_resource type="Resource" uid="uid://bq8qp6wd1vl60" path="res://input/climb.tres" id="7_pba42"]
 [ext_resource type="Resource" uid="uid://c6tovgnwacf3x" path="res://input/move.tres" id="8_y6l08"]
+[ext_resource type="PackedScene" uid="uid://beppcdkycxsn5" path="res://game/platforming/prefabs/spotlight.tscn" id="9_pba42"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ujv01"]
 texture = ExtResource("1_lvfh6")
@@ -234,3 +235,11 @@ offset_bottom = 54.0
 text = "+"
 horizontal_alignment = 1
 interact_action = ExtResource("8_y6l08")
+
+[node name="Spotlight" parent="." instance=ExtResource("9_pba42")]
+position = Vector2(166, -109)
+polygon = PackedVector2Array(-2, -27, -67.3333, 28.6667, -19.3333, 28.6667)
+
+[node name="Spotlight2" parent="." instance=ExtResource("9_pba42")]
+position = Vector2(212, -13)
+polygon = PackedVector2Array(-2, -27, -67.3333, 28.6667, -19.3333, 28.6667)

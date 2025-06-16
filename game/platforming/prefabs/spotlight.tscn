@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://beppcdkycxsn5"]
+
+[ext_resource type="Script" uid="uid://c4sypk63iqldv" path="res://game/platforming/prefabs/spotlight.gd" id="1_b6xtj"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_y6l08"]
+size = Vector2(5, 60)
+
+[node name="Spotlight" type="Polygon2D"]
+color = Color(1, 1, 1, 0.439216)
+script = ExtResource("1_b6xtj")
+
+[node name="LampPost" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_y6l08")
+
+[node name="Area2D2" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D2"]
