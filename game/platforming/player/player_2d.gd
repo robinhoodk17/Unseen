@@ -237,8 +237,11 @@ func state_machine(delta: float) -> void:
 
 		state.CLIMBING:
 			velocity.y = 0.0
+			handle_lateral_movement(delta, move_direction.x)
 			coyote_timer.start(coyote_time)
 			invisibility_timer.start(invisibility_delay)
+			if !wall_jump_left.is_colliding() and !wall_jump_right.is_colliding():
+				current_state = state.WALKING
 			if is_on_floor():
 				current_state = state.WALKING
 
