@@ -93,7 +93,7 @@ func fade_to_black(duration: float = fade_duration) -> Signal:
 
 func _to_color(new_color: Color, duration: float) -> Signal:
 	if _tween && _tween.is_running():
-		_tween.Kill()
+		_tween.kill()
 		print_debug("killed a tween")
 	_tween = create_tween()
 	_tween.tween_property(fade, "color", new_color, duration)

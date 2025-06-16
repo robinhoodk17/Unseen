@@ -26,6 +26,7 @@ ProjectUISoundController="*res://addons/maaacks_ui_sound_controller/base/scenes/
 Utils="*res://autoloads/utils.gd"
 GUIDE="*res://addons/guide/guide.gd"
 Ui="*res://ui/ui.tscn"
+Signalbus="*res://autoloads/signalbus.gd"
 
 [debug]
 
