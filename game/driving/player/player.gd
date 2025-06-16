@@ -7,6 +7,7 @@ extends PathFollow3D
 @export var braking_input : GUIDEAction
 @export var shoot_input : GUIDEAction
 @export_group("Speed_stats")
+@export var invisibility_delay : float = 0.15
 @export var movement_limits : Vector2 = Vector2(5.0,5.0)
 @export var speed_curve : Curve
 @export var max_speed : float = 200.0
@@ -26,6 +27,9 @@ extends PathFollow3D
 @export var hurt_box: Area3D
 @export var camera : Camera3D
 
+@onready var invisibility_timer: Timer = create_timer(invisibility_delay)
+
+var invisible : bool = false
 var accelerating : bool = false
 var braking : bool = false
 var current_speed : float = 0.0
@@ -33,10 +37,11 @@ var previous_position : Vector3
 var previousBasis : Basis
 
 func _ready() -> void:
+	Signalbus.playerspotted.connect(respawn)
 	boost_input.triggered.connect(start_boost)
 	player.top_level = true
 	#hurt_box.body_entered.connect(handle_collisions)
-	
+
 
 func _physics_process(delta: float) -> void:
 	if acceleration_input.value_bool:
@@ -51,6 +56,9 @@ func _physics_process(delta: float) -> void:
 	if boost_timer.is_stopped():
 		camera.fov = lerp(camera.fov, 90.0, delta)
 		progress += max_speed * speed_curve.sample(current_speed) * delta
+		show()
+		if invisibility_timer.is_stopped():
+			invisible = false
 	else:
 		handle_boost(delta)
 
@@ -65,6 +73,9 @@ func _physics_process(delta: float) -> void:
 	previous_position = player_target.global_position
 
 func handle_boost(delta) -> void:
+	hide()
+	invisible = true
+	invisibility_timer.start(invisibility_delay)
 	current_speed = 1.0
 	camera.fov = lerp(camera.fov, 120.0, delta)
 	progress += boost_speed * delta
@@ -101,8 +112,20 @@ func handle_movement(delta) -> void:
 	player_target.position.x += direction.x * delta * horizontal_speed
 	player_target.position.y += direction.y * delta * vertical_speed
 
+func handle_collisions(body : Node3D) -> void:
+	pass
+
+
 func start_boost() -> void:
 	boost_timer.start(boost_duration)
+
+#region utilities
+func create_timer(wait_time: float = 1.0, one_shot: bool = true) -> Timer:
+	var timer : Timer = Timer.new()
+	timer.wait_time = wait_time
+	timer.one_shot = one_shot
+	add_child(timer)
+	return timer
 
 func checkForNan() -> bool:
 	var checkingBasis : Basis = mesh_container.global_basis
@@ -114,5 +137,11 @@ func checkForNan() -> bool:
 		return true
 	return false
 
-func handle_collisions(body : Node3D) -> void:
-	pass
+func respawn() -> void:
+	get_tree().paused = true
+	await get_tree().create_timer(0.75).timeout
+	get_tree().paused = false
+	await Ui.fade_to_black(0.01)
+	get_tree().reload_current_scene()
+	await Ui.fade_to_clear(0.01)
+#endregion
