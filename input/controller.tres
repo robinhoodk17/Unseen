@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=51 format=3 uid="uid://dxybf2sr6yakr"]
+[gd_resource type="Resource" script_class="GUIDEMappingContext" load_steps=52 format=3 uid="uid://dxybf2sr6yakr"]
 
 [ext_resource type="Script" uid="uid://dg14s44mi7afd" path="res://addons/guide/guide_action_mapping.gd" id="1_ok07p"]
 [ext_resource type="Resource" uid="uid://0l46x8suo47" path="res://input/accelerate.tres" id="2_ocuog"]
@@ -48,6 +48,11 @@ x = 0
 y = 1
 joy_index = -1
 
+[sub_resource type="Resource" id="Resource_6er2n"]
+script = ExtResource("6_iftvl")
+lower_threshold = 0.4
+upper_threshold = 1.0
+
 [sub_resource type="Resource" id="Resource_be3e4"]
 script = ExtResource("3_hkfsi")
 override_action_settings = false
@@ -55,14 +60,14 @@ is_remappable = true
 display_name = "Right"
 display_category = ""
 input = SubResource("Resource_ud07o")
-modifiers = Array[ExtResource("5_cunx7")]([])
+modifiers = Array[ExtResource("5_cunx7")]([SubResource("Resource_6er2n")])
 triggers = Array[ExtResource("6_jmo8q")]([])
 
 [sub_resource type="Resource" id="Resource_hkoea"]
 script = ExtResource("1_ok07p")
 action = ExtResource("10_6486w")
 input_mappings = Array[ExtResource("3_hkfsi")]([SubResource("Resource_be3e4")])
-metadata/_guide_input_mappings_collapsed = true
+metadata/_guide_input_mappings_collapsed = false
 
 [sub_resource type="Resource" id="Resource_lcoek"]
 script = ExtResource("14_qaoxm")

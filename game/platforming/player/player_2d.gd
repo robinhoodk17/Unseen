@@ -13,7 +13,7 @@ signal break_interaction
 ##for example, when a player jumps before reaching the ground
 @export var queue_time : float = 0.15
 @export var queue_time_for_attacks : float = 1.0
-@export var landing_time : float = .15
+@export var landing_time : float = .05
 @export_subgroup("running")
 ##player max speed
 @export var speed : float = 100.0
@@ -135,7 +135,6 @@ func handle_gravity(delta: float) -> void:
 		invisible = true
 		animated_sprite_2d.hide()
 	else:
-		invisible = false
 		animated_sprite_2d.show()
 	current_gravity_force = 1.0
 	match current_state:
@@ -154,8 +153,9 @@ func handle_gravity(delta: float) -> void:
 			landing_timer.start(landing_time)
 			velocity.x *= 0.9
 			current_state = state.LANDING
-
 		airborne = false
+		if landing_timer.is_stopped():
+			invisible = false
 	else:
 		airborne = true
 		velocity += get_gravity() * going_down_speed * delta * current_gravity_force
@@ -210,7 +210,7 @@ func do_wall_jump() -> void:
 	wall_jump_timer.start(wall_jump_time)
 
 func dash(direction : Vector2) -> void:
-	print_debug("dashing")
+	invisibility_timer.start(invisibility_delay)
 	current_dash_velocity = dash_velocity
 	if direction == Vector2.ZERO:
 		dash_position = Vector2(looking, 0)
@@ -247,6 +247,9 @@ func state_machine(delta: float) -> void:
 				current_state = state.WALKING
 			if is_on_floor():
 				current_state = state.WALKING
+			if !climb_action.value_bool:
+				current_state = state.WALKING
+				
 
 		state.WALL_SLIDING:
 			if !wall_jump_left.is_colliding() and !wall_jump_right.is_colliding():
@@ -308,7 +311,7 @@ func state_machine(delta: float) -> void:
 
 		state.LANDING:
 			handle_lateral_movement(delta, move_direction.x)
-			animated_sprite_2d.play("land")
+			#animated_sprite_2d.play("land")
 			if landing_timer.is_stopped():
 				current_state = state.WALKING
 
