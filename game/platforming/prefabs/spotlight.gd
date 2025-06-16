@@ -8,7 +8,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	for i : Node2D in area_2d.get_overlapping_bodies():
-		print_debug(i.name)
 		if i.is_in_group("player"):
-			if i.is_on_floor() or i.current_state == PlayerController.state.CLIMBING:
-				Signalbus.playerspotted.emit()
+			if i.landing_timer.is_stopped() or i.current_state == PlayerController.state.CLIMBING:
+				if !i.invisible:
+					Signalbus.playerspotted.emit()
