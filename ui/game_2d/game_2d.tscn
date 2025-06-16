@@ -1,7 +1,14 @@
-[gd_scene format=3 uid="uid://cmu03pcy7pceo"]
+[gd_scene load_steps=3 format=3 uid="uid://cmu03pcy7pceo"]
+
+[ext_resource type="Script" uid="uid://dur06tii3qckb" path="res://ui/game_2d/game_2d.gd" id="1_qme86"]
+[ext_resource type="AudioStream" uid="uid://cg17bkd6485mi" path="res://game/platforming/assets/test game.mp3" id="2_ytqel"]
 
 [node name="Game2D" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_qme86")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ytqel")
