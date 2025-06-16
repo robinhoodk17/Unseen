@@ -24,7 +24,7 @@ up_vector_enabled = false
 curve = SubResource("Curve3D_nmmbj")
 
 [node name="Player" parent="Path3D" instance=ExtResource("1_55ww7")]
-transform = Transform3D(0.982019, -0.00547119, 0.188697, 4.65661e-10, 0.999577, 0.0289824, -0.188776, -0.0284612, 0.981606, -0.956758, 12.3678, -73.8246)
+transform = Transform3D(0.982019, -0.00547121, 0.188697, 4.65661e-10, 0.999577, 0.0289825, -0.188776, -0.0284613, 0.981606, -0.956758, 12.3678, -73.8246)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dqe0k")
