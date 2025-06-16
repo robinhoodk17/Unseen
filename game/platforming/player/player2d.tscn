@@ -332,6 +332,7 @@ shape = SubResource("CircleShape2D_jry8r")
 debug_color = Color(1, 1, 1, 0)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 5
 sprite_frames = SubResource("SpriteFrames_be406")
 animation = &"air"
 autoplay = "idle"
