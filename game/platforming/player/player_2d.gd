@@ -57,6 +57,7 @@ var last_interaction : float = -1.0
 
 var checkpoint : Vector2
 
+var invisible : bool = true
 var current_dash_velocity : float = 0.0
 var direction_x : float = 0.0
 var looking : int = 1
@@ -131,8 +132,10 @@ func _physics_process(delta: float) -> void:
 
 func handle_gravity(delta: float) -> void:
 	if invisibility_timer.is_stopped():
+		invisible = true
 		animated_sprite_2d.hide()
 	else:
+		invisible = false
 		animated_sprite_2d.show()
 	current_gravity_force = 1.0
 	match current_state:
@@ -324,6 +327,9 @@ func change_state(new_state : state) -> void:
 	current_state = new_state
 
 func respawn(_body : Node2D = null) -> void:
+	get_tree().paused = true
+	await get_tree().create_timer(0.75).timeout
+	get_tree().paused = false
 	await Ui.fade_to_black(0.01)
 	get_tree().reload_current_scene()
 	await Ui.fade_to_clear(0.01)
