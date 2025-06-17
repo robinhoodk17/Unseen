@@ -23,7 +23,7 @@ size = Vector3(0.72, 0.19, 0.515)
 [sub_resource type="SphereShape3D" id="SphereShape3D_taihn"]
 radius = 1.0
 
-[node name="Player" type="PathFollow3D" node_paths=PackedStringArray("mesh_container", "player", "player_target", "boost_timer", "camera") groups=["player"]]
+[node name="Player" type="PathFollow3D" node_paths=PackedStringArray("mesh_container", "player", "player_target", "boost_timer", "camera")]
 script = ExtResource("1_5movi")
 direction_input = ExtResource("2_taihn")
 boost_input = ExtResource("3_lcp04")
@@ -38,7 +38,7 @@ player_target = NodePath("Player_target")
 boost_timer = NodePath("BoostTimer")
 camera = NodePath("Camera3D")
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="." groups=["player"]]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 
 [node name="MeshContainer" type="Node3D" parent="CharacterBody3D"]

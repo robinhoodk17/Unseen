@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://ixi2mti2o1o4"]
+
+[ext_resource type="Script" uid="uid://b3ny8358o0ae0" path="res://game/driving/player/player.gd" id="1_a7drh"]
+[ext_resource type="Resource" uid="uid://c6tovgnwacf3x" path="res://input/move.tres" id="2_7r5pg"]
+[ext_resource type="Resource" uid="uid://u57h3v2w73ya" path="res://input/boost.tres" id="3_mijea"]
+[ext_resource type="Resource" uid="uid://0l46x8suo47" path="res://input/accelerate.tres" id="4_rfuti"]
+[ext_resource type="Resource" uid="uid://bame6gk4n45wc" path="res://input/brake.tres" id="5_gcaek"]
+[ext_resource type="Resource" uid="uid://b5g5x82md43g0" path="res://input/shoot.tres" id="6_w70ke"]
+[ext_resource type="PackedScene" uid="uid://vv4jopr7enj2" path="res://ui/assets/model/Mash1.glb" id="7_3irwx"]
+
+[sub_resource type="Curve" id="Curve_taihn"]
+_data = [Vector2(0, 0), 0.0, 2.9593, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_taihn"]
+radius = 1.0
+
+[node name="Player" type="PathFollow3D" node_paths=PackedStringArray("mesh_container", "player", "player_target", "boost_timer", "camera")]
+script = ExtResource("1_a7drh")
+direction_input = ExtResource("2_7r5pg")
+boost_input = ExtResource("3_mijea")
+acceleration_input = ExtResource("4_rfuti")
+braking_input = ExtResource("5_gcaek")
+shoot_input = ExtResource("6_w70ke")
+movement_limits = Vector2(9, 6)
+speed_curve = SubResource("Curve_taihn")
+max_speed = 80.0
+boost_speed = 50.0
+mesh_container = NodePath("CharacterBody3D/MeshContainer")
+player = NodePath("CharacterBody3D")
+player_target = NodePath("Player_target")
+boost_timer = NodePath("BoostTimer")
+camera = NodePath("Camera3D")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+
+[node name="MeshContainer" type="Node3D" parent="CharacterBody3D"]
+
+[node name="Mash1" parent="CharacterBody3D/MeshContainer" instance=ExtResource("7_3irwx")]
+transform = Transform3D(-0.14, 0, -2.11394e-08, 0, 0.14, 0, 2.11394e-08, 0, -0.14, -6.98332, -1.07968, -9.3529)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("SphereShape3D_taihn")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+current = true
+fov = 90.0
+near = 0.25
+far = 25000.0
+
+[node name="BoostTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CollisionTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Player_target" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
