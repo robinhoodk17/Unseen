@@ -10,9 +10,10 @@ class_name player3d_second_attempt
 @export_group("camera")
 @export var camera_offset : float = 10.0
 @export_group("Speed_stats")
+@export var drag : float = 50.0
 @export var limits : Vector2 = Vector2(15, 3)
 ##the distance we want to keep the player from the last wagon
-@export var wagon_optimal_distance : float = 50.0
+@export var wagon_optimal_distance : float = 100.0
 @export var speed_curve : Curve
 @export var max_speed : float = 100.0
 @export var boost_speed : float = 300.0
@@ -37,6 +38,7 @@ var current_speed : float = 0.0
 var previousBasis : Basis
 var correction_strength : float
 var current_wagon : wagon = null
+var current_velocity : float = 0.0
 
 func _ready() -> void:
 	boost_input.triggered.connect(start_boost)
@@ -59,8 +61,8 @@ func position_camera(delta) -> void :
 	camera_pivot.basis = target_transform.basis
 	
 	#camera_3d.look_at(global_position)
-	var target_camera_rotation : Basis = camera_3d.global_basis.looking_at(global_position)
-	camera_3d.global_basis = camera_3d.global_basis.slerp(target_camera_rotation,delta * 10.0)
+	#var target_camera_rotation : Basis = camera_3d.global_basis.looking_at(global_position)
+	#camera_3d.global_basis = camera_3d.global_basis.slerp(target_camera_rotation,delta * 10.0)
 	#camera_3d.rotation.x = clamp(camera_3d.rotation.x,-PI/4, PI/4)
 	#camera_3d.rotation.y = clamp(camera_3d.rotation.y,-PI/4, PI/4)
 
@@ -76,10 +78,15 @@ func _physics_process(delta: float) -> void:
 		current_speed -= delta / braking_speed
 		if current_speed < 0.0:
 			current_speed = 0.0
-	
-	var z_component : float= -max_speed * speed_curve.sample(current_speed)
+	var z_component : float = 0.0
+	if current_velocity > max_speed:
+		z_component = -current_velocity
+		current_velocity -= drag * delta
+	else:
+		z_component = -max_speed * speed_curve.sample(current_speed)
 	if !boost_timer.is_stopped():
 		z_component = -boost_speed
+		current_velocity = boost_speed
 	var direction : Vector2 = direction_input.value_axis_2d
 	var x_component : float = direction.x * move_speed.x
 	var y_component : float = -direction.y * move_speed.y
@@ -91,23 +98,25 @@ func _physics_process(delta: float) -> void:
 	
 	if current_wagon != null:
 		var wagon_relative_position : Vector3 = camera_pivot.global_position - current_wagon.global_position
-		var wagon_relative_z : float = -camera_pivot.global_basis.z.dot(wagon_relative_position)
+		var wagon_relative_z : float = camera_pivot.global_basis.z.dot(wagon_relative_position)
 		if wagon_relative_z < wagon_optimal_distance:
-			z_component /= 2.0
+			if wagon_relative_z > 0.0:
+				z_component /= clamp((wagon_optimal_distance - wagon_relative_z)/10, 1, 5)
+	
+	print_debug(velocity)
 	if relative_y <= -limits.y:
-		y_component = -10 * abs(relative_y)
+		y_component = -10 * clamp(abs(relative_y), .01, 100)
 	if relative_y >= limits.y:
-		y_component = 10 * abs(relative_y)
+		y_component = 10 * clamp(abs(relative_y), .01, 100)
 	
 	if relative_x <= -limits.x:
-		x_component = 10 * abs(relative_y)
+		x_component = 10 * clamp(abs(relative_x), .01, 100)
 	if relative_x >= limits.x:
-		x_component = -10 * abs(relative_y)
+		x_component = -10 * clamp(abs(relative_x), .01, 100)
 	
 	var untransformed_vel : Vector3 = Vector3(x_component, y_component, z_component)
 	var transformed_vel : Vector3 = camera_pivot.global_basis * untransformed_vel
 	velocity = transformed_vel
-
 	handle_animations(delta, direction)
 	move_and_slide()
 
