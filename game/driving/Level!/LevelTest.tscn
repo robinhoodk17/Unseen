@@ -1,6 +1,6 @@
 [gd_scene load_steps=32 format=4 uid="uid://4o1mq42pa2hu"]
 
-[ext_resource type="PackedScene" uid="uid://ixi2mti2o1o4" path="res://ui/assets/model/playerModel.tscn" id="2_36gg7"]
+[ext_resource type="PackedScene" uid="uid://cikp8uuoalhq5" path="res://game/driving/player/player_second_attempt.tscn" id="1_cgshd"]
 [ext_resource type="Texture2D" uid="uid://bumrpyfk6kkqb" path="res://game/EnvirinmScene/skyBox/result1.png" id="2_qhnf7"]
 [ext_resource type="PackedScene" uid="uid://b06lyeikgj761" path="res://game/EnvirinmScene/demo/assets/models/Rock/Cube_045.glb" id="4_is8j0"]
 [ext_resource type="PackedScene" uid="uid://cpplefx42voar" path="res://game/EnvirinmScene/demo/assets/models/Rock/Cube_046.glb" id="5_85gia"]
@@ -111,23 +111,23 @@ _data = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 266.165, 0)
 curve = SubResource("Curve3D_36gg7")
 
-[node name="Player" parent="Path3D" instance=ExtResource("2_36gg7")]
-transform = Transform3D(0.999838, -2.1709e-09, -0.0129725, 0, 0.999992, -1.67319e-07, 0.0129726, 1.67318e-07, 0.99983, -6.3269, -0.000793457, 4327.21)
+[node name="Player" parent="Path3D" instance=ExtResource("1_cgshd")]
+unique_name_in_owner = true
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="Path3D/Player"]
-transform = Transform3D(20.4249, -0.265007, -1.1584e-08, -4.43414e-08, -4.31031e-06, 20.4252, -0.265009, -20.425, -4.31089e-06, 1.21788, 3.89855, -9.80859)
+transform = Transform3D(20.425, -1.04308e-06, -1.56319e-13, -5.32907e-14, -8.92788e-07, 20.425, -8.9407e-08, -20.425, -8.92809e-07, -0.169231, 4.88046, 0)
 size = Vector3(0.523682, 1.13647, 0.00708008)
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="Path3D/Player"]
-transform = Transform3D(20.4249, -0.265007, -1.1584e-08, -4.43414e-08, -4.31031e-06, 20.4252, -0.265009, -20.425, -4.31089e-06, 1.21788, -5.65261, -9.80859)
+transform = Transform3D(20.425, -1.04308e-06, -1.56319e-13, -5.32907e-14, -8.92788e-07, 20.425, -8.9407e-08, -20.425, -8.92809e-07, -0.169231, -4.67062, 0)
 size = Vector3(0.523682, 1.13647, 0.00708008)
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="Path3D/Player"]
-transform = Transform3D(20.4252, -0.265012, -1.15848e-08, -4.43417e-08, -4.31024e-06, 20.4252, -0.265014, -20.425, -4.31097e-06, 7.56503, -1.66937, -9.89063)
+transform = Transform3D(20.4253, -6.04987e-06, 8.17124e-14, 4.86722e-13, -8.92718e-07, 20.425, -1.2219e-06, -20.425, -8.92889e-07, 6.17796, -0.687408, 0)
 size = Vector3(0.00762939, 1.13647, 0.626038)
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="Path3D/Player"]
-transform = Transform3D(20.4252, -0.265012, -1.15847e-08, -4.43417e-08, -4.31024e-06, 20.4252, -0.265013, -20.425, -4.31096e-06, -4.44465, -0.457275, -9.73486)
+transform = Transform3D(20.4253, -6.04987e-06, 4.9738e-14, 3.23297e-13, -8.92718e-07, 20.425, -2.38419e-07, -20.425, -8.92879e-07, -5.8318, 0.524658, 0)
 size = Vector3(0.00762939, 1.13647, 0.507355)
 
 [node name="Environment" type="Node3D" parent="."]

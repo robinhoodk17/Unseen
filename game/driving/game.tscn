@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bhsiyh7htemxt"]
 
-[ext_resource type="PackedScene" uid="uid://dv61y0i4k1uj4" path="res://game/driving/player/player.tscn" id="1_55ww7"]
 [ext_resource type="PackedScene" uid="uid://bs2ir8ft4u7rs" path="res://game/driving/level.blend" id="1_dqe0k"]
+[ext_resource type="PackedScene" uid="uid://cikp8uuoalhq5" path="res://game/driving/player/player_second_attempt.tscn" id="2_nmmbj"]
 [ext_resource type="PackedScene" uid="uid://7teeqq7nerpm" path="res://game/driving/prefabs/spotlight3d.tscn" id="3_nmmbj"]
 
 [sub_resource type="Curve3D" id="Curve3D_nmmbj"]
@@ -23,8 +23,8 @@ up_vector_enabled = false
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_nmmbj")
 
-[node name="Player" parent="Path3D" instance=ExtResource("1_55ww7")]
-transform = Transform3D(0.982019, -0.00547121, 0.188697, 4.65661e-10, 0.999577, 0.0289825, -0.188776, -0.0284613, 0.981606, -0.956758, 12.3678, -73.8246)
+[node name="Player" parent="Path3D" instance=ExtResource("2_nmmbj")]
+limits = Vector2(10, 5)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dqe0k")
