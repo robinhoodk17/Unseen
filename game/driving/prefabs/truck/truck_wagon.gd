@@ -10,7 +10,7 @@ func _ready() -> void:
 	call_deferred("late_ready")
 	
 func late_ready() -> void:
-	current_speed = player.max_speed * 1.25
+	current_speed = player.max_speed * .9
 	Signalbus.player_started_boost.connect(react_to_boost)
 	active = true
 
