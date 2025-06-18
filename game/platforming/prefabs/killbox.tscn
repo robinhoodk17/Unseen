@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://blj10034dnvuj"]
+
+[ext_resource type="Script" uid="uid://cojb2j0mjo1xa" path="res://killbox.gd" id="1_4evh4"]
+
+[node name="Killbox" type="Area2D"]
+script = ExtResource("1_4evh4")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://hs2bpyx5wu5r"]
+
+[ext_resource type="PackedScene" uid="uid://kfdjle8x4cl2" path="res://game/EnvirinmScene/demo/assets/models/City/CityPack1.glb" id="1_7bsba"]
+
+[node name="CityPack1" instance=ExtResource("1_7bsba")]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, -15.1008, 0, -2.12796)
+
+[node name="Landscape_001" parent="." index="0"]
+transform = Transform3D(274.726, 0, 0, 0, 274.726, 0, 0, 0, 274.726, 80.2723, -26.1891, 391.607)
