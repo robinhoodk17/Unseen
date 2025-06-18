@@ -8,6 +8,6 @@ func _input(event: InputEvent) -> void:
 		get_tree().paused = true
 		ui.go_to("PauseMenu")
 
-func show_ui():
+func show_ui() -> void:
 	if !audio_stream_player.playing:
 		audio_stream_player.play()

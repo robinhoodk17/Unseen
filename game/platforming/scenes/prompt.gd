@@ -13,5 +13,5 @@ func update() -> void:
 		prompt.hide()
 		return
 	var formatter : GUIDEInputFormatter = GUIDEInputFormatter.for_active_contexts(20)
-	var input_label  = await formatter.action_as_richtext_async(interact_action)
+	var input_label = await formatter.action_as_richtext_async(interact_action)
 	prompt.text = "[center]%s[center]" % [input_label]

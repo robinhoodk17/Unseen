@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://bjk3ls1owsaib"]
+[gd_scene load_steps=15 format=4 uid="uid://bjk3ls1owsaib"]
 
 [ext_resource type="Texture2D" uid="uid://gts3t1lstmvw" path="res://game/platforming/assets/brackeys_platformer_assets/sprites/world_tileset.png" id="1_lvfh6"]
 [ext_resource type="Script" uid="uid://clj5jgt5wlei2" path="res://game/platforming/scenes/trial_scene.gd" id="1_xncqr"]
@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://c6tovgnwacf3x" path="res://input/move.tres" id="8_y6l08"]
 [ext_resource type="PackedScene" uid="uid://beppcdkycxsn5" path="res://game/platforming/prefabs/spotlight.tscn" id="9_pba42"]
 [ext_resource type="PackedScene" uid="uid://blj10034dnvuj" path="res://game/platforming/prefabs/killbox.tscn" id="10_y6l08"]
+[ext_resource type="PackedScene" uid="uid://n5evuawpos7q" path="res://game/platforming/prefabs/next_room.tscn" id="11_33spm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ujv01"]
 texture = ExtResource("1_lvfh6")
@@ -260,3 +261,6 @@ polygon = PackedVector2Array(-2, -27, -67.3333, 28.6667, -19.3333, 28.6667)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killbox"]
 position = Vector2(122, 113)
 shape = SubResource("RectangleShape2D_33spm")
+
+[node name="Label" parent="." instance=ExtResource("11_33spm")]
+new_scene = "uid://cbtera7bpef48"

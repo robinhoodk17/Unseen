@@ -133,9 +133,11 @@ func _physics_process(delta: float) -> void:
 func handle_gravity(delta: float) -> void:
 	if invisibility_timer.is_stopped():
 		invisible = true
-		animated_sprite_2d.hide()
+		animated_sprite_2d.self_modulate.a = 0.1
+		#animated_sprite_2d.hide()
 	else:
-		animated_sprite_2d.show()
+		animated_sprite_2d.self_modulate.a = 1.0
+		#animated_sprite_2d.show()
 	current_gravity_force = 1.0
 	match current_state:
 		state.WALL_SLIDING:

@@ -1,7 +1,9 @@
-[gd_scene load_steps=33 format=4 uid="uid://4o1mq42pa2hu"]
+[gd_scene load_steps=34 format=4 uid="uid://4o1mq42pa2hu"]
 
-[ext_resource type="PackedScene" uid="uid://ixi2mti2o1o4" path="res://ui/assets/model/playerModel.tscn" id="2_36gg7"]
+[ext_resource type="PackedScene" uid="uid://cikp8uuoalhq5" path="res://game/driving/player/player_second_attempt.tscn" id="1_cgshd"]
+[ext_resource type="Script" uid="uid://cp2mumtpcw05u" path="res://game/driving/prefabs/truck/truck.gd" id="2_1563b"]
 [ext_resource type="Texture2D" uid="uid://bumrpyfk6kkqb" path="res://game/EnvirinmScene/skyBox/result1.png" id="2_qhnf7"]
+[ext_resource type="PackedScene" uid="uid://c2xuba36ro24p" path="res://game/driving/prefabs/truck/wagon.tscn" id="3_v7y5c"]
 [ext_resource type="PackedScene" uid="uid://b06lyeikgj761" path="res://game/EnvirinmScene/demo/assets/models/Rock/Cube_045.glb" id="4_is8j0"]
 [ext_resource type="PackedScene" uid="uid://cpplefx42voar" path="res://game/EnvirinmScene/demo/assets/models/Rock/Cube_046.glb" id="5_85gia"]
 [ext_resource type="PackedScene" uid="uid://kfdjle8x4cl2" path="res://game/EnvirinmScene/demo/assets/models/City/CityPack1.glb" id="6_guqs2"]
@@ -20,7 +22,6 @@
 [ext_resource type="PackedScene" uid="uid://du4c87jxtkpio" path="res://game/EnvirinmScene/demo/assets/models/City/CityPack3.glb" id="18_vvpe0"]
 [ext_resource type="PackedScene" uid="uid://b67iphbwe2iy" path="res://game/EnvirinmScene/demo/assets/models/City/CityPack4.glb" id="20_cgshd"]
 [ext_resource type="PackedScene" uid="uid://17wbmjaeeukf" path="res://game/EnvirinmScene/demo/assets/item/star.tscn" id="21_65d5h"]
-[ext_resource type="PackedScene" uid="uid://din8v376po0ty" path="res://game/EnvirinmScene/demo/assets/AnimationModel/Star.glb" id="22_1563b"]
 
 [sub_resource type="Curve3D" id="Curve3D_36gg7"]
 _data = {
@@ -112,9 +113,29 @@ _data = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 266.165, 0)
 curve = SubResource("Curve3D_36gg7")
 
-[node name="Player" parent="Path3D" instance=ExtResource("2_36gg7")]
-transform = Transform3D(0.999841, -2.13601e-09, -0.0129725, -3.48845e-11, 0.999992, -1.67319e-07, 0.0129726, 1.67318e-07, 0.999833, 59.7827, 5.92235e-05, -768.066)
-progress = 5095.71
+[node name="Player" parent="Path3D" instance=ExtResource("1_cgshd")]
+unique_name_in_owner = true
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Path3D/Player"]
+transform = Transform3D(20.425, -1.04308e-06, -1.56319e-13, -5.32907e-14, -8.92788e-07, 20.425, -8.9407e-08, -20.425, -8.92809e-07, -0.169231, 4.88046, 0)
+size = Vector3(0.523682, 1.13647, 0.00708008)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Path3D/Player"]
+transform = Transform3D(20.425, -1.04308e-06, -1.56319e-13, -5.32907e-14, -8.92788e-07, 20.425, -8.9407e-08, -20.425, -8.92809e-07, -0.169231, -4.67062, 0)
+size = Vector3(0.523682, 1.13647, 0.00708008)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Path3D/Player"]
+transform = Transform3D(20.4253, -6.04987e-06, 8.17124e-14, 4.86722e-13, -8.92718e-07, 20.425, -1.2219e-06, -20.425, -8.92889e-07, 6.17796, -0.687408, 0)
+size = Vector3(0.00762939, 1.13647, 0.626038)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Path3D/Player"]
+transform = Transform3D(20.4253, -6.04987e-06, 4.9738e-14, 3.23297e-13, -8.92718e-07, 20.425, -2.38419e-07, -20.425, -8.92879e-07, -5.8318, 0.524658, 0)
+size = Vector3(0.00762939, 1.13647, 0.507355)
+
+[node name="Truck" type="Node3D" parent="Path3D"]
+script = ExtResource("2_1563b")
+
+[node name="Wagon" parent="Path3D/Truck" instance=ExtResource("3_v7y5c")]
 
 [node name="Environment" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 772.891, 469.493, -258.682)
@@ -234,30 +255,6 @@ transform = Transform3D(3.69753, -1.37525, 0, 1.37525, 3.69753, 0, 0, 0, 3.945, 
 
 [node name="Cube_0454" parent="mount2" instance=ExtResource("4_is8j0")]
 transform = Transform3D(0.192678, 0, 0, 0, 0.192678, 0, 0, 0, 0.192678, 387.091, 5.64687, 171.387)
-
-[node name="Star" parent="mount2" instance=ExtResource("21_65d5h")]
-transform = Transform3D(0.043, 0, 0, 0, 0.043, 0, 0, 0, 0.043, 368.483, -19.7002, 1300.56)
-
-[node name="Star2" parent="mount2" instance=ExtResource("21_65d5h")]
-transform = Transform3D(0.043, 0, 0, 0, 0.043, 0, 0, 0, 0.043, 366.49, -21.372, 1288.4)
-
-[node name="Star3" parent="mount2" instance=ExtResource("21_65d5h")]
-transform = Transform3D(0.043, 0, 0, 0, 0.043, 0, 0, 0, 0.043, 364.866, -18.7169, 1237.99)
-
-[node name="Star4" parent="mount2" instance=ExtResource("21_65d5h")]
-transform = Transform3D(0.043, 0, 0, 0, 0.043, 0, 0, 0, 0.043, 367.834, -21.1554, 1197.62)
-
-[node name="Star6" parent="mount2" instance=ExtResource("21_65d5h")]
-transform = Transform3D(0.043, 0, 0, 0, 0.043, 0, 0, 0, 0.043, 371.464, -19.2951, 623.929)
-
-[node name="Star5" parent="mount2" instance=ExtResource("21_65d5h")]
-transform = Transform3D(0.043, 0, 0, 0, 0.043, 0, 0, 0, 0.043, 375.67, -18.7295, 410.641)
-
-[node name="Star7" parent="mount2" instance=ExtResource("21_65d5h")]
-transform = Transform3D(0.043, 0, 0, 0, 0.043, 0, 0, 0, 0.043, 375.67, -18.7295, 209.125)
-
-[node name="Star8" parent="mount2" instance=ExtResource("21_65d5h")]
-transform = Transform3D(0.043, 0, 0, 0, 0.043, 0, 0, 0, 0.043, 382.672, -18.7295, 35.3567)
 
 [node name="mount3" type="Node3D" parent="."]
 transform = Transform3D(5.19, 0, 0, 0, 5.19, 0, 0, 0, 5.19, 3625.42, 368.116, -4130.63)
@@ -1094,30 +1091,30 @@ transform = Transform3D(8.11, 0, 0, 0, 3.70744, -7.21297, 0, 7.21297, 3.70744, 1
 [node name="CityPack6" parent="." instance=ExtResource("20_cgshd")]
 transform = Transform3D(10.91, 0, 0, 0, 9.63314, -5.1216, 0, 5.1216, 9.63314, 1102.5, 1042.34, -42713.4)
 
-[node name="Star2" parent="." instance=ExtResource("21_65d5h")]
-transform = Transform3D(0.716131, 0, 0.697965, 0, 1, 0, -0.697965, 0, 0.716131, -1676.77, 471.34, -22366.9)
+[node name="star" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.10782, 265.949, 4227.48)
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
-transform = Transform3D(20.425, 0, 0, 0, 20.425, 0, 0, 0, 20.425, -40.3339, 221.4, 4259.79)
-size = Vector3(1, 230.464, 1)
+[node name="Star5" parent="star" instance=ExtResource("21_65d5h")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -1.75092, -1.17697, -32.6602)
 
-[node name="Star" parent="." instance=ExtResource("22_1563b")]
-transform = Transform3D(-0.13, 0, -1.67638e-08, 0, 0.13, 0, 1.67638e-08, 0, -0.13, -2.29501, 268.485, 4319.7)
+[node name="Torus_011" parent="star/Star5" index="0"]
+transform = Transform3D(5.77274, 0.751607, 14.4327, 14.4522, -0.30022, -5.76495, 1.50735e-06, 15.5414, -0.809354, 0, 0, 0)
 
-[node name="Cube_044" parent="Star" index="0"]
-transform = Transform3D(0.501078, 0.865402, -2.96215e-08, -0.865402, 0.501078, 1.70774e-08, 2.96214e-08, 1.70774e-08, 1, -0.746729, 0, 0)
+[node name="AnimationPlayer" parent="star/Star5" index="1"]
+root_node = NodePath("../../Star4")
 
-[node name="AnimationPlayer" parent="Star" index="1"]
-autoplay = "Cube_044Action_001"
+[node name="Star4" parent="star" instance=ExtResource("21_65d5h")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 1.75092, 1.17694, 32.6606)
 
-[node name="Star3" parent="." instance=ExtResource("22_1563b")]
-transform = Transform3D(-0.13, 0, -1.67638e-08, 0, 0.13, 0, 1.67638e-08, 0, -0.13, 7.31583, 268.485, 4319.7)
+[node name="Torus_011" parent="star/Star4" index="0"]
+transform = Transform3D(5.77274, 0.751607, 14.4327, 14.4522, -0.30022, -5.76495, 1.50735e-06, 15.5414, -0.809354, 0, 0, 0)
 
-[node name="Cube_044" parent="Star3" index="0"]
-transform = Transform3D(0.501078, 0.865402, -2.96215e-08, -0.865402, 0.501078, 1.70774e-08, 2.96215e-08, 1.70774e-08, 1, 112.704, 0, 1.5979)
+[node name="Star6" parent="star" instance=ExtResource("21_65d5h")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 1.75092, 1.17694, 32.6606)
 
-[node name="AnimationPlayer" parent="Star3" index="1"]
-autoplay = "Cube_044Action_002"
+[node name="Torus_011" parent="star/Star6" index="0"]
+transform = Transform3D(5.77274, 0.751607, 14.4327, 14.4522, -0.30022, -5.76495, 1.50735e-06, 15.5414, -0.809353, -75.5597, -10.6733, -1870.59)
 
-[editable path="Star"]
-[editable path="Star3"]
+[editable path="star/Star5"]
+[editable path="star/Star4"]
+[editable path="star/Star6"]

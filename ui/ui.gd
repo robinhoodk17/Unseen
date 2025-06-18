@@ -85,6 +85,13 @@ func create_fade() -> void:
 	fade.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(fade)
 
+func change_scene(new_scene : String) -> void:
+	get_tree().paused = true
+	fade_to_black(.5)
+	get_tree().call_deferred("change_scene_to_file", new_scene)
+	fade_to_clear(.5)
+	get_tree().paused = false
+
 func fade_to_clear(duration: float = fade_duration) -> Signal:
 	return _to_color(CLEAR, duration)
 	

@@ -1,33 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsh8lu3xwvk31"]
+[gd_scene load_steps=2 format=3 uid="uid://bsh8lu3xwvk31"]
 
 [ext_resource type="Script" uid="uid://bvr8gs45y6h57" path="res://main.gd" id="1_cii0i"]
-[ext_resource type="PackedScene" uid="uid://cwlsmyqfrwdd4" path="res://game/driving/level.blend" id="2_h2yge"]
-[ext_resource type="PackedScene" uid="uid://dv61y0i4k1uj4" path="res://game/driving/player/player.tscn" id="3_1bvp3"]
-
-[sub_resource type="Curve3D" id="Curve3D_h2yge"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -28.9425, -8.84217, 123.273, 0, 0, 0, 0, 0, 0, -40.2502, -16.0454, 223.727, 0, 0, 0, 0, 0, 0, -27.317, -22.553, 314.538, 0, 0, 0, 0, 0, 0, 54.8966, -29.0978, 406.04, 0, 0, 0, 0, 0, 0, 132.912, -36.422, 508.404, 0, 0, 0, 0, 0, 0, -1.36973, -43.4412, 605.985, 0, 0, 0, 0, 0, 0, -249.65, -44.8518, 625.044, 0, 0, 0, 0, 0, 0, -489.019, -34.5397, 480.594, 0, 0, 0, 0, 0, 0, -518.232, -20.9857, 291.447, 0, 0, 0, 0, 0, 0, -452.893, -10.6652, 147.641, 0, 0, 0, 0, 0, 0, -408.707, -0.60606, 7.4299, 0, 0, 0, 0, 0, 0, -348.853, 13.8, -193.381, 0, 0, 0, 0, 0, 0, -419.823, 21.7361, -304.264),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-}
-point_count = 13
-
-[sub_resource type="Environment" id="Environment_7mycd"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_cii0i")
-
-[node name="level" parent="." instance=ExtResource("2_h2yge")]
-
-[node name="Path3D" type="Path3D" parent="."]
-transform = Transform3D(0.977406, -0.0149497, 0.210838, -4.65661e-10, 0.997495, 0.0707285, -0.211367, -0.0691306, 0.974958, -0.956758, 54.9228, -73.8246)
-curve = SubResource("Curve3D_h2yge")
-
-[node name="Player" parent="Path3D" instance=ExtResource("3_1bvp3")]
-transform = Transform3D(-0.993724, -0.00795056, 0.111577, -9.31322e-10, 0.997471, 0.0710763, -0.111859, 0.0706302, -0.991211, -28.9425, -8.84217, 123.273)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_7mycd")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
-transform = Transform3D(1, 0, 0, 0, 0.124589, 0.992208, 0, -0.992208, 0.124589, 0, 0, 0)
-directional_shadow_mode = 0
