@@ -20,14 +20,16 @@ signal break_interaction
 @export_subgroup("jump")
 @export var invisibility_delay : float = 0.05
 @export var jump_velocity : float = -200.0
-@export var jump_floatiness : float = 0.18
+@export var jump_floatiness : float = 0.25
+@export var jump_hang : float = 0.025
 ##how big is gravity
-@export var going_down_speed : float = 1.0
+@export var going_down_speed : float = 2.0
 @export_subgroup("wall jump")
 ##the velocity in x repulsing the player from the wall
 @export var wall_jump_repulsion : float = 100.0
 @export var wall_jump_time : float = 0.375
 @export var wall_slide_break_time : float = .05
+@export var climb_cooldown : float = .35
 ##when the player is pressing against a wall, how much it stops falling
 @export var wall_slide_gravity : float = 0.6
 @export var dash_velocity : float = 300.0
@@ -63,17 +65,20 @@ var direction_x : float = 0.0
 var looking : int = 1
 var jumping_time : float = 0.0
 var dash_spent : bool = false
+var climb_spent : bool = false
 var input_queued : inputs = inputs.NONE
 var airborne : bool = false
 var current_gravity_force : float = 1.0
 var dash_position : Vector2
   
 @onready var coyote_timer: Timer = create_timer()
+@onready var climb_timer: Timer = create_timer()
 @onready var invisibility_timer: Timer = create_timer()
 @onready var dash_reset_timer: Timer = create_timer()
 @onready var queue_timer: Timer = create_timer()
 @onready var landing_timer: Timer = create_timer()
 @onready var down_timer : Timer = create_timer(0.2)
+@onready var jump_hang_timer: Timer = create_timer(jump_hang)
 @onready var wall_jump_timer : Timer = create_timer(wall_jump_time)
 @onready var wall_slide_timer : Timer = create_timer(wall_slide_break_time)
 
@@ -131,6 +136,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func handle_gravity(delta: float) -> void:
+	current_gravity_force = 1.0
 	if invisibility_timer.is_stopped():
 		invisible = true
 		animated_sprite_2d.self_modulate.a = 0.1
@@ -138,7 +144,6 @@ func handle_gravity(delta: float) -> void:
 	else:
 		animated_sprite_2d.self_modulate.a = 1.0
 		#animated_sprite_2d.show()
-	current_gravity_force = 1.0
 	match current_state:
 		state.WALL_SLIDING:
 			if velocity.y <= 0.0:
@@ -146,10 +151,17 @@ func handle_gravity(delta: float) -> void:
 		state.CLIMBING:
 			current_gravity_force = 0.0
 			velocity.y = 0.0
-
+		state.JUMPING:
+			current_gravity_force = 0.5
+		state.WALL_JUMP:
+			current_gravity_force = 0.4
+			
+	if !jump_hang_timer.is_stopped():
+		current_gravity_force = 0.01
 	if is_on_floor():
 		invisibility_timer.start(invisibility_delay)
 		dash_spent = false
+		climb_spent = false
 		coyote_timer.start(coyote_time)
 		if airborne:
 			landing_timer.start(landing_time)
@@ -189,18 +201,20 @@ func jump() -> void:
 
 	coyote_timer.stop()
 
-	if current_state == state.WALL_SLIDING or current_state == state.CLIMBING:
+	if current_state == state.WALL_SLIDING:
 		do_wall_jump()
 		return
 	
-	current_state = state.JUMPING
 	jumping_time = 0.0
 	velocity.y = jump_velocity
+	if current_state == state.CLIMBING:
+		velocity.y *= 2.0
+	current_state = state.JUMPING
 	#velocity += get_platform_velocity()/4.0	
 
 func do_wall_jump() -> void:
 	invisibility_timer.start(invisibility_delay)
-	velocity.y = jump_velocity * 1.25
+	velocity.y = jump_velocity * 1.5
 	current_state = state.WALL_JUMP
 	var _sign : int = 1
 	#if wall_jump_right.is_colliding()
@@ -261,8 +275,11 @@ func state_machine(delta: float) -> void:
 					wall_slide_timer.start(wall_slide_break_time)
 			if wall_slide_timer.is_stopped():
 				current_state = state.WALKING
-			if climb_action.value_bool:
+			#if climb_action.value_bool and !climb_spent:
+			if climb_action.value_bool and climb_timer.is_stopped():
 				current_state = state.CLIMBING
+				climb_spent = true
+				climb_timer.start(climb_cooldown)
 
 		state.WALKING:
 			handle_lateral_movement(delta, move_direction.x)
@@ -308,7 +325,8 @@ func state_machine(delta: float) -> void:
 		state.JUMPING:
 			handle_lateral_movement(delta, move_direction.x)
 			animated_sprite_2d.play("jump")
-			if jumping_time > jump_floatiness:
+			if velocity.y > -0.01:
+				jump_hang_timer.start(jump_hang)
 				current_state = state.WALKING
 
 		state.LANDING:
