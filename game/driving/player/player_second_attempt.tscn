@@ -23,7 +23,7 @@ size = Vector3(0.72, 0.19, 0.515)
 [sub_resource type="SphereShape3D" id="SphereShape3D_jko4k"]
 radius = 1.0
 
-[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("mesh_container", "camera_pivot")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("mesh_container", "camera_pivot")]
 script = ExtResource("1_53b0o")
 direction_input = ExtResource("2_03fqq")
 boost_input = ExtResource("3_jibn3")
@@ -50,7 +50,6 @@ mesh = SubResource("BoxMesh_gevky")
 skeleton = NodePath("../..")
 
 [node name="CameraPivot" type="PathFollow3D" parent="."]
-top_level = true
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 
