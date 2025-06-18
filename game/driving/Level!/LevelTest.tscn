@@ -112,7 +112,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 266.165, 0)
 curve = SubResource("Curve3D_36gg7")
 
 [node name="Player" parent="Path3D" instance=ExtResource("2_36gg7")]
-transform = Transform3D(0.999839, -2.1709e-09, -0.0129725, 0, 0.999992, -1.67319e-07, 0.0129726, 1.67318e-07, 0.999831, -6.3269, -0.000793457, 4327.21)
+transform = Transform3D(0.999838, -2.1709e-09, -0.0129725, 0, 0.999992, -1.67319e-07, 0.0129726, 1.67318e-07, 0.99983, -6.3269, -0.000793457, 4327.21)
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="Path3D/Player"]
 transform = Transform3D(20.4249, -0.265007, -1.1584e-08, -4.43414e-08, -4.31031e-06, 20.4252, -0.265009, -20.425, -4.31089e-06, 1.21788, 3.89855, -9.80859)

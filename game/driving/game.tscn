@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bhsiyh7htemxt"]
 
 [ext_resource type="PackedScene" uid="uid://dv61y0i4k1uj4" path="res://game/driving/player/player.tscn" id="1_55ww7"]
-[ext_resource type="PackedScene" uid="uid://cwlsmyqfrwdd4" path="res://game/driving/level.blend" id="1_dqe0k"]
+[ext_resource type="PackedScene" uid="uid://bs2ir8ft4u7rs" path="res://game/driving/level.blend" id="1_dqe0k"]
 [ext_resource type="PackedScene" uid="uid://7teeqq7nerpm" path="res://game/driving/prefabs/spotlight3d.tscn" id="3_nmmbj"]
 
 [sub_resource type="Curve3D" id="Curve3D_nmmbj"]

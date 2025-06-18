@@ -23,7 +23,7 @@ class_name player3D
 @export var vertical_speed : float = 10.0
 @export_group("Nodes")
 @export var mesh_container : Node3D
-@export var player : AnimatableBody3D
+@export var player : CharacterBody3D
 @export var player_target : Node3D
 @export var boost_timer : Timer
 @export var hurt_box: Area3D
@@ -43,7 +43,7 @@ func _ready() -> void:
 	Signalbus.playerspotted.connect(respawn)
 	boost_input.triggered.connect(start_boost)
 	player.top_level = false
-	hurt_box.body_entered.connect(handle_collisions)
+	#hurt_box.body_entered.connect(handle_collisions)
 
 
 func _physics_process(delta: float) -> void:
