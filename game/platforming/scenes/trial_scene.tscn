@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://bjk3ls1owsaib"]
+[gd_scene load_steps=14 format=4 uid="uid://bjk3ls1owsaib"]
 
 [ext_resource type="Texture2D" uid="uid://gts3t1lstmvw" path="res://game/platforming/assets/brackeys_platformer_assets/sprites/world_tileset.png" id="1_lvfh6"]
 [ext_resource type="Script" uid="uid://clj5jgt5wlei2" path="res://game/platforming/scenes/trial_scene.gd" id="1_xncqr"]
@@ -7,7 +7,6 @@
 [ext_resource type="Resource" uid="uid://dq10pdwoyx1kv" path="res://input/Jump.tres" id="5_8xad1"]
 [ext_resource type="Resource" uid="uid://u57h3v2w73ya" path="res://input/boost.tres" id="6_frs7f"]
 [ext_resource type="Resource" uid="uid://bq8qp6wd1vl60" path="res://input/climb.tres" id="7_pba42"]
-[ext_resource type="Resource" uid="uid://c6tovgnwacf3x" path="res://input/move.tres" id="8_y6l08"]
 [ext_resource type="PackedScene" uid="uid://beppcdkycxsn5" path="res://game/platforming/prefabs/spotlight.tscn" id="9_pba42"]
 [ext_resource type="PackedScene" uid="uid://blj10034dnvuj" path="res://game/platforming/prefabs/killbox.tscn" id="10_y6l08"]
 [ext_resource type="PackedScene" uid="uid://n5evuawpos7q" path="res://game/platforming/prefabs/next_room.tscn" id="11_33spm"]
@@ -224,29 +223,28 @@ text = "You can also hold to the platforms"
 
 [node name="Hold" parent="." instance=ExtResource("4_uncyi")]
 offset_left = 169.0
+offset_top = -271.0
+offset_right = 218.0
+offset_bottom = -248.0
+text = "Climb:"
+interact_action = ExtResource("5_8xad1")
+
+[node name="Hold3" parent="." instance=ExtResource("4_uncyi")]
+offset_left = 169.0
 offset_top = -227.0
 offset_right = 210.0
 offset_bottom = -204.0
-text = "Hold"
+text = "+"
+horizontal_alignment = 1
 interact_action = ExtResource("7_pba42")
 
 [node name="WallJump" parent="." instance=ExtResource("4_uncyi")]
-offset_left = -11.0
-offset_top = -203.0
-offset_right = 67.0
-offset_bottom = -180.0
+offset_left = 254.0
+offset_top = -267.0
+offset_right = 332.0
+offset_bottom = -244.0
 text = "Wall jump"
 interact_action = ExtResource("5_8xad1")
-
-[node name="Hold3" parent="WallJump" instance=ExtResource("4_uncyi")]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 31.0
-offset_right = 80.0
-offset_bottom = 54.0
-text = "+"
-horizontal_alignment = 1
-interact_action = ExtResource("8_y6l08")
 
 [node name="Spotlight" parent="." instance=ExtResource("9_pba42")]
 position = Vector2(97, -58)
