@@ -15,7 +15,7 @@ func reparent_node(node: Node, parent: Node, position_reset: bool = true) -> voi
 		old_parent.call_deferred("remove_child", node)
 		await get_tree().process_frame
 	if position_reset:
-		node.set("position", Vector2.ZERO)
+		node.set("position", Vector3.ZERO)
 	if is_instance_valid(parent):
 		parent.add_child(node)
 	# Is the 2nd await required or could we set_deferred instead?

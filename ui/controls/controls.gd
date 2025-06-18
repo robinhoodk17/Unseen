@@ -80,10 +80,10 @@ func _get_new_input_for_action(item: GUIDERemapper.ConfigItem, for_joypad: bool 
 	# if any collision is from a non-bindable mapping, we cannot use this input
 	if collisions.any(func(it: GUIDERemapper.ConfigItem) -> bool: return not it.is_remappable):
 		return
-
-	# unbind the colliding entries.
-	for collision: GUIDERemapper.ConfigItem in collisions:
-		_remapper.set_bound_input(collision, null)
+#
+	## unbind the colliding entries.
+	#for collision: GUIDERemapper.ConfigItem in collisions:
+		#_remapper.set_bound_input(collision, null)
 
 	# now bind the new input
 	_remapper.set_bound_input(item, input)

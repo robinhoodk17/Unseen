@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://n5evuawpos7q"]
+
+[ext_resource type="Texture2D" uid="uid://dfrj2up44fax" path="res://ui/assets/icons/notifications/checkmark-circle-outline-white.png" id="1_3p4tl"]
+[ext_resource type="Script" uid="uid://c4jisgppex2t8" path="res://game/platforming/prefabs/next_room.gd" id="1_hgjbh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hgjbh"]
+size = Vector2(45, 48)
+
+[node name="Label" type="Label"]
+offset_left = 280.0
+offset_top = -68.0
+offset_right = 363.0
+offset_bottom = -45.0
+text = "Next room"
+script = ExtResource("1_hgjbh")
+new_scene = "uid://bjk3ls1owsaib"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(40, 45)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_3p4tl")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(40.5, 44)
+shape = SubResource("RectangleShape2D_hgjbh")

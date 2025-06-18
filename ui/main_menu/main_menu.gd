@@ -20,5 +20,7 @@ func _connect_buttons() -> void:
 
 func _start_game() -> void:
 	# TODO: Consider adding some kind of scene transition
+	await Ui.fade_to_black(1.0)
 	Ui.go_to("Game")
 	get_tree().change_scene_to_file("res://game/driving/game.tscn")
+	Ui.fade_to_clear(1.0)
