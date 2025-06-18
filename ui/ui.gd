@@ -2,8 +2,13 @@ extends CanvasLayer
 
 @export var mapping_contexts : Array[GUIDEMappingContext]
 @export var change_mapping : GUIDEAction
+@export var fade_duration : float = 1.0
+@export var CLEAR : Color =  Color(0, 0, 0, 0)
 
 var current_active_mapping : int = 0
+var _tween: Tween
+var tween2: Tween
+var fade : ColorRect
 
 # TODO: consider using the hide_ui and show_ui functions to add ui animation
 func hide_ui(page: Variant = null) -> void:
@@ -62,12 +67,37 @@ func _resolve_ui_page(node_or_name: Variant) -> Node:
 
 func _ready() -> void:
 	get_viewport().gui_focus_changed.connect(_on_focus_changed)
+	create_fade()
 	for child: Node in get_children():
 		if child is UiPage:
 			print("injecting ui in ", child.name)
 			child.set("ui", self)
 	call_deferred("late_ready")
 
+func create_fade() -> void:
+	fade = ColorRect.new()
+	fade.name = "fade"
+	fade.color = CLEAR 
+	fade.anchor_left = 0
+	fade.anchor_top = 0
+	fade.anchor_right = 1
+	fade.anchor_bottom = 1
+	fade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(fade)
+
+func fade_to_clear(duration: float = fade_duration) -> Signal:
+	return _to_color(CLEAR, duration)
+	
+func fade_to_black(duration: float = fade_duration) -> Signal:
+	return _to_color(Color.BLACK, duration)
+
+func _to_color(new_color: Color, duration: float) -> Signal:
+	if _tween && _tween.is_running():
+		_tween.Kill()
+		print_debug("killed a tween")
+	_tween = create_tween()
+	_tween.tween_property(fade, "color", new_color, duration)
+	return _tween.finished
 
 func late_ready() -> void:
 	GUIDE.enable_mapping_context(mapping_contexts[current_active_mapping])

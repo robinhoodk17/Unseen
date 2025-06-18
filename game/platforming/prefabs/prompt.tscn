@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://cr6uaw8sw3210"]
+
+[ext_resource type="Script" uid="uid://bnxb4ekig20e3" path="res://game/platforming/scenes/prompt.gd" id="1_pjdrw"]
+
+[node name="Label" type="Label"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Jump"
+script = ExtResource("1_pjdrw")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_top = 28.0
+offset_right = 40.0
+offset_bottom = 68.0
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
