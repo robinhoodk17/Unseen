@@ -1,7 +1,9 @@
-[gd_scene load_steps=32 format=4 uid="uid://4o1mq42pa2hu"]
+[gd_scene load_steps=34 format=4 uid="uid://4o1mq42pa2hu"]
 
 [ext_resource type="PackedScene" uid="uid://cikp8uuoalhq5" path="res://game/driving/player/player_second_attempt.tscn" id="1_cgshd"]
+[ext_resource type="Script" uid="uid://cp2mumtpcw05u" path="res://game/driving/prefabs/truck/truck.gd" id="2_1563b"]
 [ext_resource type="Texture2D" uid="uid://bumrpyfk6kkqb" path="res://game/EnvirinmScene/skyBox/result1.png" id="2_qhnf7"]
+[ext_resource type="PackedScene" uid="uid://c2xuba36ro24p" path="res://game/driving/prefabs/truck/wagon.tscn" id="3_v7y5c"]
 [ext_resource type="PackedScene" uid="uid://b06lyeikgj761" path="res://game/EnvirinmScene/demo/assets/models/Rock/Cube_045.glb" id="4_is8j0"]
 [ext_resource type="PackedScene" uid="uid://cpplefx42voar" path="res://game/EnvirinmScene/demo/assets/models/Rock/Cube_046.glb" id="5_85gia"]
 [ext_resource type="PackedScene" uid="uid://kfdjle8x4cl2" path="res://game/EnvirinmScene/demo/assets/models/City/CityPack1.glb" id="6_guqs2"]
@@ -129,6 +131,11 @@ size = Vector3(0.00762939, 1.13647, 0.626038)
 [node name="CSGBox3D6" type="CSGBox3D" parent="Path3D/Player"]
 transform = Transform3D(20.4253, -6.04987e-06, 4.9738e-14, 3.23297e-13, -8.92718e-07, 20.425, -2.38419e-07, -20.425, -8.92879e-07, -5.8318, 0.524658, 0)
 size = Vector3(0.00762939, 1.13647, 0.507355)
+
+[node name="Truck" type="Node3D" parent="Path3D"]
+script = ExtResource("2_1563b")
+
+[node name="Wagon" parent="Path3D/Truck" instance=ExtResource("3_v7y5c")]
 
 [node name="Environment" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 772.891, 469.493, -258.682)

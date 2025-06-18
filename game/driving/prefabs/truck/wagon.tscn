@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2xuba36ro24p"]
+
+[ext_resource type="Script" uid="uid://ce5l4gyh2d6pp" path="res://game/driving/prefabs/truck/truck_wagon.gd" id="1_u84f1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qt2gw"]
+size = Vector3(20, 20, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vk28q"]
+size = Vector3(20, 20, 100)
+
+[node name="Wagon" type="PathFollow3D"]
+script = ExtResource("1_u84f1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_qt2gw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_vk28q")
