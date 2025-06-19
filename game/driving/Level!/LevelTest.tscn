@@ -35,8 +35,8 @@ _data = {
 }
 point_count = 17
 
-[sub_resource type="Curve" id="Curve_22cry"]
-_data = [Vector2(0, 0), 0.0, 2.88304, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_yxah2"]
+_data = [Vector2(0.0113636, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jko4k"]
@@ -129,11 +129,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 266.165, 0)
 curve = SubResource("Curve3D_36gg7")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.999911, -2.17091e-09, -0.0129736, 0, 0.999998, -1.67333e-07, 0.0129735, 1.67319e-07, 0.999914, -6.3269, -0.000793457, 4327.21)
+transform = Transform3D(0.999925, 1.90493e-06, -0.0112676, -1.90504e-06, 0.999998, 0, 0.0112675, 2.14654e-08, 0.999931, 153.102, 0.532257, -6945.26)
+progress = 11274.3
+
+[node name="@Node3D@71306" type="Node3D" parent="Path3D/PathFollow3D"]
+transform = Transform3D(0.999925, 0, 0.0129737, -2.17092e-09, 1, 1.67319e-07, -0.0129736, -1.67334e-07, 0.999919, -0.509972, 1.69229, -109.653)
+visible = false
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Path3D/PathFollow3D/@Node3D@71306"]
+transform = Transform3D(-0.999882, 0.00790637, 0.0129731, -0.00790563, -0.99996, 0.000102889, 0.0129735, 1.67327e-07, 0.999912, -0.795337, 1.77008, 0)
+size = Vector3(29.9971, 1.06244, 232.014)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Path3D/PathFollow3D/@Node3D@71306"]
+transform = Transform3D(0.00790557, 0.99996, -0.000102888, -0.999882, 0.0079063, 0.0129731, 0.0129735, 1.6732e-07, 0.999912, -12.3671, 1.22336, 0)
+size = Vector3(7.29468, 1.06244, 232.014)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Path3D/PathFollow3D/@Node3D@71306"]
+transform = Transform3D(0.00790557, 0.99996, -0.000102888, -0.999882, 0.0079063, 0.0129731, 0.0129735, 1.6732e-07, 0.999912, 13.9578, 1.22336, 0)
+size = Vector3(7.29468, 1.06244, 232.014)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Path3D/PathFollow3D/@Node3D@71306"]
+transform = Transform3D(-0.999882, 0.00790637, 0.0129731, -0.00790563, -0.99996, 0.000102889, 0.0129735, 1.67327e-07, 0.999912, -0.795337, -4.21686, 0)
+size = Vector3(29.9971, 1.06244, 232.014)
 
 [node name="Player" type="CharacterBody3D" parent="Path3D/PathFollow3D" node_paths=PackedStringArray("mesh_container", "camera_pivot", "curve_follow", "bullet_spawns")]
 unique_name_in_owner = true
-transform = Transform3D(0.999916, -1.09047e-16, 0.0129736, -2.17091e-09, 1, 1.67319e-07, -0.0129736, -1.67333e-07, 0.999916, -0.0947227, -0.11673, 1.13037)
+transform = Transform3D(0.999916, -1.18017e-17, 0.0129736, -2.17091e-09, 1, 1.67319e-07, -0.0129736, -1.67333e-07, 0.999916, -0.0947189, -0.11673, 1.13037)
 floor_max_angle = 1.57952
 script = ExtResource("1_p84sy")
 direction_input = ExtResource("2_cgki8")
@@ -146,7 +167,11 @@ camera_pivot = NodePath("CameraPivot")
 curve_follow = NodePath("../..")
 bullet_spawns = [NodePath("MeshContainer/BulletSpawns/SpawnLeft"), NodePath("MeshContainer/BulletSpawns/SpawnRight")]
 drag = 45.0
-speed_curve = SubResource("Curve_22cry")
+limits = Vector2(17, 17)
+speed_curve = SubResource("Curve_yxah2")
+max_speed = 60.0
+boost_speed = 50.0
+braking_speed = 0.0
 
 [node name="MeshContainer" type="Node3D" parent="Path3D/PathFollow3D/Player"]
 
@@ -757,7 +782,7 @@ transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -1.52588e-05, -1.525
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -1.52588e-05, -1.52588e-05, -404.36)
 
 [node name="_Node3D_68967" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 87.0569, 261.069, 1809.12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 117.745, 261.069, 1809.12)
 
 [node name="_Node3D_39805" type="Node3D" parent="_Node3D_68967"]
 transform = Transform3D(0.81, 0, 0, 0, 0.81, 0, 0, 0, 0.81, -12.8701, -5.76344, -39.5894)
@@ -1128,30 +1153,29 @@ transform = Transform3D(8.11, 0, 0, 0, 3.70744, -7.21297, 0, 7.21297, 3.70744, 1
 [node name="CityPack6" parent="." instance=ExtResource("20_cgshd")]
 transform = Transform3D(10.91, 0, 0, 0, 9.63314, -5.1216, 0, 5.1216, 9.63314, 1102.5, 1042.34, -42713.4)
 
-[node name="star" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.10782, 265.949, 4227.48)
+[node name="StarMain" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.81756, 267.614, 3501.32)
 
-[node name="Star5" parent="star" instance=ExtResource("21_65d5h")]
-transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, -1.75092, -1.17697, -32.6602)
+[node name="Star8" parent="StarMain" instance=ExtResource("21_65d5h")]
+transform = Transform3D(0.115, 0, 0, 0, 0.115, 0, 0, 0, 0.115, 8.26874, -1.06506, -887.39)
 
-[node name="Torus_011" parent="star/Star5" index="0"]
-transform = Transform3D(5.77274, 0.751607, 14.4327, 14.4522, -0.30022, -5.76495, 1.50735e-06, 15.5414, -0.809354, 0, 0, 0)
+[node name="Star9" parent="StarMain" instance=ExtResource("21_65d5h")]
+transform = Transform3D(0.115, 0, 0, 0, 0.115, 0, 0, 0, 0.115, 21.5034, -0.173737, -933.143)
 
-[node name="AnimationPlayer" parent="star/Star5" index="1"]
-root_node = NodePath("../../Star4")
+[node name="Star5" parent="StarMain" instance=ExtResource("21_65d5h")]
+transform = Transform3D(0.115, 0, 0, 0, 0.115, 0, 0, 0, 0.115, -7.02, 0, -66.2766)
 
-[node name="Star4" parent="star" instance=ExtResource("21_65d5h")]
-transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 1.75092, 1.17694, 32.6606)
+[node name="Star4" parent="StarMain" instance=ExtResource("21_65d5h")]
+transform = Transform3D(0.115, 0, 0, 0, 0.115, 0, 0, 0, 0.115, 7.02, 0, 66.2766)
 
-[node name="Torus_011" parent="star/Star4" index="0"]
-transform = Transform3D(5.77274, 0.751607, 14.4327, 14.4522, -0.30022, -5.76495, 1.50735e-06, 15.5414, -0.809354, 0, 0, 0)
+[node name="Star6" parent="StarMain" instance=ExtResource("21_65d5h")]
+transform = Transform3D(0.115, 0, 0, 0, 0.115, 0, 0, 0, 0.115, -17.7653, -0.572327, 744.019)
 
-[node name="Star6" parent="star" instance=ExtResource("21_65d5h")]
-transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 1.75092, 1.17694, 32.6606)
+[node name="Star10" parent="StarMain" instance=ExtResource("21_65d5h")]
+transform = Transform3D(0.115, 0, 0, 0, 0.115, 0, 0, 0, 0.115, 24.9413, -1.71848, -1717.31)
 
-[node name="Torus_011" parent="star/Star6" index="0"]
-transform = Transform3D(5.77274, 0.751607, 14.4327, 14.4522, -0.30022, -5.76495, 1.50735e-06, 15.5414, -0.809353, -75.5597, -10.6733, -1870.59)
+[node name="Star7" parent="StarMain" instance=ExtResource("21_65d5h")]
+transform = Transform3D(0.115, 0, 0, 0, 0.115, 0, 0, 0, 0.115, 1.2503, -0.790558, 681.492)
 
-[editable path="star/Star5"]
-[editable path="star/Star4"]
-[editable path="star/Star6"]
+[node name="Star11" parent="StarMain" instance=ExtResource("21_65d5h")]
+transform = Transform3D(0.115, 0, 0, 0, 0.115, 0, 0, 0, 0.115, 15.5994, -1.08008, -1539.04)
