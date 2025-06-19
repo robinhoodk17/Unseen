@@ -7,5 +7,5 @@ func _process(delta: float) -> void:
 		return
 	for i : Node3D in get_overlapping_bodies():
 		if i.is_in_group("player"):
-			if !i.get_parent().invisible:
+			if !i.invisible:
 				Signalbus.playerspotted.emit()

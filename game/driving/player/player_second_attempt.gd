@@ -11,39 +11,49 @@ class_name player3d_second_attempt
 @export var mesh_container : Node3D
 @export var camera_pivot : PathFollow3D
 @export var curve_follow : Path3D
-@export var bullet : PackedScene = preload("uid://d34trstqhio75")
+@export var bullet_scene : PackedScene = preload("uid://d34trstqhio75")
+@export var superbullet : PackedScene = preload("uid://d34trstqhio75")
 @export var bullet_spawns : Array[Marker3D]
 @export_group("camera")
-@export var camera_offset : float = 10.0
-@export_group("shooting")
+@export var camera_offset : float = 1.0
+@export_group("combat and health")
 ##the amount of damage per shot
 @export var damage : float = 1.0
 ##time between shots
-@export var fire_rate : float = 0.5
+@export var fire_rate : float = 0.25
+##the multiplier whenever the damage is boosted
+@export var damage_bonus : float = 2.0
+@export var max_hp : float = 100.0
+@export var boost_cost : float = 5.0
 @export_group("Speed_stats")
-@export var drag : float = 50.0
-@export var limits : Vector2 = Vector2(15, 3)
+@export var invisibility_grace : float = 0.5
+@export var drag : float = 5.0
+@export var limits : Vector2 = Vector2(1.5, .3)
 ##the distance we want to keep the player from the last wagon
-@export var wagon_optimal_distance : float = 100.0
+@export var wagon_optimal_distance : float = 10.0
 @export var speed_curve : Curve
-@export var max_speed : float = 100.0
-@export var boost_speed : float = 300.0
+@export var max_speed : float = 10.0
+@export var boost_speed : float = 30.0
 @export var boost_duration : float = 2.0
 #the number of seconds it takes to go from 0 to max speed
 @export var acceleration_speed : float = 5.0
 #the number of seconds it takes to go from max speed to 0
 @export var braking_speed : float = 1.0
-@export var move_speed : Vector2 = Vector2(25.0, 25.0)
+@export var move_speed : Vector2 = Vector2(2.5, 2.5)
 
 
 @onready var camera_3d: Camera3D = $CameraPivot/Camera3D
 @onready var mesh_animations: Node3D = $MeshContainer/MeshAnimations
+@onready var invisibility_timer: Timer = create_timer(invisibility_grace)
 @onready var boost_timer: Timer = create_timer(boost_duration)
+@onready var damage_timer: Timer = create_timer()
 @onready var shot_timer: Timer = create_timer(fire_rate)
 @onready var aim_assist: ShapeCast3D = $AimAssist
 
+var current_hp = max_hp
+var current_boost_speed : float = max_speed
+var invisible : bool = false
 var current_spawn : int = 0
-var damage_bonus : float = 1.0
 var running : bool = false
 var setup : bool = false
 var current_speed : float = 0.0
@@ -71,7 +81,7 @@ func position_camera(delta) -> void :
 	#print_debug(camera_point)
 	camera_pivot.position = camera_point
 	camera_pivot.basis = target_transform.basis
-	
+	aim_assist.global_basis = camera_pivot.global_basis
 	#camera_3d.look_at(global_position)
 	#var target_camera_rotation : Basis = camera_3d.global_basis.looking_at(global_position)
 	#camera_3d.global_basis = camera_3d.global_basis.slerp(target_camera_rotation,delta * 10.0)
@@ -96,10 +106,20 @@ func _physics_process(delta: float) -> void:
 		current_velocity -= drag * delta
 	else:
 		z_component = -max_speed * speed_curve.sample(current_speed)
-	if !boost_timer.is_stopped():
+	if boost_timer.is_stopped():
+		show()
+	else:
 		z_component = -boost_speed
 		current_velocity = boost_speed
+		invisibility_timer.start(invisibility_grace)
+		invisible = true
+		hide()
+	if invisibility_timer.is_stopped():
+		invisible = false
+	Signalbus.current_speed.emit(-z_component)
 	var direction : Vector2 = direction_input.value_axis_2d
+	if braking_input.value_bool:
+		direction.y *= 3.0
 	var x_component : float = direction.x * move_speed.x
 	var y_component : float = -direction.y * move_speed.y
 	mesh_container.look_at(camera_pivot.global_position - (camera_pivot.global_basis.z * 100))
@@ -113,9 +133,9 @@ func _physics_process(delta: float) -> void:
 		var wagon_relative_z : float = camera_pivot.global_basis.z.dot(wagon_relative_position)
 		if wagon_relative_z < wagon_optimal_distance:
 			if wagon_relative_z > 0.0:
-				z_component /= clamp((wagon_optimal_distance - wagon_relative_z)/10, 1, 5)
-	
-	
+				var correction : float = clamp((wagon_optimal_distance - wagon_relative_z), 1, 5)
+				z_component /= correction
+
 	if relative_y <= -limits.y:
 		y_component = -10 * clamp(abs(relative_y), .01, 100)
 	if relative_y >= limits.y:
@@ -141,7 +161,8 @@ func shoot(_delta):
 	var actual_damage : float = damage
 	#the position of the shot in the target's local space
 	var offset : Vector3 = Vector3(0,0,0)
-	actual_damage *= damage_bonus
+	if !damage_timer.is_stopped():
+		actual_damage *= damage_bonus
 	var _hitSomething : bool = false
 			
 	var thingWeShot : Node3D = null
@@ -157,7 +178,11 @@ func shoot(_delta):
 	doShotVFX(thingWeShot, offset)
 	
 func doShotVFX(target, offset : Vector3):
-	var newBullet : Node3D = bullet.instantiate()
+	var newBullet : Node3D
+	if damage_timer.is_stopped():
+		newBullet = bullet_scene.instantiate()
+	else:
+		newBullet = superbullet.instantiate()
 	add_child(newBullet)
 	newBullet.global_position = bullet_spawns[current_spawn].global_position
 	newBullet.spawn = bullet_spawns[current_spawn]
@@ -183,8 +208,11 @@ func doShotVFX(target, offset : Vector3):
 	newBullet.initialize()
 	current_spawn = (current_spawn + 1) % bullet_spawns.size()
 func start_boost() -> void:
+	current_hp -= boost_cost
 	boost_timer.start(boost_duration)
 	Signalbus.player_started_boost.emit()
+	Signalbus.player_hp_update.emit(current_hp)
+	
 
 func handle_animations(delta : float, direction : Vector2) -> void:
 	var target_rotation = mesh_container.global_basis.rotated(mesh_container.global_basis.z, -direction.x * PI/3.0).orthonormalized()

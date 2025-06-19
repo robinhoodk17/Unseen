@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3 uid="uid://c3b6wrclraa3k"]
+
+[ext_resource type="Texture2D" uid="uid://cgmn77pflejuk" path="res://game/driving/prefabs/damage_upgrade/swords.png" id="1_c60dk"]
+[ext_resource type="Script" uid="uid://csslgk8ng85db" path="res://game/driving/prefabs/damage_upgrade/damage_upgrade.gd" id="1_p1jd7"]
+
+[sub_resource type="Animation" id="Animation_51rp1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Movable/Sprite3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_p1jd7"]
+resource_name = "new_animation"
+length = 2.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Movable/Sprite3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0n7vi"]
+_data = {
+&"RESET": SubResource("Animation_51rp1"),
+&"new_animation": SubResource("Animation_p1jd7")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p1jd7"]
+size = Vector3(3, 3, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_51rp1"]
+size = Vector3(100, 100, 100)
+
+[node name="DamageUpgrade" type="PathFollow3D"]
+
+[node name="Movable" type="Area3D" parent="."]
+script = ExtResource("1_p1jd7")
+
+[node name="Sprite3D" type="Sprite3D" parent="Movable"]
+pixel_size = 0.03
+texture = ExtResource("1_c60dk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Movable"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_0n7vi")
+}
+autoplay = "new_animation"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Movable"]
+shape = SubResource("BoxShape3D_p1jd7")
+
+[node name="StartMoving" type="Area3D" parent="Movable"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Movable/StartMoving"]
+shape = SubResource("BoxShape3D_51rp1")

@@ -11,3 +11,5 @@ signal post_ui_message(text: String)
 ## Emitted by UI/Controls when a action is remapped
 @warning_ignore("unused_signal")
 signal controls_changed(config: GUIDERemappingConfig)
+var damage_boost_duration : float = 15.0
+var collectibles_speed : float = 1.0

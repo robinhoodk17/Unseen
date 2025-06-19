@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cikp8uuoalhq5"]
+[gd_scene load_steps=13 format=3 uid="uid://cikp8uuoalhq5"]
 
 [ext_resource type="Script" uid="uid://dtkyhmijc4ir" path="res://game/driving/player/player_second_attempt.gd" id="1_53b0o"]
 [ext_resource type="Resource" uid="uid://c6tovgnwacf3x" path="res://input/move.tres" id="2_03fqq"]
@@ -7,18 +7,20 @@
 [ext_resource type="Resource" uid="uid://bame6gk4n45wc" path="res://input/brake.tres" id="5_l2504"]
 [ext_resource type="Resource" uid="uid://b5g5x82md43g0" path="res://input/shoot.tres" id="6_el4t4"]
 [ext_resource type="PackedScene" uid="uid://vv4jopr7enj2" path="res://ui/assets/model/Mash1.glb" id="7_jibn3"]
+[ext_resource type="PackedScene" uid="uid://b17qvk5e2o1a" path="res://game/driving/player/superbullet.tscn" id="7_l2504"]
+[ext_resource type="Texture2D" uid="uid://cu0boovf1mytb" path="res://ui/assets/UI/aim.png" id="8_m2tcp"]
 
 [sub_resource type="Curve" id="Curve_22cry"]
 _data = [Vector2(0, 0), 0.0, 2.88304, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jko4k"]
-radius = 1.0
+radius = 0.1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jibn3"]
-radius = 2.0
+radius = 0.2
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("mesh_container", "camera_pivot", "bullet_spawns")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("mesh_container", "camera_pivot", "bullet_spawns") groups=["player"]]
 script = ExtResource("1_53b0o")
 direction_input = ExtResource("2_03fqq")
 boost_input = ExtResource("3_jibn3")
@@ -27,6 +29,7 @@ braking_input = ExtResource("5_l2504")
 shoot_input = ExtResource("6_el4t4")
 mesh_container = NodePath("MeshContainer")
 camera_pivot = NodePath("CameraPivot")
+superbullet = ExtResource("7_l2504")
 bullet_spawns = [NodePath("MeshContainer/BulletSpawns/SpawnLeft"), NodePath("MeshContainer/BulletSpawns/SpawnRight")]
 speed_curve = SubResource("Curve_22cry")
 
@@ -35,23 +38,30 @@ speed_curve = SubResource("Curve_22cry")
 [node name="MeshAnimations" type="Node3D" parent="MeshContainer"]
 
 [node name="Mash1" parent="MeshContainer/MeshAnimations" instance=ExtResource("7_jibn3")]
-transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, -5.331, -0.923, -6.585)
+transform = Transform3D(-0.01, 0, -1.50996e-09, 0, 0.01, 0, 1.50996e-09, 0, -0.01, -0.536268, -0.0948121, -0.64609)
 
 [node name="BulletSpawns" type="Node3D" parent="MeshContainer"]
 
 [node name="SpawnLeft" type="Marker3D" parent="MeshContainer/BulletSpawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.130305, 0.0370253, -1.22652)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.016013, 0.000262182, -0.114682)
 
 [node name="SpawnRight" type="Marker3D" parent="MeshContainer/BulletSpawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11228, 0.037, -1.227)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00751538, 0.000262182, -0.114682)
 
 [node name="CameraPivot" type="PathFollow3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+fov = 100.0
+near = 0.01
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_jko4k")
 
 [node name="AimAssist" type="ShapeCast3D" parent="."]
 shape = SubResource("SphereShape3D_jibn3")
-target_position = Vector3(0, 0, -300)
+target_position = Vector3(0, 0, -30)
+
+[node name="Sprite3D" type="Sprite3D" parent="AimAssist"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
+pixel_size = 0.002
+texture = ExtResource("8_m2tcp")

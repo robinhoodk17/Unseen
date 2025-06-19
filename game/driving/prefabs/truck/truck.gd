@@ -1,8 +1,8 @@
 extends Node3D
 class_name truck
 
-@export var wagon_size : float = 100.0
-@export var space_between_wagons : float = 10.0
+@export var wagon_size : float = 10.0
+@export var space_between_wagons : float = 1.0
 
 @onready var player : Node3D = %Player
 
@@ -19,5 +19,5 @@ func late_ready() -> void:
 	for i in get_children():
 		i.reparent(curve_follow, false)
 		i.player = player
-		i.progress = (wagon_number * wagon_size/2) + space_between_wagons + 100
+		i.progress = (wagon_number * wagon_size/2) + space_between_wagons + wagon_size
 		wagon_number -= 1
