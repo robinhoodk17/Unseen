@@ -1,8 +1,10 @@
-[gd_scene load_steps=14 format=4 uid="uid://bjk3ls1owsaib"]
+[gd_scene load_steps=17 format=4 uid="uid://bjk3ls1owsaib"]
 
 [ext_resource type="Texture2D" uid="uid://gts3t1lstmvw" path="res://game/platforming/assets/brackeys_platformer_assets/sprites/world_tileset.png" id="1_lvfh6"]
 [ext_resource type="Script" uid="uid://clj5jgt5wlei2" path="res://game/platforming/scenes/trial_scene.gd" id="1_xncqr"]
+[ext_resource type="Texture2D" uid="uid://dyawvywgjqpox" path="res://game/platforming/assets/Background/background.png" id="2_oh05e"]
 [ext_resource type="PackedScene" uid="uid://bqks7dq4cdunv" path="res://game/platforming/player/player2d.tscn" id="2_ujv01"]
+[ext_resource type="Texture2D" uid="uid://dn4sk2hmc756c" path="res://game/platforming/assets/platform/platform test 2.png" id="4_6tx2p"]
 [ext_resource type="PackedScene" uid="uid://cr6uaw8sw3210" path="res://game/platforming/prefabs/prompt.tscn" id="4_uncyi"]
 [ext_resource type="Resource" uid="uid://dq10pdwoyx1kv" path="res://input/Jump.tres" id="5_8xad1"]
 [ext_resource type="Resource" uid="uid://u57h3v2w73ya" path="res://input/boost.tres" id="6_frs7f"]
@@ -179,9 +181,45 @@ texture = ExtResource("1_lvfh6")
 2:15/0 = 0
 3:15/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y4c4x"]
+texture = ExtResource("4_6tx2p")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
 [sub_resource type="TileSet" id="TileSet_xncqr"]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_ujv01")
+sources/1 = SubResource("TileSetAtlasSource_y4c4x")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_33spm"]
 size = Vector2(1150, 124)
@@ -189,8 +227,14 @@ size = Vector2(1150, 124)
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_xncqr")
 
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(116.556, -132)
+scale = Vector2(0.505556, 0.505556)
+texture = ExtResource("2_oh05e")
+
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAFAP7/AAAAAAAAAAAGAP7/AAAAAAAAAAAHAP7/AAAAAAAAAAAIAP7/AAAAAAAAAAAJAP7/AAAAAAAAAAAFAPv/AAAAAAAAAAAFAPr/AAAAAAAAAAAFAPn/AAAAAAAAAAAIAPv/AAAAAAAAAAAIAPr/AAAAAAAAAAAIAPn/AAAAAAAAAAAIAPj/AAAAAAAAAAAIAPf/AAAAAAAAAAAIAPb/AAAAAAAAAAAFAPj/AAAAAAAAAAAFAPf/AAAAAAAAAAAFAPb/AAAAAAAAAAD0/wIAAAAAAAEAAAD1/wIAAAAAAAEAAAD2/wIAAAAAAAEAAAD3/wIAAAAAAAEAAAD4/wIAAAAAAAEAAAD5/wIAAAAAAAEAAAD6/wEAAAAAAAEAAAD7/wEAAAAAAAEAAAD8/wEAAAAAAAEAAAD9/wEAAAAAAAEAAAD+/wEAAAAAAAEAAAD//wEAAAAAAAEAAAAAAAEAAAAAAAEAAAABAAEAAAAAAAEAAAACAAEAAAAAAAEAAAADAAEAAAAAAAEAAAAEAAEAAAAAAAEAAAAFAAEAAAAAAAEAAAAGAAEAAAAAAAEAAAAHAAEAAAAAAAEAAAAIAAEAAAAAAAEAAAAJAAEAAAAAAAEAAAAKAAEAAAAAAAEAAAALAAEAAAAAAAEAAAAMAAEAAAAAAAEAAAANAAEAAAAAAAEAAAAOAAEAAAAAAAEAAAAPAAEAAAAAAAEAAAAQAAEAAAAAAAEAAAARAAEAAAAAAAEAAAASAAAAAAAAAAEAAAATAAAAAAAAAAEAAAAUAAAAAAAAAAEAAAAIAPX/AAAAAAEAAAAIAPT/AAAAAAEAAAAIAPP/AAAAAAEAAAAIAPL/AAAAAAEAAAAIAPH/AAAAAAEAAAAIAPD/AAAAAAEAAAAIAO//AAAAAAEAAAAIAO7/AAAAAAEAAAAFAPX/AAAAAAEAAAAFAPT/AAAAAAEAAAAFAPH/AAAAAAEAAAAFAPD/AAAAAAEAAAAFAO//AAAAAAEAAAAFAO7/AAAAAAEAAAAFAPP/AAAAAAEAAAAFAPL/AAAAAAEAAAAVAAAAAAAAAAEAAADz/wIAAAAAAAEAAAA=")
+position = Vector2(-3, -2)
+tile_map_data = PackedByteArray("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")
 tile_set = SubResource("TileSet_xncqr")
 
 [node name="Player" parent="." instance=ExtResource("2_ujv01")]
@@ -247,12 +291,13 @@ text = "Wall jump"
 interact_action = ExtResource("5_8xad1")
 
 [node name="Spotlight" parent="." instance=ExtResource("9_pba42")]
-position = Vector2(97, -58)
-polygon = PackedVector2Array(-2, -27, -67.3333, 28.6667, -19.3333, 28.6667)
+position = Vector2(79, -89)
+polygon = PackedVector2Array(-14, 3, -75, 87, -46, 87)
 
 [node name="Spotlight2" parent="." instance=ExtResource("9_pba42")]
-position = Vector2(212, -13)
-polygon = PackedVector2Array(-2, -27, -67.3333, 28.6667, -19.3333, 28.6667)
+position = Vector2(141, -95)
+rotation = 3.14159
+polygon = PackedVector2Array(-15, 1.99993, -68.9995, -109, -33.9995, -109)
 
 [node name="Killbox" parent="." instance=ExtResource("10_y6l08")]
 
