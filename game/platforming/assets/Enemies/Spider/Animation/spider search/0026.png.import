@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyawvywgjqpox"
-path="res://.godot/imported/background.png-527a8459308f1980dc4de47340fe85db.ctex"
+uid="uid://b67k6hqq7o3ub"
+path="res://.godot/imported/0026.png-62da0704fa9d5ffd542a615a86ab5087.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game/platforming/assets/background.png"
-dest_files=["res://.godot/imported/background.png-527a8459308f1980dc4de47340fe85db.ctex"]
+source_file="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0026.png"
+dest_files=["res://.godot/imported/0026.png-62da0704fa9d5ffd542a615a86ab5087.ctex"]
 
 [params]
 
