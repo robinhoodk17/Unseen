@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhsiyh7htemxt"]
+[gd_scene load_steps=10 format=3 uid="uid://bhsiyh7htemxt"]
 
 [ext_resource type="PackedScene" uid="uid://bs2ir8ft4u7rs" path="res://game/driving/level.blend" id="1_dqe0k"]
 [ext_resource type="PackedScene" uid="uid://cikp8uuoalhq5" path="res://game/driving/player/player_second_attempt.tscn" id="2_nmmbj"]
 [ext_resource type="Script" uid="uid://cp2mumtpcw05u" path="res://game/driving/prefabs/truck/truck.gd" id="3_6uque"]
 [ext_resource type="PackedScene" uid="uid://7teeqq7nerpm" path="res://game/driving/prefabs/spotlight3d.tscn" id="3_nmmbj"]
 [ext_resource type="PackedScene" uid="uid://c2xuba36ro24p" path="res://game/driving/prefabs/truck/wagon.tscn" id="4_n7lqk"]
+[ext_resource type="PackedScene" uid="uid://bstld3j3n5kfs" path="res://game/driving/prefabs/dialogue_popup.tscn" id="6_a4ecv"]
 [ext_resource type="PackedScene" uid="uid://c3b6wrclraa3k" path="res://game/driving/prefabs/damage_upgrade/damage_upgrade.tscn" id="6_eyqbd"]
 
 [sub_resource type="Curve3D" id="Curve3D_n7lqk"]
@@ -40,6 +41,9 @@ progress = 99.56
 
 [node name="Movable" parent="Path3D/DamageUpgrade" index="0"]
 transform = Transform3D(1, 0, 4.65661e-10, 0, 1, 0, -4.65661e-10, 0, 1, 1.67382, 0, -0.0113449)
+
+[node name="DialoguePopup" parent="Path3D" instance=ExtResource("6_a4ecv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -66.3583)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dqe0k")
