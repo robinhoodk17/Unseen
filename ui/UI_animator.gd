@@ -141,6 +141,7 @@ func exit() -> void:
 		await tween.finished
 		target.hide()
 func on_hover() -> void:
+	$AudioStreamPlayer.play()
 	add_tween(hover_values, parallel_animations, hover_time, hover_transition, hover_easing, hover_delay)
 func off_hover() -> void:
 	add_tween(default_values, parallel_animations, hover_time, hover_transition, hover_easing, hover_delay)

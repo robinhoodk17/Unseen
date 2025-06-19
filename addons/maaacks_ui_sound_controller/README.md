@@ -61,4 +61,3 @@ Alternatively, open `ProjectUISoundController.tscn`, select the root node, and a
 ## Links
 [Attribution](ATTRIBUTION.md)  
 [License](LICENSE.txt)  
-
