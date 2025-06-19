@@ -1,12 +1,17 @@
-[gd_scene load_steps=34 format=4 uid="uid://4o1mq42pa2hu"]
+[gd_scene load_steps=42 format=4 uid="uid://4o1mq42pa2hu"]
 
-[ext_resource type="PackedScene" uid="uid://cikp8uuoalhq5" path="res://game/driving/player/player_second_attempt.tscn" id="1_cgshd"]
+[ext_resource type="Script" uid="uid://dtkyhmijc4ir" path="res://game/driving/player/player_second_attempt.gd" id="1_p84sy"]
 [ext_resource type="Script" uid="uid://cp2mumtpcw05u" path="res://game/driving/prefabs/truck/truck.gd" id="2_1563b"]
+[ext_resource type="Resource" uid="uid://c6tovgnwacf3x" path="res://input/move.tres" id="2_cgki8"]
 [ext_resource type="Texture2D" uid="uid://bumrpyfk6kkqb" path="res://game/EnvirinmScene/skyBox/result1.png" id="2_qhnf7"]
-[ext_resource type="PackedScene" uid="uid://c2xuba36ro24p" path="res://game/driving/prefabs/truck/wagon.tscn" id="3_v7y5c"]
+[ext_resource type="Resource" uid="uid://u57h3v2w73ya" path="res://input/boost.tres" id="3_kev3d"]
 [ext_resource type="PackedScene" uid="uid://b06lyeikgj761" path="res://game/EnvirinmScene/demo/assets/models/Rock/Cube_045.glb" id="4_is8j0"]
+[ext_resource type="Resource" uid="uid://0l46x8suo47" path="res://input/accelerate.tres" id="4_krymx"]
 [ext_resource type="PackedScene" uid="uid://cpplefx42voar" path="res://game/EnvirinmScene/demo/assets/models/Rock/Cube_046.glb" id="5_85gia"]
+[ext_resource type="Resource" uid="uid://bame6gk4n45wc" path="res://input/brake.tres" id="5_acyrk"]
 [ext_resource type="PackedScene" uid="uid://kfdjle8x4cl2" path="res://game/EnvirinmScene/demo/assets/models/City/CityPack1.glb" id="6_guqs2"]
+[ext_resource type="Resource" uid="uid://b5g5x82md43g0" path="res://input/shoot.tres" id="6_plqqr"]
+[ext_resource type="PackedScene" uid="uid://vv4jopr7enj2" path="res://ui/assets/model/Mash1.glb" id="7_rv3v7"]
 [ext_resource type="Texture2D" uid="uid://bwkqa0xngm7t0" path="res://game/EnvirinmScene/demo/assets/models/Rock/Cube_044_gray_rocks_diff_1k.jpg" id="10_wi0v3"]
 [ext_resource type="Texture2D" uid="uid://csj86k7rwuy5c" path="res://game/EnvirinmScene/demo/assets/models/Rock/Cube_044_gray_rocks_rough_1k.png" id="11_yss8g"]
 [ext_resource type="Texture2D" uid="uid://cc0tu2b2ev53a" path="res://game/EnvirinmScene/demo/assets/models/Rock/Cube_044_gray_rocks_nor_gl_1k.png" id="12_au7yl"]
@@ -29,6 +34,16 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 17
+
+[sub_resource type="Curve" id="Curve_22cry"]
+_data = [Vector2(0, 0), 0.0, 2.88304, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jko4k"]
+radius = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jibn3"]
+radius = 2.0
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_is8j0"]
 panorama = ExtResource("2_qhnf7")
@@ -113,29 +128,49 @@ _data = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 266.165, 0)
 curve = SubResource("Curve3D_36gg7")
 
-[node name="Player" parent="Path3D" instance=ExtResource("1_cgshd")]
+[node name="Player" type="CharacterBody3D" parent="Path3D" node_paths=PackedStringArray("mesh_container", "camera_pivot", "bullet_spawns")]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.1389, 0, 0)
+floor_max_angle = 1.57952
+script = ExtResource("1_p84sy")
+direction_input = ExtResource("2_cgki8")
+boost_input = ExtResource("3_kev3d")
+acceleration_input = ExtResource("4_krymx")
+braking_input = ExtResource("5_acyrk")
+shoot_input = ExtResource("6_plqqr")
+mesh_container = NodePath("MeshContainer")
+camera_pivot = NodePath("CameraPivot")
+bullet_spawns = [NodePath("MeshContainer/BulletSpawns/SpawnLeft"), NodePath("MeshContainer/BulletSpawns/SpawnRight")]
+speed_curve = SubResource("Curve_22cry")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="Path3D/Player"]
-transform = Transform3D(20.425, -1.04308e-06, -1.56319e-13, -5.32907e-14, -8.92788e-07, 20.425, -8.9407e-08, -20.425, -8.92809e-07, -0.169231, 4.88046, 0)
-size = Vector3(0.523682, 1.13647, 0.00708008)
+[node name="MeshContainer" type="Node3D" parent="Path3D/Player"]
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="Path3D/Player"]
-transform = Transform3D(20.425, -1.04308e-06, -1.56319e-13, -5.32907e-14, -8.92788e-07, 20.425, -8.9407e-08, -20.425, -8.92809e-07, -0.169231, -4.67062, 0)
-size = Vector3(0.523682, 1.13647, 0.00708008)
+[node name="MeshAnimations" type="Node3D" parent="Path3D/Player/MeshContainer"]
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="Path3D/Player"]
-transform = Transform3D(20.4253, -6.04987e-06, 8.17124e-14, 4.86722e-13, -8.92718e-07, 20.425, -1.2219e-06, -20.425, -8.92889e-07, 6.17796, -0.687408, 0)
-size = Vector3(0.00762939, 1.13647, 0.626038)
+[node name="Mash1" parent="Path3D/Player/MeshContainer/MeshAnimations" instance=ExtResource("7_rv3v7")]
+transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, -5.331, -0.923, -6.585)
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="Path3D/Player"]
-transform = Transform3D(20.4253, -6.04987e-06, 4.9738e-14, 3.23297e-13, -8.92718e-07, 20.425, -2.38419e-07, -20.425, -8.92879e-07, -5.8318, 0.524658, 0)
-size = Vector3(0.00762939, 1.13647, 0.507355)
+[node name="BulletSpawns" type="Node3D" parent="Path3D/Player/MeshContainer"]
+
+[node name="SpawnLeft" type="Marker3D" parent="Path3D/Player/MeshContainer/BulletSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.130305, 0.0370253, -1.22652)
+
+[node name="SpawnRight" type="Marker3D" parent="Path3D/Player/MeshContainer/BulletSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11228, 0.037, -1.227)
+
+[node name="CameraPivot" type="PathFollow3D" parent="Path3D/Player"]
+
+[node name="Camera3D" type="Camera3D" parent="Path3D/Player/CameraPivot"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/Player"]
+shape = SubResource("SphereShape3D_jko4k")
+
+[node name="AimAssist" type="ShapeCast3D" parent="Path3D/Player"]
+shape = SubResource("SphereShape3D_jibn3")
+target_position = Vector3(0, 0, -300)
 
 [node name="Truck" type="Node3D" parent="Path3D"]
 script = ExtResource("2_1563b")
-
-[node name="Wagon" parent="Path3D/Truck" instance=ExtResource("3_v7y5c")]
 
 [node name="Environment" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 772.891, 469.493, -258.682)
@@ -252,9 +287,6 @@ transform = Transform3D(11.438, 0, 0, 0, 11.438, 0, 0, 0, 11.438, -561.125, 102.
 
 [node name="Cube_0452" parent="mount2" instance=ExtResource("4_is8j0")]
 transform = Transform3D(3.69753, -1.37525, 0, 1.37525, 3.69753, 0, 0, 0, 3.945, -98.2308, -30.3598, -2.44263)
-
-[node name="Cube_0454" parent="mount2" instance=ExtResource("4_is8j0")]
-transform = Transform3D(0.192678, 0, 0, 0, 0.192678, 0, 0, 0, 0.192678, 387.091, 5.64687, 171.387)
 
 [node name="mount3" type="Node3D" parent="."]
 transform = Transform3D(5.19, 0, 0, 0, 5.19, 0, 0, 0, 5.19, 3625.42, 368.116, -4130.63)
