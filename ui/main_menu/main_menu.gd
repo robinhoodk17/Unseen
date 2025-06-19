@@ -14,7 +14,7 @@ func _connect_buttons() -> void:
 		%HowToPlay.pressed.connect(ui.go_to.bind("HowToPlay"))
 		%Settings.pressed.connect(ui.go_to.bind("Settings"))
 		%Controls.pressed.connect(ui.go_to.bind("Controls"))
-		%Credits.pressed.connect(ui.go_to.bind("Credits"))
+		#%Credits.pressed.connect(ui.go_to.bind("Credits"))
 		%Exit.pressed.connect(get_tree().call_deferred.bind("quit"))
 
 
