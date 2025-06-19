@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cikp8uuoalhq5"]
+[gd_scene load_steps=11 format=3 uid="uid://cikp8uuoalhq5"]
 
 [ext_resource type="Script" uid="uid://dtkyhmijc4ir" path="res://game/driving/player/player_second_attempt.gd" id="1_53b0o"]
 [ext_resource type="Resource" uid="uid://c6tovgnwacf3x" path="res://input/move.tres" id="2_03fqq"]
@@ -15,16 +15,20 @@ point_count = 2
 [sub_resource type="SphereShape3D" id="SphereShape3D_jko4k"]
 radius = 1.0
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("mesh_container", "camera_pivot")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_jibn3"]
+radius = 2.0
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("mesh_container", "camera_pivot", "bullet_spawns")]
 script = ExtResource("1_53b0o")
 direction_input = ExtResource("2_03fqq")
 boost_input = ExtResource("3_jibn3")
 acceleration_input = ExtResource("4_m2tcp")
 braking_input = ExtResource("5_l2504")
 shoot_input = ExtResource("6_el4t4")
-speed_curve = SubResource("Curve_22cry")
 mesh_container = NodePath("MeshContainer")
 camera_pivot = NodePath("CameraPivot")
+bullet_spawns = [NodePath("MeshContainer/BulletSpawns/SpawnLeft"), NodePath("MeshContainer/BulletSpawns/SpawnRight")]
+speed_curve = SubResource("Curve_22cry")
 
 [node name="MeshContainer" type="Node3D" parent="."]
 
@@ -33,9 +37,21 @@ camera_pivot = NodePath("CameraPivot")
 [node name="Mash1" parent="MeshContainer/MeshAnimations" instance=ExtResource("7_jibn3")]
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, -5.331, -0.923, -6.585)
 
+[node name="BulletSpawns" type="Node3D" parent="MeshContainer"]
+
+[node name="SpawnLeft" type="Marker3D" parent="MeshContainer/BulletSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.130305, 0.0370253, -1.22652)
+
+[node name="SpawnRight" type="Marker3D" parent="MeshContainer/BulletSpawns"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11228, 0.037, -1.227)
+
 [node name="CameraPivot" type="PathFollow3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_jko4k")
+
+[node name="AimAssist" type="ShapeCast3D" parent="."]
+shape = SubResource("SphereShape3D_jibn3")
+target_position = Vector3(0, 0, -300)

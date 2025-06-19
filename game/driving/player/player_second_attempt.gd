@@ -7,8 +7,19 @@ class_name player3d_second_attempt
 @export var acceleration_input : GUIDEAction
 @export var braking_input : GUIDEAction
 @export var shoot_input : GUIDEAction
+@export_subgroup("Nodes")
+@export var mesh_container : Node3D
+@export var camera_pivot : PathFollow3D
+@export var curve_follow : Path3D
+@export var bullet : PackedScene = preload("uid://d34trstqhio75")
+@export var bullet_spawns : Array[Marker3D]
 @export_group("camera")
 @export var camera_offset : float = 10.0
+@export_group("shooting")
+##the amount of damage per shot
+@export var damage : float = 1.0
+##time between shots
+@export var fire_rate : float = 0.5
 @export_group("Speed_stats")
 @export var drag : float = 50.0
 @export var limits : Vector2 = Vector2(15, 3)
@@ -23,15 +34,16 @@ class_name player3d_second_attempt
 #the number of seconds it takes to go from max speed to 0
 @export var braking_speed : float = 1.0
 @export var move_speed : Vector2 = Vector2(25.0, 25.0)
-@export_group("Nodes")
-@export var mesh_container : Node3D
-@export var camera_pivot : PathFollow3D
-@export var curve_follow : Path3D
+
 
 @onready var camera_3d: Camera3D = $CameraPivot/Camera3D
 @onready var mesh_animations: Node3D = $MeshContainer/MeshAnimations
 @onready var boost_timer: Timer = create_timer(boost_duration)
+@onready var shot_timer: Timer = create_timer(fire_rate)
+@onready var aim_assist: ShapeCast3D = $AimAssist
 
+var current_spawn : int = 0
+var damage_bonus : float = 1.0
 var running : bool = false
 var setup : bool = false
 var current_speed : float = 0.0
@@ -103,7 +115,7 @@ func _physics_process(delta: float) -> void:
 			if wagon_relative_z > 0.0:
 				z_component /= clamp((wagon_optimal_distance - wagon_relative_z)/10, 1, 5)
 	
-	print_debug(velocity)
+	
 	if relative_y <= -limits.y:
 		y_component = -10 * clamp(abs(relative_y), .01, 100)
 	if relative_y >= limits.y:
@@ -118,8 +130,58 @@ func _physics_process(delta: float) -> void:
 	var transformed_vel : Vector3 = camera_pivot.global_basis * untransformed_vel
 	velocity = transformed_vel
 	handle_animations(delta, direction)
+	if shoot_input.value_bool:
+		shoot(delta)
 	move_and_slide()
 
+func shoot(_delta):
+	if !shot_timer.is_stopped():
+		return
+	shot_timer.start(fire_rate)
+	var actual_damage : float = damage
+	#the position of the shot in the target's local space
+	var offset : Vector3 = Vector3(0,0,0)
+	actual_damage *= damage_bonus
+	var _hitSomething : bool = false
+			
+	var thingWeShot : Node3D = null
+	if aim_assist.is_colliding():
+		thingWeShot = aim_assist.get_collider(0)
+		if thingWeShot != null:
+			offset = aim_assist.get_collision_point(0) - thingWeShot.global_position
+			if thingWeShot.has_method("takeDamage"):
+				thingWeShot.takeDamage(actual_damage)
+			else:
+				thingWeShot = null
+	
+	doShotVFX(thingWeShot, offset)
+	
+func doShotVFX(target, offset : Vector3):
+	var newBullet : Node3D = bullet.instantiate()
+	add_child(newBullet)
+	newBullet.global_position = bullet_spawns[current_spawn].global_position
+	newBullet.spawn = bullet_spawns[current_spawn]
+	if target == null:
+		var space_state = camera_3d.get_world_3d().direct_space_state
+		var origin = bullet_spawns[current_spawn].global_position
+		var end = origin - bullet_spawns[current_spawn].global_basis.z * 300
+		var query = PhysicsRayQueryParameters3D.create(origin,end)
+		query.collide_with_bodies = true
+		var result : Dictionary = space_state.intersect_ray(query)
+		if !result.is_empty():
+			target = result.position
+		else:
+			target = aim_assist.global_position + aim_assist.target_position
+		newBullet.target = target
+		Signalbus.shotSignal.emit()
+		newBullet.look_at(target)
+	else:
+		newBullet.target = target
+		Signalbus.shotSignal.emit()
+		newBullet.look_at(target.global_position)
+	newBullet.offset = offset
+	newBullet.initialize()
+	current_spawn = (current_spawn + 1) % bullet_spawns.size()
 func start_boost() -> void:
 	boost_timer.start(boost_duration)
 	Signalbus.player_started_boost.emit()

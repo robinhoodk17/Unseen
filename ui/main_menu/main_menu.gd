@@ -16,6 +16,8 @@ func _connect_buttons() -> void:
 		%Controls.pressed.connect(ui.go_to.bind("Controls"))
 		#%Credits.pressed.connect(ui.go_to.bind("Credits"))
 		%Exit.pressed.connect(get_tree().call_deferred.bind("quit"))
+		await get_tree().process_frame
+		%Play.grab_focus()
 
 
 func _start_game() -> void:
