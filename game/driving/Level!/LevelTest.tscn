@@ -128,9 +128,12 @@ _data = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 266.165, 0)
 curve = SubResource("Curve3D_36gg7")
 
-[node name="Player" type="CharacterBody3D" parent="Path3D" node_paths=PackedStringArray("mesh_container", "camera_pivot", "bullet_spawns")]
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.999911, -2.17091e-09, -0.0129736, 0, 0.999998, -1.67333e-07, 0.0129735, 1.67319e-07, 0.999914, -6.3269, -0.000793457, 4327.21)
+
+[node name="Player" type="CharacterBody3D" parent="Path3D/PathFollow3D" node_paths=PackedStringArray("mesh_container", "camera_pivot", "curve_follow", "bullet_spawns")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.1389, 0, 0)
+transform = Transform3D(0.999916, -1.09047e-16, 0.0129736, -2.17091e-09, 1, 1.67319e-07, -0.0129736, -1.67333e-07, 0.999916, -0.0947227, -0.11673, 1.13037)
 floor_max_angle = 1.57952
 script = ExtResource("1_p84sy")
 direction_input = ExtResource("2_cgki8")
@@ -140,32 +143,34 @@ braking_input = ExtResource("5_acyrk")
 shoot_input = ExtResource("6_plqqr")
 mesh_container = NodePath("MeshContainer")
 camera_pivot = NodePath("CameraPivot")
+curve_follow = NodePath("../..")
 bullet_spawns = [NodePath("MeshContainer/BulletSpawns/SpawnLeft"), NodePath("MeshContainer/BulletSpawns/SpawnRight")]
+drag = 45.0
 speed_curve = SubResource("Curve_22cry")
 
-[node name="MeshContainer" type="Node3D" parent="Path3D/Player"]
+[node name="MeshContainer" type="Node3D" parent="Path3D/PathFollow3D/Player"]
 
-[node name="MeshAnimations" type="Node3D" parent="Path3D/Player/MeshContainer"]
+[node name="MeshAnimations" type="Node3D" parent="Path3D/PathFollow3D/Player/MeshContainer"]
 
-[node name="Mash1" parent="Path3D/Player/MeshContainer/MeshAnimations" instance=ExtResource("7_rv3v7")]
+[node name="Mash1" parent="Path3D/PathFollow3D/Player/MeshContainer/MeshAnimations" instance=ExtResource("7_rv3v7")]
 transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, -5.331, -0.923, -6.585)
 
-[node name="BulletSpawns" type="Node3D" parent="Path3D/Player/MeshContainer"]
+[node name="BulletSpawns" type="Node3D" parent="Path3D/PathFollow3D/Player/MeshContainer"]
 
-[node name="SpawnLeft" type="Marker3D" parent="Path3D/Player/MeshContainer/BulletSpawns"]
+[node name="SpawnLeft" type="Marker3D" parent="Path3D/PathFollow3D/Player/MeshContainer/BulletSpawns"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.130305, 0.0370253, -1.22652)
 
-[node name="SpawnRight" type="Marker3D" parent="Path3D/Player/MeshContainer/BulletSpawns"]
+[node name="SpawnRight" type="Marker3D" parent="Path3D/PathFollow3D/Player/MeshContainer/BulletSpawns"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11228, 0.037, -1.227)
 
-[node name="CameraPivot" type="PathFollow3D" parent="Path3D/Player"]
+[node name="CameraPivot" type="PathFollow3D" parent="Path3D/PathFollow3D/Player"]
 
-[node name="Camera3D" type="Camera3D" parent="Path3D/Player/CameraPivot"]
+[node name="Camera3D" type="Camera3D" parent="Path3D/PathFollow3D/Player/CameraPivot"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/Player"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/Player"]
 shape = SubResource("SphereShape3D_jko4k")
 
-[node name="AimAssist" type="ShapeCast3D" parent="Path3D/Player"]
+[node name="AimAssist" type="ShapeCast3D" parent="Path3D/PathFollow3D/Player"]
 shape = SubResource("SphereShape3D_jibn3")
 target_position = Vector3(0, 0, -300)
 
