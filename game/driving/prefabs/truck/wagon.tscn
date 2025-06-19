@@ -4,13 +4,28 @@
 [ext_resource type="Script" uid="uid://6738gjeeqax7" path="res://game/driving/prefabs/truck/damage_bus.gd" id="2_qt2gw"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qt2gw"]
-size = Vector3(20, 20, 100)
+size = Vector3(2, 2, 10)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u84f1"]
 albedo_color = Color(0.356565, 0.356565, 0.356565, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vk28q"]
-size = Vector3(20, 20, 100)
+size = Vector3(2, 2, 10)
+
+[sub_resource type="Animation" id="Animation_vk28q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.356565, 0.356565, 0.356565, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_qt2gw"]
 resource_name = "take_damage"
@@ -26,21 +41,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(0.356565, 0.356565, 0.356565, 1), Color(100, 100, 100, 1), Color(0.356565, 0.356565, 0.356565, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_vk28q"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:surface_material_override/0:albedo_color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.356565, 0.356565, 0.356565, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3to55"]

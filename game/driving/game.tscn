@@ -1,38 +1,45 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhsiyh7htemxt"]
+[gd_scene load_steps=9 format=3 uid="uid://bhsiyh7htemxt"]
 
 [ext_resource type="PackedScene" uid="uid://bs2ir8ft4u7rs" path="res://game/driving/level.blend" id="1_dqe0k"]
 [ext_resource type="PackedScene" uid="uid://cikp8uuoalhq5" path="res://game/driving/player/player_second_attempt.tscn" id="2_nmmbj"]
 [ext_resource type="Script" uid="uid://cp2mumtpcw05u" path="res://game/driving/prefabs/truck/truck.gd" id="3_6uque"]
 [ext_resource type="PackedScene" uid="uid://7teeqq7nerpm" path="res://game/driving/prefabs/spotlight3d.tscn" id="3_nmmbj"]
 [ext_resource type="PackedScene" uid="uid://c2xuba36ro24p" path="res://game/driving/prefabs/truck/wagon.tscn" id="4_n7lqk"]
+[ext_resource type="PackedScene" uid="uid://c3b6wrclraa3k" path="res://game/driving/prefabs/damage_upgrade/damage_upgrade.tscn" id="6_eyqbd"]
 
 [sub_resource type="Curve3D" id="Curve3D_n7lqk"]
-closed = true
 bake_interval = 512.0
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.85606, 0, -2541.1, 0, 0, 0, 0, 0, 0, 117.554, 0, -2901.74, 0, 0, 0, 0, 0, 0, 329.699, 0, -3095.28, 0, 0, 0, 0, 0, 0, 534.4, 0, -3169.71, 0, 0, 0, 0, 0, 0, 794.929, 0, -3229.26, 0, 0, 0, 0, 0, 0, 984.743, 0, -3225.54, 0, 0, 0, 0, 0, 0, 1256.44, 0, -3221.82, 0, 0, 0, 0, 0, 0, 2605.14, 0, -3228.35, 0, 0, 0, 0, 0, 0, 2943.83, 0, -3146.46, 0, 0, 0, 0, 0, 0, 3167.14, 0, -3001.31, 0, 0, 0, 0, 0, 0, 3237.85, 0, -2811.5, 0, 0, 0, 0, 0, 0, 3241.58, 0, -2617.96, 0, 0, 0, 0, 0, 0, 3245.02, 0, -1452.21, 0, 0, 0, 0, 0, 0, 3160.64, 0, -1283.49, 0, 0, 0, 0, 0, 0, 3083.86, 0, -1242.15, 0, 0, 0, 0, 0, 0, 2971.64, 0, -1248.06, 0, 0, 0, 0, 0, 0, 2871.24, 0, -1277.59, 0, 0, 0, 0, 0, 0, 2782.65, 0, -1354.37, 0, 0, 0, 0, 0, 0, 2759.02, 0, -1826.85, 0, 0, 0, 0, 0, 0, 3007.08, 0, -1885.91, 0, 0, 0, 0, 0, 0, 3101.58, 0, -1962.69),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.537712, 0, 0.838134, 0, 0, 0, 0, 0, 0, -0.537712, 0, -27.5355, 0, 0, 0, 0, 0, 0, -0.114235, 0, -60.9909, 0, 0, 0, 0, 0, 0, -0.687965, 0, -174.629, 0, 0, 0, 0, 0, 0, 0.694855, 0, -261.153, 0, 0, 0, 0, 0, 0, 14.5224, 0, -294.57, 0, 0, 0, 0, 0, 0, 41.6014, 0, -313.006, 0, 0, 0, 0, 0, 0, 76.7465, 0, -322.801, 0, 0, 0, 0, 0, 0, 113.044, 0, -322.801, 0, 0, 0, 0, 0, 0, 274.297, 0, -321.945, 0, 0, 0, 0, 0, 0, 302.528, 0, -311.574, 0, 0, 0, 0, 0, 0, 317.508, 0, -297.747, 0, 0, 0, 0, 0, 0, 323.846, 0, -273.548, 0, 0, 0, 0, 0, 0, 323.846, 0, -144.491),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 22
+point_count = 14
 
 [sub_resource type="Environment" id="Environment_dqe0k"]
 
 [node name="Game_tscn" type="Node3D"]
 
 [node name="level" parent="." instance=ExtResource("1_dqe0k")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_n7lqk")
 
 [node name="Player" parent="Path3D" instance=ExtResource("2_nmmbj")]
 unique_name_in_owner = true
-limits = Vector2(15, 5)
 
 [node name="Truck" type="Node3D" parent="Path3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.54015)
 script = ExtResource("3_6uque")
 
 [node name="Wagon" parent="Path3D/Truck" instance=ExtResource("4_n7lqk")]
+
+[node name="DamageUpgrade" parent="Path3D" instance=ExtResource("6_eyqbd")]
+transform = Transform3D(0.999974, 0, -0.00677883, 0, 1, 0, 0.00677883, 0, 0.999974, -0.302877, 0, -93.7775)
+progress = 99.56
+
+[node name="Movable" parent="Path3D/DamageUpgrade" index="0"]
+transform = Transform3D(1, 0, 4.65661e-10, 0, 1, 0, -4.65661e-10, 0, 1, 1.67382, 0, -0.0113449)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dqe0k")
@@ -42,9 +49,12 @@ transform = Transform3D(1, 0, 0, 0, 0.124589, 0.992208, 0, -0.992208, 0.124589, 
 directional_shadow_mode = 0
 
 [node name="Spotlights" type="Node3D" parent="."]
+visible = false
 
 [node name="Spotlight" parent="Spotlights" instance=ExtResource("3_nmmbj")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 22.7045, -4.70654, 0)
 
 [node name="Spotlight2" parent="Spotlights" instance=ExtResource("3_nmmbj")]
 transform = Transform3D(0.272297, 0, -0.962213, 0, 1, 0, 0.962213, 0, 0.272297, -53.8871, 0.337573, -441.682)
+
+[editable path="Path3D/DamageUpgrade"]

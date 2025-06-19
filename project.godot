@@ -20,12 +20,12 @@ config/icon="res://icon.png"
 
 [autoload]
 
+Signalbus="*res://autoloads/signalbus.gd"
 Settings="*res://autoloads/settings.gd"
 Globals="*res://autoloads/globals.gd"
 Utils="*res://autoloads/utils.gd"
 GUIDE="*res://addons/guide/guide.gd"
 Ui="*res://ui/ui.tscn"
-Signalbus="*res://autoloads/signalbus.gd"
 ProjectUISoundController="*res://addons/maaacks_ui_sound_controller/base/scenes/Autoloads/ProjectUISoundController.tscn"
 
 [debug]
