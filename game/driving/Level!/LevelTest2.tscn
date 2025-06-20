@@ -1,12 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://bggyqwvvg0xvl"]
+[gd_scene load_steps=9 format=3 uid="uid://bggyqwvvg0xvl"]
 
-[ext_resource type="Script" uid="uid://dtkyhmijc4ir" path="res://game/driving/player/player_second_attempt.gd" id="1_81e4d"]
-[ext_resource type="Resource" uid="uid://c6tovgnwacf3x" path="res://input/move.tres" id="2_bki1t"]
-[ext_resource type="Resource" uid="uid://u57h3v2w73ya" path="res://input/boost.tres" id="3_xynii"]
-[ext_resource type="Resource" uid="uid://0l46x8suo47" path="res://input/accelerate.tres" id="4_0iipy"]
-[ext_resource type="Resource" uid="uid://bame6gk4n45wc" path="res://input/brake.tres" id="5_pioo4"]
-[ext_resource type="Resource" uid="uid://b5g5x82md43g0" path="res://input/shoot.tres" id="6_2eb7r"]
-[ext_resource type="PackedScene" uid="uid://vv4jopr7enj2" path="res://ui/assets/model/Mash1.glb" id="7_bd7ln"]
+[ext_resource type="PackedScene" uid="uid://cikp8uuoalhq5" path="res://game/driving/player/player_second_attempt.tscn" id="1_t578y"]
+[ext_resource type="PackedScene" uid="uid://dav788km80g3s" path="res://game/EnvirinmScene/demo/assets/item/Star.glb" id="3_2d604"]
 [ext_resource type="Script" uid="uid://cp2mumtpcw05u" path="res://game/driving/prefabs/truck/truck.gd" id="8_joms5"]
 [ext_resource type="Texture2D" uid="uid://bumrpyfk6kkqb" path="res://game/EnvirinmScene/skyBox/result1.png" id="9_18wxa"]
 
@@ -16,16 +11,6 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 8
-
-[sub_resource type="Curve" id="Curve_yxah2"]
-_data = [Vector2(0.0113636, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_jko4k"]
-radius = 1.0
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_jibn3"]
-radius = 2.0
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_is8j0"]
 panorama = ExtResource("9_18wxa")
@@ -50,8 +35,13 @@ glow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 266.165, 0)
 curve = SubResource("Curve3D_ycb0r")
 
+[node name="Player" parent="Path3D" instance=ExtResource("1_t578y")]
+unique_name_in_owner = true
+transform = Transform3D(1.1646, 0, -0.0306428, 0, 1.165, 0, 0.0306428, 0, 1.1646, -6.60748, 0.000274658, 4323.12)
+limits = Vector2(3, 5)
+
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.999638, 0, -0.0263026, 0, 0.999997, 0, 0.0263024, 0, 0.999644, -6.60748, 0.000274658, 4323.12)
+transform = Transform3D(0.999637, 0, -0.0263026, 0, 0.999997, 0, 0.0263024, 0, 0.999643, -6.60748, 0.000274658, 4323.12)
 
 [node name="@Node3D@71306" type="Node3D" parent="Path3D/PathFollow3D"]
 transform = Transform3D(0.999925, 0, 0.0129737, -2.17092e-09, 1, 1.67319e-07, -0.0129736, -1.67334e-07, 0.999919, -0.509972, 1.69229, -109.653)
@@ -73,55 +63,11 @@ size = Vector3(7.29468, 1.06244, 232.014)
 transform = Transform3D(-0.999882, 0.00790637, 0.0129731, -0.00790563, -0.99996, 0.000102889, 0.0129735, 1.67327e-07, 0.999912, -0.795337, -4.21686, 0)
 size = Vector3(29.9971, 1.06244, 232.014)
 
-[node name="Player" type="CharacterBody3D" parent="Path3D/PathFollow3D" node_paths=PackedStringArray("mesh_container", "camera_pivot", "curve_follow", "bullet_spawns")]
-unique_name_in_owner = true
-transform = Transform3D(0.999916, -1.18017e-17, 0.0129736, -2.17091e-09, 1, 1.67319e-07, -0.0129736, -1.67333e-07, 0.999916, -0.0947189, -0.11673, 1.13037)
-script = ExtResource("1_81e4d")
-direction_input = ExtResource("2_bki1t")
-boost_input = ExtResource("3_xynii")
-acceleration_input = ExtResource("4_0iipy")
-braking_input = ExtResource("5_pioo4")
-shoot_input = ExtResource("6_2eb7r")
-mesh_container = NodePath("MeshContainer")
-camera_pivot = NodePath("CameraPivot")
-curve_follow = NodePath("../..")
-bullet_spawns = [NodePath("MeshContainer/BulletSpawns/SpawnLeft"), NodePath("MeshContainer/BulletSpawns/SpawnRight")]
-camera_offset = 10.0
-drag = 45.0
-speed_curve = SubResource("Curve_yxah2")
-max_speed = 60.0
-boost_speed = 50.0
-braking_speed = 0.0
-
-[node name="MeshContainer" type="Node3D" parent="Path3D/PathFollow3D/Player"]
-
-[node name="MeshAnimations" type="Node3D" parent="Path3D/PathFollow3D/Player/MeshContainer"]
-
-[node name="Mash1" parent="Path3D/PathFollow3D/Player/MeshContainer/MeshAnimations" instance=ExtResource("7_bd7ln")]
-transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, -5.331, -0.923, -6.585)
-
-[node name="BulletSpawns" type="Node3D" parent="Path3D/PathFollow3D/Player/MeshContainer"]
-
-[node name="SpawnLeft" type="Marker3D" parent="Path3D/PathFollow3D/Player/MeshContainer/BulletSpawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.130305, 0.0370253, -1.22652)
-
-[node name="SpawnRight" type="Marker3D" parent="Path3D/PathFollow3D/Player/MeshContainer/BulletSpawns"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11228, 0.037, -1.227)
-
-[node name="CameraPivot" type="PathFollow3D" parent="Path3D/PathFollow3D/Player"]
-
-[node name="Camera3D" type="Camera3D" parent="Path3D/PathFollow3D/Player/CameraPivot"]
-fov = 100.0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/Player"]
-shape = SubResource("SphereShape3D_jko4k")
-
-[node name="AimAssist" type="ShapeCast3D" parent="Path3D/PathFollow3D/Player"]
-shape = SubResource("SphereShape3D_jibn3")
-target_position = Vector3(0, 0, -300)
-
 [node name="Truck" type="Node3D" parent="Path3D"]
 script = ExtResource("8_joms5")
+
+[node name="Star" parent="Path3D" instance=ExtResource("3_2d604")]
+transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, -9.92908, -6.34567, 4247.63)
 
 [node name="Environment" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 772.891, 469.493, -258.682)
