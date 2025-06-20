@@ -257,7 +257,6 @@ script = ExtResource("1_b6xtj")
 [node name="Area2D2" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D2"]
-position = Vector2(-28, 14)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-7, 1)

@@ -37,4 +37,3 @@ func _process(delta: float) -> void:
 
 func hp_update(new_hp : float) -> void:
 	health.value = new_hp/100.0
-	print_debug(health.value)

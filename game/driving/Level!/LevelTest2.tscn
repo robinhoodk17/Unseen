@@ -51,7 +51,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 266.165, 0)
 curve = SubResource("Curve3D_ycb0r")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.999641, 0, -0.0263063, 0, 0.999997, 0, 0.0263061, 0, 0.999647, -6.60748, 0.000274658, 4323.12)
+transform = Transform3D(0.999638, 0, -0.0263026, 0, 0.999997, 0, 0.0263024, 0, 0.999644, -6.60748, 0.000274658, 4323.12)
 
 [node name="@Node3D@71306" type="Node3D" parent="Path3D/PathFollow3D"]
 transform = Transform3D(0.999925, 0, 0.0129737, -2.17092e-09, 1, 1.67319e-07, -0.0129736, -1.67334e-07, 0.999919, -0.509972, 1.69229, -109.653)
@@ -88,7 +88,6 @@ curve_follow = NodePath("../..")
 bullet_spawns = [NodePath("MeshContainer/BulletSpawns/SpawnLeft"), NodePath("MeshContainer/BulletSpawns/SpawnRight")]
 camera_offset = 10.0
 drag = 45.0
-limits = Vector2(17, 17)
 speed_curve = SubResource("Curve_yxah2")
 max_speed = 60.0
 boost_speed = 50.0
@@ -112,6 +111,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11228, 0.037, -1.227)
 [node name="CameraPivot" type="PathFollow3D" parent="Path3D/PathFollow3D/Player"]
 
 [node name="Camera3D" type="Camera3D" parent="Path3D/PathFollow3D/Player/CameraPivot"]
+fov = 100.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/Player"]
 shape = SubResource("SphereShape3D_jko4k")

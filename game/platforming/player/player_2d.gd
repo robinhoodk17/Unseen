@@ -315,10 +315,10 @@ func state_machine(delta: float) -> void:
 				current_state = state.WALKING
 				velocity.x *= .75
 			if looking < 0:
-				if wall_jump_left.is_colliding() and !is_on_floor():
+				if wall_jump_left.is_colliding() and !is_on_floor() and velocity.y < 0.0:
 					current_state = state.WALL_SLIDING
 			if looking > 0:
-				if wall_jump_right.is_colliding() and !is_on_floor():
+				if wall_jump_right.is_colliding() and !is_on_floor() and velocity.y < 0.0:
 					current_state = state.WALL_SLIDING
 			return
 

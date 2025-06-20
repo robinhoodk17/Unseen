@@ -13,3 +13,6 @@ signal post_ui_message(text: String)
 signal controls_changed(config: GUIDERemappingConfig)
 var damage_boost_duration : float = 15.0
 var collectibles_speed : float = 1.0
+var destructible_hp : float = 2.0
+var weak_point_hp : float = 1.0
+var wagon_hp : float = 1.0
