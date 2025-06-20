@@ -17,8 +17,9 @@ func late_ready() -> void:
 		current_wagon.previous_wagon = previous_wagon
 		if previous_wagon != null:
 			previous_wagon.died.connect(current_wagon.previous_wagon_died)
+		else:
+			player.current_wagon = current_wagon
 		previous_wagon = current_wagon
-	player.current_wagon = previous_wagon
 	for i in get_children():
 		i.reparent(curve_follow, false)
 		i.player = player

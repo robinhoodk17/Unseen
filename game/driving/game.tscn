@@ -33,10 +33,6 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_n7lqk")
 
-[node name="Player" parent="Path3D" instance=ExtResource("2_nmmbj")]
-unique_name_in_owner = true
-limits = Vector2(1.5, 5)
-
 [node name="Truck" type="Node3D" parent="Path3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.54015)
 script = ExtResource("3_6uque")
@@ -51,6 +47,9 @@ wagon_number = 1
 
 [node name="Wagon3" parent="Path3D/Truck" instance=ExtResource("4_n7lqk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.3011)
+
+[node name="Player" parent="Path3D" instance=ExtResource("2_nmmbj")]
+unique_name_in_owner = true
 
 [node name="DamageUpgrade" parent="Path3D" instance=ExtResource("6_eyqbd")]
 transform = Transform3D(0.999974, 0, -0.00677883, 0, 1, 0, 0.00677883, 0, 0.999974, -0.302877, 0, -93.7775)

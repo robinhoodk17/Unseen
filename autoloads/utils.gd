@@ -29,3 +29,9 @@ func start_dialogue(timeline : String) -> void:
 		get_tree().paused = true
 		Dialogic.start(timeline).process_mode = Node.PROCESS_MODE_ALWAYS
 		Dialogic.timeline_ended.connect(func():get_tree().set('paused', false))
+
+func create_timer(wait_time: float = 1.0, one_shot: bool = true) -> Timer:
+	var timer : Timer = Timer.new()
+	timer.wait_time = wait_time
+	timer.one_shot = one_shot
+	return timer

@@ -5,6 +5,7 @@ signal died
 
 @export var wagon_number : int = 0
 @export var weak_spots : Array[WeakSpot]
+@export var guards : Array[Guard]
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var player: player3d_second_attempt = %Player
@@ -15,13 +16,14 @@ var current_speed : float
 var active : bool = false
 var current_hp = Globals.wagon_hp
 
-##function implemented by subclasses
+##function implemented by subclasses called when a weak spot is destroyed
 func extensible_weak_spot_event(weak_spot_number) -> void:
 	pass
 ##function implemented by subclasses
 func extensible_ready() -> void:
+	guards[0].spawn()
 	pass
-##function implemented by subclasses
+##function implemented by subclasses called when the previous wagon dies
 func extensible_wagon_event() -> void:
 	pass
 ##function implemented by subclasses
@@ -35,6 +37,8 @@ func late_ready() -> void:
 	current_speed = player.max_speed * 1.1
 	Signalbus.player_started_boost.connect(react_to_boost)
 	active = true
+	for i : Guard in guards:
+		i.player = player
 	for i in weak_spots:
 		i.took_damage.connect(takeDamageFromWeakSpot)
 		i.died.connect(weak_spot_died)
@@ -69,7 +73,6 @@ func takeDamage(amount) -> void:
 		queue_free()
 
 func takeDamageFromWeakSpot(amount) -> void:
-	print_debug(wagon_number)
 	animation_player.play("take_damage")
 
 func _physics_process(delta: float) -> void:
