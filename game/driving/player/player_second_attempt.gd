@@ -1,6 +1,7 @@
 extends CharacterBody3D
 class_name player3d_second_attempt
 
+@export var progress : float = 0.0
 @export_group("GUIDE actions")
 @export var direction_input : GUIDEAction
 @export var boost_input : GUIDEAction
@@ -67,7 +68,7 @@ func _ready() -> void:
 	if curve_follow == null:
 		curve_follow = get_parent()
 	await Utils.reparent_node(camera_pivot,curve_follow,true)
-	camera_pivot.progress = 0
+	camera_pivot.progress = progress
 	global_position = camera_pivot.global_position - global_basis.z * camera_offset
 	for i in 10:
 		position_camera(.1)

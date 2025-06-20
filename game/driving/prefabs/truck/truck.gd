@@ -19,5 +19,5 @@ func late_ready() -> void:
 	for i in get_children():
 		i.reparent(curve_follow, false)
 		i.player = player
-		i.progress = (wagon_number * wagon_size/2) + space_between_wagons + wagon_size
+		i.progress = (wagon_number * wagon_size/2) + space_between_wagons + wagon_size + player.progress
 		wagon_number -= 1
