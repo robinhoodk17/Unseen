@@ -23,3 +23,9 @@ func reparent_node(node: Node, parent: Node, position_reset: bool = true) -> voi
 	# await get_tree().process_frame
 	if position_reset and pos:
 		node.set("global_position", pos)
+
+func start_dialogue(timeline : String) -> void:
+		Dialogic.process_mode = Node.PROCESS_MODE_ALWAYS
+		get_tree().paused = true
+		Dialogic.start(timeline).process_mode = Node.PROCESS_MODE_ALWAYS
+		Dialogic.timeline_ended.connect(func():get_tree().set('paused', false))

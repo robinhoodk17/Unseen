@@ -1,22 +1,29 @@
-[gd_scene load_steps=10 format=3 uid="uid://bhsiyh7htemxt"]
+[gd_scene load_steps=14 format=3 uid="uid://bhsiyh7htemxt"]
 
 [ext_resource type="PackedScene" uid="uid://bs2ir8ft4u7rs" path="res://game/driving/level.blend" id="1_dqe0k"]
 [ext_resource type="PackedScene" uid="uid://cikp8uuoalhq5" path="res://game/driving/player/player_second_attempt.tscn" id="2_nmmbj"]
 [ext_resource type="Script" uid="uid://cp2mumtpcw05u" path="res://game/driving/prefabs/truck/truck.gd" id="3_6uque"]
 [ext_resource type="PackedScene" uid="uid://7teeqq7nerpm" path="res://game/driving/prefabs/spotlight3d.tscn" id="3_nmmbj"]
 [ext_resource type="PackedScene" uid="uid://c2xuba36ro24p" path="res://game/driving/prefabs/truck/wagon.tscn" id="4_n7lqk"]
+[ext_resource type="PackedScene" uid="uid://c0wvi3ixdpqmu" path="res://game/driving/prefabs/boost_pad/boost_pad.tscn" id="6_17euv"]
 [ext_resource type="PackedScene" uid="uid://bstld3j3n5kfs" path="res://game/driving/prefabs/dialogue_popup.tscn" id="6_a4ecv"]
 [ext_resource type="PackedScene" uid="uid://c3b6wrclraa3k" path="res://game/driving/prefabs/damage_upgrade/damage_upgrade.tscn" id="6_eyqbd"]
+[ext_resource type="PackedScene" uid="uid://c4tighgrqejbq" path="res://game/driving/prefabs/health_pad/health_pad.tscn" id="7_cy5fq"]
+[ext_resource type="PackedScene" uid="uid://rv836bpusitt" path="res://game/driving/prefabs/destructible/create_destrucible.tscn" id="10_cy5fq"]
 
 [sub_resource type="Curve3D" id="Curve3D_n7lqk"]
+closed = true
 bake_interval = 512.0
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.537712, 0, 0.838134, 0, 0, 0, 0, 0, 0, -0.537712, 0, -27.5355, 0, 0, 0, 0, 0, 0, -0.114235, 0, -60.9909, 0, 0, 0, 0, 0, 0, -0.687965, 0, -174.629, 0, 0, 0, 0, 0, 0, 0.694855, 0, -261.153, 0, 0, 0, 0, 0, 0, 14.5224, 0, -294.57, 0, 0, 0, 0, 0, 0, 41.6014, 0, -313.006, 0, 0, 0, 0, 0, 0, 76.7465, 0, -322.801, 0, 0, 0, 0, 0, 0, 113.044, 0, -322.801, 0, 0, 0, 0, 0, 0, 274.297, 0, -321.945, 0, 0, 0, 0, 0, 0, 302.528, 0, -311.574, 0, 0, 0, 0, 0, 0, 317.508, 0, -297.747, 0, 0, 0, 0, 0, 0, 323.846, 0, -273.548, 0, 0, 0, 0, 0, 0, 323.846, 0, -144.491),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.537712, 0, 0.838134, 0, 0, 0, 0, 0, 0, -0.537712, 0, -27.5355, 0, 0, 0, 0, 0, 0, -0.114235, 0, -60.9909, 0, 0, 0, 0, 0, 0, -0.687965, 0, -174.629, 0, 0, 0, 0, 0, 0, 0.694855, 0, -261.153, 0, 0, 0, 0, 0, 0, 14.5224, 0, -294.57, 0, 0, 0, 0, 0, 0, 41.6014, 0, -313.006, 0, 0, 0, 0, 0, 0, 76.7465, 0, -322.801, 0, 0, 0, 0, 0, 0, 113.044, 0, -322.801, 0, 0, 0, 0, 0, 0, 274.297, 0, -321.945, 0, 0, 0, 0, 0, 0, 302.528, 0, -311.574, 0, 0, 0, 0, 0, 0, 317.508, 0, -297.747, 0, 0, 0, 0, 0, 0, 323.846, 0, -273.548, 0, 0, 0, 0, 0, 0, 323.846, 0, -144.491, 0, 0, 0, 0, 0, 0, 315.304, 0, -127.313, 0, 0, 0, 0, 0, 0, 297.939, 0, -124.028, 0, 0, 0, 0, 0, 0, 284.798, 0, -129.66, 0, 0, 0, 0, 0, 0, 275.881, 0, -139.515, 0, 0, 0, 0, 0, 0, 273.535, 0, -159.227, 0, 0, 0, 0, 0, 0, 276.82, 0, -182.224, 0, 0, 0, 0, 0, 0, 306.387, 0, -192.08, 0, 0, 0, 0, 0, 0, 312.019, 0, -198.65, 0, 0, 0, 0, 0, 0, 306.387, 0, -208.506, 0, 0, 0, 0, 0, 0, 287.413, 0, -220.531, 0, 0, 0, 0, 0, 0, 273.803, 0, -224.286, 0, 0, 0, 0, 0, 0, 133.945, 0, -288.583, 0, 0, 0, 0, 0, 0, 119.865, 0, -289.991, 0, 0, 0, 0, 0, 0, 103.908, 0, -282.012, 0, 0, 0, 0, 0, 0, 75.4376, 0, -253.295, 0, 0, 0, 0, 0, 0, 75.6549, 0, -245.687, 0, 0, 0, 0, 0, 0, 80.8722, 0, -240.252, 0, 0, 0, 0, 0, 0, 134.167, 0, -225.01, 0, 0, 0, 0, 0, 0, 160.036, 0, -219.575, 0, 0, 0, 0, 0, 0, 219.456, 0, -208.686, 0, 0, 0, 0, 0, 0, 233.368, 0, -194.121, 0, 0, 0, 0, 0, 0, 239.021, 0, -176.296, 0, 0, 0, 0, 0, 0, 238.323, 0, -164.579, 0, 0, 0, 0, 0, 0, 227.019, 0, -156.753, 0, 0, 0, 0, 0, 0, 212.237, 0, -154.796, 0, 0, 0, 0, 0, 0, 185.61, 0, -161.287, 0, 0, 0, 0, 0, 0, 164.741, 0, -172.156, 0, 0, 0, 0, 0, 0, 149.089, 0, -179.548, 0, 0, 0, 0, 0, 0, 131.046, 0, -190.199, 0, 0, 0, 0, 0, 0, 117.786, 0, -200.417, 0, 0, 0, 0, 0, 0, 111.481, 0, -203.025, 0, 0, 0, 0, 0, 0, 97.5686, 0, -197.373, 0, 0, 0, 0, 0, 0, 84.5254, 0, -186.939, 0, 0, 0, 0, 0, 0, 74.0908, 0, -171.504, 0, 0, 0, 0, 0, 0, 63.2111, 0, -147.857, 0, 0, 0, 0, 0, 0, 74.595, 0, -131.988, 0, 0, 0, 0, 0, 0, 77.6997, 0, -121.984, 0, 0, 0, 0, 0, 0, 75.7816, 0, 53.0409, 0, 0, 0, 0, 0, 0, 89.2371, 0, 75.2404, 0, 0, 0, 0, 0, 0, 102.933, 0, 77.1969, 0, 0, 0, 0, 0, 0, 117.063, 0, 72.197, 0, 0, 0, 0, 0, 0, 123.584, 0, 65.6754, 0, 0, 0, 0, 0, 0, 125.106, 0, 56.9799, 0, 0, 0, 0, 0, 0, 125.758, 0, 45.4584, 0, 0, 0, 0, 0, 0, 125.871, 0, 18.2065, 0, 0, 0, 0, 0, 0, 140.653, 0, 6.03284, 0, 0, 0, 0, 0, 0, 162.174, 0, 4.07635, 0, 0, 0, 0, 0, 0, 184.348, 0, 1.68509, 0, 0, 0, 0, 0, 0, 301.111, 0, 0.577236, 0, 0, 0, 0, 0, 0, 322.85, 0, 11.2292, 0, 0, 0, 0, 0, 0, 327.415, 0, 30.7941, 0, 0, 0, 0, 0, 0, 327.32, 0, 89.2722, 0, 0, 0, 0, 0, 0, 325.423, 0, 125.58, 0, 0, 0, 0, 0, 0, 305.07, 0, 155.592, 0, 0, 0, 0, 0, 0, 279.887, 0, 175.945, 0, 0, 0, 0, 0, 0, 197.785, 0, 176.29, 0, 0, 0, 0, 0, 0, 59.3486, 0, 177.416, 0, 0, 0, 0, 0, 0, 28.9915, 0, 167.067, 0, 0, 0, 0, 0, 0, 0.014389, 0, 127.051, 0, 0, 0, 0, 0, 0, -0.672606, 0, 77.9279),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 14
+point_count = 74
 
 [sub_resource type="Environment" id="Environment_dqe0k"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qnipa"]
+size = Vector3(7.11, 3.65, 1)
 
 [node name="Game_tscn" type="Node3D"]
 
@@ -28,12 +35,22 @@ curve = SubResource("Curve3D_n7lqk")
 
 [node name="Player" parent="Path3D" instance=ExtResource("2_nmmbj")]
 unique_name_in_owner = true
+limits = Vector2(1.5, 5)
 
 [node name="Truck" type="Node3D" parent="Path3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.54015)
 script = ExtResource("3_6uque")
 
 [node name="Wagon" parent="Path3D/Truck" instance=ExtResource("4_n7lqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.13436)
+wagon_number = 2
+
+[node name="Wagon2" parent="Path3D/Truck" instance=ExtResource("4_n7lqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.3011)
+wagon_number = 1
+
+[node name="Wagon3" parent="Path3D/Truck" instance=ExtResource("4_n7lqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.3011)
 
 [node name="DamageUpgrade" parent="Path3D" instance=ExtResource("6_eyqbd")]
 transform = Transform3D(0.999974, 0, -0.00677883, 0, 1, 0, 0.00677883, 0, 0.999974, -0.302877, 0, -93.7775)
@@ -42,8 +59,16 @@ progress = 99.56
 [node name="Movable" parent="Path3D/DamageUpgrade" index="0"]
 transform = Transform3D(1, 0, 4.65661e-10, 0, 1, 0, -4.65661e-10, 0, 1, 1.67382, 0, -0.0113449)
 
+[node name="BoostPad" parent="Path3D" instance=ExtResource("6_17euv")]
+transform = Transform3D(0.999997, 0, 0, 0, 1, 0, 0, 0, 0.999997, -0.548834, 0, -4.59146)
+progress = 7.6
+
+[node name="HealthPad" parent="Path3D" instance=ExtResource("7_cy5fq")]
+transform = Transform3D(0.999955, 0, -0.00912343, 0, 1, 0, 0.00912343, 0, 0.999955, -0.747636, 0, -237.844)
+progress = 233.79
+
 [node name="DialoguePopup" parent="Path3D" instance=ExtResource("6_a4ecv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -66.3583)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.70745)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dqe0k")
@@ -61,4 +86,12 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 22.704
 [node name="Spotlight2" parent="Spotlights" instance=ExtResource("3_nmmbj")]
 transform = Transform3D(0.272297, 0, -0.962213, 0, 1, 0, 0.962213, 0, 0.272297, -53.8871, 0.337573, -441.682)
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -57.18)
+mesh = SubResource("BoxMesh_qnipa")
+
+[node name="StaticBody3D" parent="MeshInstance3D" instance=ExtResource("10_cy5fq")]
+
 [editable path="Path3D/DamageUpgrade"]
+[editable path="Path3D/HealthPad"]
+[editable path="Path3D/HealthPad/Movable/Health"]

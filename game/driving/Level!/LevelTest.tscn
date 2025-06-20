@@ -155,6 +155,7 @@ size = Vector3(29.9971, 1.06244, 232.014)
 unique_name_in_owner = true
 transform = Transform3D(0.999916, -1.18017e-17, 0.0129736, -2.17091e-09, 1, 1.67319e-07, -0.0129736, -1.67333e-07, 0.999916, -0.0947189, -0.11673, 1.13037)
 script = ExtResource("1_p84sy")
+progress = 10000.0
 direction_input = ExtResource("2_cgki8")
 boost_input = ExtResource("3_kev3d")
 acceleration_input = ExtResource("4_krymx")

@@ -1,6 +1,7 @@
 extends CharacterBody3D
 class_name player3d_second_attempt
 
+@export var progress : float = 0.0
 @export_group("GUIDE actions")
 @export var direction_input : GUIDEAction
 @export var boost_input : GUIDEAction
@@ -67,21 +68,27 @@ func _ready() -> void:
 	if curve_follow == null:
 		curve_follow = get_parent()
 	await Utils.reparent_node(camera_pivot,curve_follow,true)
-	camera_pivot.progress = 0
+	camera_pivot.progress = progress
 	global_position = camera_pivot.global_position - global_basis.z * camera_offset
 	for i in 10:
 		position_camera(.1)
-		global_position = camera_pivot.global_position - global_basis.z * camera_offset
+		global_position = camera_pivot.global_position - camera_pivot.global_basis.z * camera_offset
 	running = true
 
 func position_camera(delta) -> void :
-	var camera_point : Vector3 = curve_follow.curve.get_closest_point(global_position + mesh_container.global_basis.z * camera_offset)
+	var camera_point : Vector3 = curve_follow.curve.get_closest_point(global_position + mesh_container.global_basis.z * camera_offset) + curve_follow.global_position
 	var offset = curve_follow.curve.get_closest_offset(global_position)
 	var target_transform : Transform3D = curve_follow.curve.sample_baked_with_rotation(offset,false,true)
-	#print_debug(camera_point)
-	camera_pivot.position = camera_point
+	camera_pivot.global_position = camera_point
 	camera_pivot.basis = target_transform.basis
 	aim_assist.global_basis = camera_pivot.global_basis
+	
+	var relative_position : Vector3 = global_position - camera_pivot.global_position
+	var distance_on_x : float = clamp(camera_pivot.global_basis.x.dot(relative_position),-limits.x/1.1,limits.x/1.1)
+	var distance_on_y : float = clamp(camera_pivot.global_basis.y.dot(relative_position),-limits.y/1.1,limits.y/1.1)
+	#
+	camera_3d.position = lerp(camera_3d.position, Vector3(distance_on_x, distance_on_y, 0), delta * 5.0)
+	
 	#camera_3d.look_at(global_position)
 	#var target_camera_rotation : Basis = camera_3d.global_basis.looking_at(global_position)
 	#camera_3d.global_basis = camera_3d.global_basis.slerp(target_camera_rotation,delta * 10.0)
@@ -107,13 +114,13 @@ func _physics_process(delta: float) -> void:
 	else:
 		z_component = -max_speed * speed_curve.sample(current_speed)
 	if boost_timer.is_stopped():
-		show()
+		mesh_container.show()
 	else:
 		z_component = -boost_speed
 		current_velocity = boost_speed
 		invisibility_timer.start(invisibility_grace)
 		invisible = true
-		hide()
+		mesh_container.hide()
 	if invisibility_timer.is_stopped():
 		invisible = false
 	Signalbus.current_speed.emit(-z_component)
@@ -207,12 +214,15 @@ func doShotVFX(target, offset : Vector3):
 	newBullet.offset = offset
 	newBullet.initialize()
 	current_spawn = (current_spawn + 1) % bullet_spawns.size()
+
 func start_boost() -> void:
-	current_hp -= boost_cost
+	take_damage(boost_cost)
 	boost_timer.start(boost_duration)
 	Signalbus.player_started_boost.emit()
-	Signalbus.player_hp_update.emit(current_hp)
-	
+
+func start_free_boost() -> void:
+	boost_timer.start(boost_duration)
+	Signalbus.player_started_boost.emit()
 
 func handle_animations(delta : float, direction : Vector2) -> void:
 	var target_rotation = mesh_container.global_basis.rotated(mesh_container.global_basis.z, -direction.x * PI/3.0).orthonormalized()
@@ -222,6 +232,11 @@ func handle_animations(delta : float, direction : Vector2) -> void:
 	else:
 		previousBasis = mesh_animations.global_basis
 		mesh_animations.global_basis = mesh_animations.global_basis.slerp(target_rotation, delta * 5.0).orthonormalized()
+
+func take_damage(amount : float) -> void:
+	current_hp -= amount
+	current_hp = min(current_hp, max_hp)
+	Signalbus.player_hp_update.emit(current_hp)
 
 #region utilities
 func create_timer(wait_time: float = 1.0, one_shot: bool = true) -> Timer:
