@@ -112,8 +112,22 @@ _data = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 266.165, 0)
 curve = SubResource("Curve3D_36gg7")
 
+[node name="Player" parent="Path3D" instance=ExtResource("2_65d5h")]
+unique_name_in_owner = true
+transform = Transform3D(0.999307, 1.89036e-06, -0.0366838, -1.88952e-06, 0.999995, 5.69378e-08, 0.0366835, 1.2416e-08, 0.999315, 145.528, 0.533295, -6424.04)
+slide_on_ceiling = false
+wall_min_slide_angle = 0.872665
+floor_stop_on_slope = false
+floor_block_on_wall = false
+camera_offset = 0.5
+limits = Vector2(5, 5)
+max_speed = 20.0
+boost_speed = 50.0
+acceleration_speed = 10.0
+move_speed = Vector2(10, 10)
+
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.999712, 1.88645e-06, -0.0233582, -1.89012e-06, 0.999995, -1.35589e-07, 0.023358, 1.79703e-07, 0.99972, 145.766, 0.532241, -6419.95)
+transform = Transform3D(0.999712, 1.88645e-06, -0.0233582, -1.89011e-06, 0.999995, -1.35589e-07, 0.023358, 1.79703e-07, 0.99972, 145.766, 0.532241, -6419.95)
 progress = 10748.8
 
 [node name="@Node3D@71306" type="Node3D" parent="Path3D/PathFollow3D"]
@@ -135,20 +149,6 @@ size = Vector3(7.29468, 1.06244, 232.014)
 [node name="CSGBox3D3" type="CSGBox3D" parent="Path3D/PathFollow3D/@Node3D@71306"]
 transform = Transform3D(-0.999882, 0.00790637, 0.0129731, -0.00790563, -0.99996, 0.000102889, 0.0129735, 1.67327e-07, 0.999912, -0.795337, -4.21686, 0)
 size = Vector3(29.9971, 1.06244, 232.014)
-
-[node name="Player" parent="Path3D/PathFollow3D" instance=ExtResource("2_65d5h")]
-unique_name_in_owner = true
-transform = Transform3D(0.999907, -5.15486e-16, -0.0133316, 2.23078e-09, 1, 1.67317e-07, 0.0133314, -1.67334e-07, 0.999907, -0.333614, 0.00106812, -4.08594)
-slide_on_ceiling = false
-wall_min_slide_angle = 0.872665
-floor_stop_on_slope = false
-floor_block_on_wall = false
-camera_offset = 0.5
-limits = Vector2(5, 5)
-max_speed = 20.0
-boost_speed = 50.0
-acceleration_speed = 10.0
-move_speed = Vector2(10, 10)
 
 [node name="Truck" type="Node3D" parent="Path3D"]
 script = ExtResource("2_1563b")

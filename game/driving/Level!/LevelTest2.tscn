@@ -159,7 +159,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.3011)
 script = ExtResource("12_lp03g")
 
 [node name="DamageUpgrade" parent="Path3D" instance=ExtResource("4_14eqd")]
-transform = Transform3D(0.999953, -8.71033e-06, -0.00953601, 8.70843e-06, 1, -2.38572e-07, 0.00953599, 1.55517e-07, 0.999955, -3.71107, 0.102263, 3705.9)
+transform = Transform3D(0.999953, -8.71033e-06, -0.00953601, 8.70844e-06, 1, -2.38572e-07, 0.00953599, 1.55517e-07, 0.999955, -3.71107, 0.102263, 3705.9)
 progress = 617.33
 
 [node name="Movable" parent="Path3D/DamageUpgrade" index="0"]
