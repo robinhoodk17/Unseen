@@ -103,6 +103,7 @@ project/assembly_name="Godot-4-Jam-Template"
 
 [editor]
 
+movie_writer/movie_file="/home/diego/Documents/Videojuego/Builds/movie.avi"
 naming/script_name_casing=2
 
 [editor_plugins]

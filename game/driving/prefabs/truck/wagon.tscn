@@ -42,7 +42,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(0.356565, 0.356565, 0.356565, 1), Color(100, 100, 100, 1), Color(0.356565, 0.356565, 0.356565, 1)]
+"values": [Color(0.356565, 0.356565, 0.356565, 1), Color(0.8, 0.8, 0.8, 1), Color(0.356565, 0.356565, 0.356565, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3to55"]
@@ -78,7 +78,7 @@ libraries = {
 }
 
 [node name="ActualWeakPoint" type="StaticBody3D" parent="." node_paths=PackedStringArray("mesh_instance_3d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.02727, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.02727, 0, 5.64621)
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("3_vk28q")
@@ -91,7 +91,7 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ActualWeakPoint"]
 
 [node name="ActualWeakPoint2" type="StaticBody3D" parent="." node_paths=PackedStringArray("mesh_instance_3d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0162158, 1.87727, -4.50459)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0162158, 1.77035, 5.5042)
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("3_vk28q")
@@ -99,7 +99,6 @@ mesh_instance_3d = NodePath("WeakPoint")
 weak_spot_number = 1
 
 [node name="WeakPoint" type="MeshInstance3D" parent="ActualWeakPoint2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.88123, 4.62999)
 mesh = SubResource("SphereMesh_3to55")
 skeleton = NodePath("../..")
 

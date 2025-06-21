@@ -16,7 +16,7 @@ class_name player3d_second_attempt
 @export var superbullet : PackedScene = preload("uid://d34trstqhio75")
 @export var bullet_spawns : Array[Marker3D]
 @export_group("camera")
-@export var camera_offset : float = 1.0
+@export var camera_offset : float = 2.0
 @export_group("combat and health")
 ##the amount of damage per shot
 @export var damage : float = 1.0
@@ -29,7 +29,7 @@ class_name player3d_second_attempt
 @export var collision_hp_loss : float = 5.0
 @export_group("Speed_stats")
 @export var invisibility_grace : float = 0.5
-@export var drag : float = 5.0
+@export var drag : float = 2.5
 @export var limits : Vector2 = Vector2(1.5, 1.0)
 ##the distance we want to keep the player from the last wagon
 @export var wagon_optimal_distance : float = 10.0
@@ -92,8 +92,8 @@ func position_camera(delta) -> void :
 	aim_assist.global_basis = camera_pivot.global_basis
 	
 	var relative_position : Vector3 = global_position - camera_pivot.global_position
-	var distance_on_x : float = camera_pivot.global_basis.x.dot(relative_position) * 0.9
-	var distance_on_y : float = camera_pivot.global_basis.y.dot(relative_position) * 0.9
+	var distance_on_x : float = camera_pivot.global_basis.x.dot(relative_position)
+	var distance_on_y : float = camera_pivot.global_basis.y.dot(relative_position)
 	#
 	camera_3d.position = lerp(camera_3d.position, Vector3(distance_on_x, distance_on_y, 0), delta * 5.0)
 	

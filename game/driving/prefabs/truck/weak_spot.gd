@@ -19,6 +19,7 @@ func enable() -> void:
 
 func _ready() -> void:
 	collision_shape_3d.shape = mesh_instance_3d.mesh.create_trimesh_shape()
+	collision_shape_3d.transform = mesh_instance_3d.transform
 	hide()
 
 func takeDamage(amount) -> void:
