@@ -41,7 +41,8 @@ directories/dch_directory={
 "protagonist": "res://dialogic/characters/protagonist.dch"
 }
 directories/dtl_directory={
-"catch_up": "res://dialogic/timelines/catch_up.dtl"
+"catch_up": "res://dialogic/timelines/catch_up.dtl",
+"spotlights_driving": "res://dialogic/timelines/spotlights_driving.dtl"
 }
 extensions_folder="res://addons/dialogic_additions"
 text/letter_speed=0.01
@@ -79,7 +80,7 @@ audio/channel_defaults={
 layout/style_list=["res://dialogic/style.tres"]
 layout/default_style="res://dialogic/style.tres"
 text/input_action="dialogic_default_action"
-text/autoadvance_enabled=true
+text/autoadvance_enabled=false
 text/autoadvance_fixed_delay=3.0
 text/autoadvance_per_word_delay=0
 text/autocolor_names=false
@@ -88,6 +89,7 @@ event_default_overrides={
 "portrait": ""
 }
 }
+animations/join_default="Fade In Up"
 
 [display]
 

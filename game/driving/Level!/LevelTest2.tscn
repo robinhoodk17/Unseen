@@ -1,10 +1,29 @@
-[gd_scene load_steps=10 format=3 uid="uid://bggyqwvvg0xvl"]
+[gd_scene load_steps=21 format=3 uid="uid://bggyqwvvg0xvl"]
 
+[ext_resource type="Script" uid="uid://cytuck1gttjie" path="res://game/driving/Level!/level_test_2.gd" id="1_q1xq3"]
 [ext_resource type="PackedScene" uid="uid://cikp8uuoalhq5" path="res://game/driving/player/player_second_attempt.tscn" id="1_t578y"]
+[ext_resource type="PackedScene" uid="uid://cnjw54m0awi81" path="res://game/driving/prefabs/prompt/prompt.tscn" id="2_waym2"]
 [ext_resource type="PackedScene" uid="uid://c2xuba36ro24p" path="res://game/driving/prefabs/truck/wagon.tscn" id="3_2d604"]
+[ext_resource type="Resource" uid="uid://c6tovgnwacf3x" path="res://input/move.tres" id="3_xia7n"]
 [ext_resource type="PackedScene" uid="uid://c3b6wrclraa3k" path="res://game/driving/prefabs/damage_upgrade/damage_upgrade.tscn" id="4_14eqd"]
+[ext_resource type="Resource" uid="uid://b5g5x82md43g0" path="res://input/shoot.tres" id="4_ycb0r"]
+[ext_resource type="Resource" uid="uid://u57h3v2w73ya" path="res://input/boost.tres" id="5_g8etj"]
 [ext_resource type="Script" uid="uid://cp2mumtpcw05u" path="res://game/driving/prefabs/truck/truck.gd" id="8_joms5"]
 [ext_resource type="Texture2D" uid="uid://bumrpyfk6kkqb" path="res://game/EnvirinmScene/skyBox/result1.png" id="9_18wxa"]
+[ext_resource type="PackedScene" uid="uid://bstld3j3n5kfs" path="res://game/driving/prefabs/dialogue_popup.tscn" id="11_2fdob"]
+[ext_resource type="PackedScene" uid="uid://7teeqq7nerpm" path="res://game/driving/prefabs/spotlight3d.tscn" id="12_c883t"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xia7n"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ycb0r"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_g8etj"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2fdob"]
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_ycb0r"]
 bake_interval = 512.0
@@ -32,13 +51,47 @@ tonemap_exposure = 0.66
 glow_enabled = true
 
 [node name="LevelTest" type="Node3D"]
+script = ExtResource("1_q1xq3")
+
+[node name="Extras" type="Node3D" parent="."]
+
+[node name="Move" parent="Extras" instance=ExtResource("2_waym2")]
+transform = Transform3D(0.999654, 0, -0.0263029, 0, 1, 0, 0.0263028, 0, 0.999654, -6.607, 266.559, 4295.72)
+no_depth_test = true
+texture = SubResource("ViewportTexture_xia7n")
+interact_action = ExtResource("3_xia7n")
+message = "Move"
+
+[node name="Accelerate" parent="Extras" instance=ExtResource("2_waym2")]
+transform = Transform3D(0.999654, 0, -0.0263029, 0, 1, 0, 0.0263028, 0, 0.999654, -6.6075, 266.559, 4310.82)
+no_depth_test = true
+texture = SubResource("ViewportTexture_ycb0r")
+
+[node name="Boost" parent="Extras" instance=ExtResource("2_waym2")]
+transform = Transform3D(0.999654, 0, -0.0263029, -9.09495e-13, 1, 5.82077e-11, 0.0263028, -5.82077e-11, 0.999654, -3.36153, 266.242, 4198.67)
+texture = SubResource("ViewportTexture_g8etj")
+interact_action = ExtResource("5_g8etj")
+message = "Boost (careful)"
+
+[node name="Shoot" parent="Extras" instance=ExtResource("2_waym2")]
+transform = Transform3D(0.999654, 0, -0.0263029, -9.09495e-13, 1, 5.82077e-11, 0.0263028, -5.82077e-11, 0.999654, -3.36153, 266.242, 4014.87)
+texture = SubResource("ViewportTexture_2fdob")
+interact_action = ExtResource("4_ycb0r")
+message = "Shoot"
+
+[node name="DialoguePopup" parent="Extras" instance=ExtResource("11_2fdob")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80205, 266.404, 4096.05)
+timeline = "spotlights_driving"
+
+[node name="Spotlight" parent="Extras" instance=ExtResource("12_c883t")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 15.1012, 247.068, 4058.58)
 
 [node name="Path3D" type="Path3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 266.165, 0)
 curve = SubResource("Curve3D_ycb0r")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.999635, 0, -0.0263025, 0, 0.999997, 0, 0.0263024, 0, 0.999641, -6.60748, 0.000274658, 4323.12)
+transform = Transform3D(0.999626, 0, -0.0263023, 0, 0.999996, 0, 0.0263021, 0, 0.999633, -6.60748, 0.000274658, 4323.12)
 
 [node name="_Node3D_71306" type="Node3D" parent="Path3D/PathFollow3D"]
 transform = Transform3D(0.999925, 0, 0.0129737, -2.17092e-09, 1, 1.67319e-07, -0.0129736, -1.67334e-07, 0.999919, -0.509972, 1.69229, -109.653)
@@ -69,7 +122,6 @@ floor_block_on_wall = false
 camera_offset = 0.5
 limits = Vector2(5, 5)
 acceleration_speed = 10.0
-move_speed = Vector2(10, 9)
 
 [node name="Truck2" type="Node3D" parent="Path3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.54015)
@@ -87,8 +139,8 @@ wagon_number = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.3011)
 
 [node name="DamageUpgrade" parent="Path3D" instance=ExtResource("4_14eqd")]
-transform = Transform3D(0.999213, -1.23085e-05, -0.0396379, -1.92371e-05, 1, -0.000795461, 0.0396379, 0.000795599, 0.999214, -3.36154, 0.0767147, 4218.01)
-progress = 114.378
+transform = Transform3D(0.999953, -8.71033e-06, -0.00953601, 8.70843e-06, 1, -2.38572e-07, 0.00953599, 1.55517e-07, 0.999955, -3.71107, 0.102263, 3705.9)
+progress = 617.33
 
 [node name="Movable" parent="Path3D/DamageUpgrade" index="0"]
 transform = Transform3D(1, 0, 0, -7.27596e-12, 1, 0, -7.45058e-09, 0, 1, 2.05859, 3.05176e-05, -0.081543)
