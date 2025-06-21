@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bggyqwvvg0xvl"]
+[gd_scene load_steps=10 format=3 uid="uid://bggyqwvvg0xvl"]
 
 [ext_resource type="PackedScene" uid="uid://cikp8uuoalhq5" path="res://game/driving/player/player_second_attempt.tscn" id="1_t578y"]
+[ext_resource type="PackedScene" uid="uid://c2xuba36ro24p" path="res://game/driving/prefabs/truck/wagon.tscn" id="3_2d604"]
+[ext_resource type="PackedScene" uid="uid://c3b6wrclraa3k" path="res://game/driving/prefabs/damage_upgrade/damage_upgrade.tscn" id="4_14eqd"]
 [ext_resource type="Script" uid="uid://cp2mumtpcw05u" path="res://game/driving/prefabs/truck/truck.gd" id="8_joms5"]
 [ext_resource type="Texture2D" uid="uid://bumrpyfk6kkqb" path="res://game/EnvirinmScene/skyBox/result1.png" id="9_18wxa"]
 
 [sub_resource type="Curve3D" id="Curve3D_ycb0r"]
+bake_interval = 512.0
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, -6.60748, 0.000274658, 4323.12, 0, 0, 0, 0, 0, 0, -6.09387, 0.000274658, 4303.6, 0, 0, 0, 0, 0, 0, -5.92099, 0.0299683, 4266.3, 0, 0, 0, 0, 0, 0, -4.17091, 0.0580139, 4231.07, 0, 0, 0, 0, 0, 0, -2.79718, 0.102142, 4175.64, 0, 0, 0, 0, 0, 0, -6.19515, 0.102203, 3959.43, 0, 0, 0, 0, 0, 0, -1.1747, 0.102325, 3447.09, 0, 0, 0, 0, 0, 0, 0.496813, 0.102448, 3196.37),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
@@ -35,7 +38,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 266.165, 0)
 curve = SubResource("Curve3D_ycb0r")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.999637, 0, -0.0263026, 0, 0.999997, 0, 0.0263024, 0, 0.999643, -6.60748, 0.000274658, 4323.12)
+transform = Transform3D(0.999635, 0, -0.0263025, 0, 0.999997, 0, 0.0263024, 0, 0.999641, -6.60748, 0.000274658, 4323.12)
 
 [node name="_Node3D_71306" type="Node3D" parent="Path3D/PathFollow3D"]
 transform = Transform3D(0.999925, 0, 0.0129737, -2.17092e-09, 1, 1.67319e-07, -0.0129736, -1.67334e-07, 0.999919, -0.509972, 1.69229, -109.653)
@@ -56,9 +59,6 @@ size = Vector3(7.29468, 1.06244, 232.014)
 transform = Transform3D(-0.999882, 0.00790637, 0.0129731, -0.00790563, -0.99996, 0.000102889, 0.0129735, 1.67327e-07, 0.999912, -0.795337, -4.21686, 0)
 size = Vector3(29.9971, 1.06244, 232.014)
 
-[node name="Truck" type="Node3D" parent="Path3D"]
-script = ExtResource("8_joms5")
-
 [node name="Player" parent="Path3D" instance=ExtResource("1_t578y")]
 unique_name_in_owner = true
 transform = Transform3D(0.999638, 0, -0.0263026, 0, 0.999997, 0, 0.0263024, 0, 0.999644, -6.60748, 0.000274658, 4323.12)
@@ -68,10 +68,30 @@ floor_stop_on_slope = false
 floor_block_on_wall = false
 camera_offset = 0.5
 limits = Vector2(5, 5)
-max_speed = 20.0
-boost_speed = 50.0
 acceleration_speed = 10.0
 move_speed = Vector2(10, 9)
+
+[node name="Truck2" type="Node3D" parent="Path3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.54015)
+script = ExtResource("8_joms5")
+
+[node name="Wagon" parent="Path3D/Truck2" instance=ExtResource("3_2d604")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.13436)
+wagon_number = 2
+
+[node name="Wagon2" parent="Path3D/Truck2" instance=ExtResource("3_2d604")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.3011)
+wagon_number = 1
+
+[node name="Wagon3" parent="Path3D/Truck2" instance=ExtResource("3_2d604")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.3011)
+
+[node name="DamageUpgrade" parent="Path3D" instance=ExtResource("4_14eqd")]
+transform = Transform3D(0.999213, -1.23085e-05, -0.0396379, -1.92371e-05, 1, -0.000795461, 0.0396379, 0.000795599, 0.999214, -3.36154, 0.0767147, 4218.01)
+progress = 114.378
+
+[node name="Movable" parent="Path3D/DamageUpgrade" index="0"]
+transform = Transform3D(1, 0, 0, -7.27596e-12, 1, 0, -7.45058e-09, 0, 1, 2.05859, 3.05176e-05, -0.081543)
 
 [node name="Environment" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 772.891, 469.493, -258.682)
@@ -104,3 +124,5 @@ size = Vector3(13.0277, 33.0179, 1)
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.1092, 270.238, 3277.84)
 size = Vector3(13.0277, 33.0179, 1)
+
+[editable path="Path3D/DamageUpgrade"]
