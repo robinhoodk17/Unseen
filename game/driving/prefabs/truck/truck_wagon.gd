@@ -21,7 +21,6 @@ func extensible_weak_spot_event(weak_spot_number) -> void:
 	pass
 ##function implemented by subclasses
 func extensible_ready() -> void:
-	guards[0].spawn()
 	pass
 ##function implemented by subclasses called when the previous wagon dies
 func extensible_wagon_event() -> void:

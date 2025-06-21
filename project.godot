@@ -41,6 +41,7 @@ directories/dch_directory={
 "protagonist": "res://dialogic/characters/protagonist.dch"
 }
 directories/dtl_directory={
+"boost_now": "res://dialogic/timelines/boost_now.dtl",
 "catch_up": "res://dialogic/timelines/catch_up.dtl",
 "inside": "res://dialogic/timelines/inside.dtl",
 "spotlights_driving": "res://dialogic/timelines/spotlights_driving.dtl"

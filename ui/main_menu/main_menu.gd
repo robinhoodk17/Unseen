@@ -19,6 +19,9 @@ func _connect_buttons() -> void:
 		await get_tree().process_frame
 		%Play.grab_focus()
 
+func show_ui() -> void:
+	show()
+	%Play.grab_focus()
 
 func _start_game() -> void:
 	# TODO: Consider adding some kind of scene transition

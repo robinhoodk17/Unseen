@@ -4,10 +4,20 @@ extends UiPage
 @onready var health: TextureProgressBar = $Health
 @onready var arrow: Sprite2D = $Speedometer/Arrow
 @onready var speedometer: TextureRect = $Speedometer
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var boost_shown : float = 0.0
 var speedometer_size : float
 
+func hide_ui() -> void:
+	hide()
+	audio_stream_player.stop()
+
+func show_ui() -> void:
+	show()
+	if !audio_stream_player.playing:
+		audio_stream_player.play()
+		
 func _ready() -> void:
 	Signalbus.damage_upgrade.connect(got_damage)
 	Signalbus.current_speed.connect(adjust_speed)

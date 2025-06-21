@@ -69,6 +69,7 @@ fov = 120.0
 near = 0.01
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CameraPivot"]
+visible = false
 mesh = SubResource("SphereMesh_el4t4")
 surface_material_override/0 = SubResource("StandardMaterial3D_22cry")
 

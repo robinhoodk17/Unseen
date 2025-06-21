@@ -73,25 +73,31 @@ texture = SubResource("ViewportTexture_ycb0r")
 
 [node name="Boost" parent="Extras" instance=ExtResource("2_waym2")]
 transform = Transform3D(0.999654, 0, -0.0263029, -9.09495e-13, 1, 5.82077e-11, 0.0263028, -5.82077e-11, 0.999654, -3.36153, 266.242, 4198.67)
+no_depth_test = true
 texture = SubResource("ViewportTexture_g8etj")
 interact_action = ExtResource("5_g8etj")
 message = "Boost (careful)"
 
 [node name="Shoot" parent="Extras" instance=ExtResource("2_waym2")]
 transform = Transform3D(0.999654, 0, -0.0263029, -9.09495e-13, 1, 5.82077e-11, 0.0263028, -5.82077e-11, 0.999654, -3.36153, 266.242, 4014.87)
+no_depth_test = true
 texture = SubResource("ViewportTexture_2fdob")
 interact_action = ExtResource("4_ycb0r")
 message = "Shoot"
 
 [node name="DialoguePopup" parent="Extras" instance=ExtResource("11_2fdob")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80205, 266.404, 4096.05)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80205, 266.404, 4137.09)
 timeline = "spotlights_driving"
 
-[node name="DialoguePopup2" type="Area3D" parent="Extras"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80205, 266.404, 3194.48)
+[node name="BoostNow" parent="Extras" instance=ExtResource("11_2fdob")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80205, 266.404, 4090.74)
+timeline = "boost_now"
+
+[node name="Scenechange" type="Area3D" parent="Extras"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80205, 266.247, 3202.04)
 script = ExtResource("7_bx6mp")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Extras/DialoguePopup2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Extras/Scenechange"]
 shape = SubResource("BoxShape3D_a4ecv")
 debug_color = Color(1, 1, 1, 1)
 
@@ -103,7 +109,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 266.165, 0)
 curve = SubResource("Curve3D_ycb0r")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.999626, 0, -0.0263023, 0, 0.999996, 0, 0.0263021, 0, 0.999633, -6.60748, 0.000274658, 4323.12)
+transform = Transform3D(0.999626, 0, -0.0263023, 0, 0.999996, 0, 0.0263021, 0, 0.999632, -6.60748, 0.000274658, 4323.12)
 
 [node name="_Node3D_71306" type="Node3D" parent="Path3D/PathFollow3D"]
 transform = Transform3D(0.999925, 0, 0.0129737, -2.17092e-09, 1, 1.67319e-07, -0.0129736, -1.67334e-07, 0.999919, -0.509972, 1.69229, -109.653)

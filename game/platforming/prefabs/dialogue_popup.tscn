@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ceuxrv2qojshk"]
+
+[ext_resource type="Script" uid="uid://bleso50qqfwqa" path="res://game/platforming/prefabs/dialogue_popup.gd" id="1_txm2o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_txm2o"]
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_txm2o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_txm2o")
