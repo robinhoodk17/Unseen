@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2xuba36ro24p"]
+[gd_scene load_steps=13 format=3 uid="uid://c2xuba36ro24p"]
 
 [ext_resource type="Script" uid="uid://ce5l4gyh2d6pp" path="res://game/driving/prefabs/truck/truck_wagon.gd" id="1_u84f1"]
 [ext_resource type="Script" uid="uid://6738gjeeqax7" path="res://game/driving/prefabs/truck/damage_bus.gd" id="2_qt2gw"]
 [ext_resource type="Script" uid="uid://bkhok4mw5rs1k" path="res://game/driving/prefabs/truck/weak_spot.gd" id="3_vk28q"]
+[ext_resource type="PackedScene" uid="uid://dp00cghmqi7fb" path="res://game/driving/prefabs/guard/guard.tscn" id="4_3to55"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qt2gw"]
 size = Vector3(2, 2, 10)
@@ -56,9 +57,10 @@ _data = {
 shading_mode = 0
 albedo_color = Color(0, 1, 0, 1)
 
-[node name="Wagon" type="PathFollow3D" node_paths=PackedStringArray("weak_spots")]
+[node name="Wagon" type="PathFollow3D" node_paths=PackedStringArray("weak_spots", "guards")]
 script = ExtResource("1_u84f1")
 weak_spots = [NodePath("ActualWeakPoint"), NodePath("ActualWeakPoint2"), NodePath("ActualWeakPoint3")]
+guards = [NodePath("Guard")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_qt2gw")
@@ -97,6 +99,7 @@ mesh_instance_3d = NodePath("WeakPoint")
 weak_spot_number = 1
 
 [node name="WeakPoint" type="MeshInstance3D" parent="ActualWeakPoint2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.88123, 4.62999)
 mesh = SubResource("SphereMesh_3to55")
 skeleton = NodePath("../..")
 
@@ -116,3 +119,6 @@ skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_vk28q")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ActualWeakPoint3"]
+
+[node name="Guard" parent="." instance=ExtResource("4_3to55")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.0596142, 2, 2.78712)

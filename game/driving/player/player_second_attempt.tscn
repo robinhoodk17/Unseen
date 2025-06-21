@@ -71,7 +71,7 @@ shape = SubResource("SphereShape3D_jko4k")
 
 [node name="AimAssist" type="ShapeCast3D" parent="."]
 shape = SubResource("SphereShape3D_jibn3")
-target_position = Vector3(0, 0, -30)
+target_position = Vector3(0, 0, -60)
 
 [node name="Sprite3D" type="Sprite3D" parent="AimAssist"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
