@@ -42,6 +42,7 @@ directories/dch_directory={
 }
 directories/dtl_directory={
 "catch_up": "res://dialogic/timelines/catch_up.dtl",
+"inside": "res://dialogic/timelines/inside.dtl",
 "spotlights_driving": "res://dialogic/timelines/spotlights_driving.dtl"
 }
 extensions_folder="res://addons/dialogic_additions"

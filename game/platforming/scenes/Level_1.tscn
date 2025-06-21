@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=4 uid="uid://cbtera7bpef48"]
+[gd_scene load_steps=13 format=4 uid="uid://cbtera7bpef48"]
 
 [ext_resource type="Script" uid="uid://clj5jgt5wlei2" path="res://game/platforming/scenes/trial_scene.gd" id="1_sorhx"]
 [ext_resource type="Texture2D" uid="uid://gts3t1lstmvw" path="res://game/platforming/assets/brackeys_platformer_assets/sprites/world_tileset.png" id="2_ca850"]
 [ext_resource type="Texture2D" uid="uid://dyawvywgjqpox" path="res://game/platforming/assets/Background/background.png" id="2_jy6x7"]
 [ext_resource type="PackedScene" uid="uid://bqks7dq4cdunv" path="res://game/platforming/player/player2d.tscn" id="3_k1fog"]
 [ext_resource type="Texture2D" uid="uid://dn4sk2hmc756c" path="res://game/platforming/assets/platform/platform test 2.png" id="4_fwb5e"]
+[ext_resource type="PackedScene" uid="uid://n5evuawpos7q" path="res://game/platforming/prefabs/next_room.tscn" id="8_fwb5e"]
 [ext_resource type="PackedScene" uid="uid://beppcdkycxsn5" path="res://game/platforming/prefabs/spotlight.tscn" id="9_afqk1"]
 [ext_resource type="PackedScene" uid="uid://blj10034dnvuj" path="res://game/platforming/prefabs/killbox.tscn" id="10_ugli3"]
 
@@ -266,3 +267,10 @@ polygon = PackedVector2Array(-12.0478, 1.68828, -63.6415, -14.6546, -64.471, 17.
 position = Vector2(176, 32)
 rotation = -4.71239
 polygon = PackedVector2Array(-12, 1, -112, -23.0001, -112, 16.9999)
+
+[node name="Label" parent="." instance=ExtResource("8_fwb5e")]
+offset_left = 349.0
+offset_top = -39.0
+offset_right = 432.0
+offset_bottom = -16.0
+new_scene = "uid://mvjfd261gyai"
