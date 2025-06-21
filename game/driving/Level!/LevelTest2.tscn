@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bggyqwvvg0xvl"]
+[gd_scene load_steps=24 format=3 uid="uid://bggyqwvvg0xvl"]
 
 [ext_resource type="Script" uid="uid://cytuck1gttjie" path="res://game/driving/Level!/level_test_2.gd" id="1_q1xq3"]
 [ext_resource type="PackedScene" uid="uid://cikp8uuoalhq5" path="res://game/driving/player/player_second_attempt.tscn" id="1_t578y"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bumrpyfk6kkqb" path="res://game/EnvirinmScene/skyBox/result1.png" id="9_18wxa"]
 [ext_resource type="PackedScene" uid="uid://bstld3j3n5kfs" path="res://game/driving/prefabs/dialogue_popup.tscn" id="11_2fdob"]
 [ext_resource type="PackedScene" uid="uid://7teeqq7nerpm" path="res://game/driving/prefabs/spotlight3d.tscn" id="12_c883t"]
+[ext_resource type="Script" uid="uid://b5m3i4r4t7m6t" path="res://game/driving/prefabs/truck/wagon0.gd" id="12_lp03g"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_xia7n"]
 viewport_path = NodePath("SubViewport")
@@ -155,6 +156,7 @@ wagon_number = 1
 
 [node name="Wagon3" parent="Path3D/Truck2" instance=ExtResource("3_2d604")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.3011)
+script = ExtResource("12_lp03g")
 
 [node name="DamageUpgrade" parent="Path3D" instance=ExtResource("4_14eqd")]
 transform = Transform3D(0.999953, -8.71033e-06, -0.00953601, 8.70843e-06, 1, -2.38572e-07, 0.00953599, 1.55517e-07, 0.999955, -3.71107, 0.102263, 3705.9)
@@ -195,4 +197,5 @@ size = Vector3(13.0277, 33.0179, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.1092, 270.238, 3277.84)
 size = Vector3(13.0277, 33.0179, 1)
 
+[editable path="Path3D/Truck2/Wagon3"]
 [editable path="Path3D/DamageUpgrade"]
