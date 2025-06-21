@@ -6,6 +6,7 @@ enum inputs{JUMP, DASH, NONE}
 
 signal interacted
 signal break_interaction
+@onready var label: Label = $Label
 
 @export var slow_time : bool = false
 @export_group("Player Movement")
@@ -19,19 +20,19 @@ signal break_interaction
 @export var speed : float = 100.0
 @export_subgroup("jump")
 @export var invisibility_delay : float = 0.05
-@export var jump_velocity : float = -200.0
+@export var jump_velocity : float = -250.0
 @export var jump_floatiness : float = 0.25
-@export var jump_hang : float = 0.025
+@export var jump_hang : float = 0.1
 ##how big is gravity
 @export var going_down_speed : float = 2.0
 @export_subgroup("wall jump")
 ##the velocity in x repulsing the player from the wall
 @export var wall_jump_repulsion : float = 100.0
-@export var wall_jump_time : float = 0.375
+@export var wall_jump_time : float = 0.35
 @export var wall_slide_break_time : float = .05
 @export var climb_cooldown : float = .35
 ##when the player is pressing against a wall, how much it stops falling
-@export var wall_slide_gravity : float = 0.6
+@export var wall_slide_gravity : float = 0.15
 @export var dash_velocity : float = 300.0
 @export var dash_duration : float = 0.15
 @export var coyote_time : float = 0.25
@@ -146,18 +147,21 @@ func handle_gravity(delta: float) -> void:
 		#animated_sprite_2d.show()
 	match current_state:
 		state.WALL_SLIDING:
-			if velocity.y <= 0.0:
-				current_gravity_force = wall_slide_gravity
+			if velocity.y < 100:
+				velocity += get_gravity() * going_down_speed * delta * current_gravity_force
+			else:
+				velocity.y = 100.0
 		state.CLIMBING:
 			current_gravity_force = 0.0
 			velocity.y = 0.0
-		state.JUMPING:
-			current_gravity_force = 0.5
 		state.WALL_JUMP:
 			current_gravity_force = 0.4
-			
+		
+	if jumping_time < jump_floatiness:
+		current_gravity_force = 0.33
+
 	if !jump_hang_timer.is_stopped():
-		current_gravity_force = 0.01
+		current_gravity_force = .01
 	if is_on_floor():
 		invisibility_timer.start(invisibility_delay)
 		dash_spent = false
@@ -176,7 +180,9 @@ func handle_gravity(delta: float) -> void:
 	if jumping_time < jump_floatiness:
 		jumping_time += delta
 		if jump_action.value_bool:
-			velocity.y = jump_velocity
+			velocity.y += jump_velocity * delta
+		else:
+			jumping_time = jump_floatiness
 
 func handle_lateral_movement(delta : float, _direction : float) -> void:
 	if abs(velocity.x) > speed * 1.1:
@@ -194,27 +200,30 @@ func handle_lateral_movement(delta : float, _direction : float) -> void:
 	direction_x = looking
 
 func jump() -> void:
-	if !coyote_timer.is_stopped() or current_state == state.WALL_SLIDING or current_state == state.CLIMBING:
+	if !coyote_timer.is_stopped() or wall_jump_left.is_colliding() or wall_jump_right.is_colliding():
 		input_queued = inputs.NONE
 	else:
 		return
 
+	if coyote_timer.is_stopped():
+		if wall_jump_left.is_colliding() or wall_jump_right.is_colliding():
+			do_wall_jump()
+			return
+
 	coyote_timer.stop()
 
-	if current_state == state.WALL_SLIDING:
-		do_wall_jump()
-		return
+
 	
 	jumping_time = 0.0
 	velocity.y = jump_velocity
-	if current_state == state.CLIMBING:
-		velocity.y *= 2.0
+	#if current_state == state.CLIMBING:
+		#velocity.y *= 2.0
 	current_state = state.JUMPING
 	#velocity += get_platform_velocity()/4.0	
 
 func do_wall_jump() -> void:
 	invisibility_timer.start(invisibility_delay)
-	velocity.y = jump_velocity * 1.5
+	velocity.y = jump_velocity * 1.15
 	current_state = state.WALL_JUMP
 	var _sign : int = 1
 	#if wall_jump_right.is_colliding()
@@ -238,6 +247,7 @@ func dash(direction : Vector2) -> void:
 	dash_reset_timer.start(dash_duration)
 
 func state_machine(delta: float) -> void:
+	label.text = str(current_state)
 	var move_direction : Vector2 = move.value_axis_2d
 
 	var aiming_for_wall : bool = false
@@ -265,9 +275,9 @@ func state_machine(delta: float) -> void:
 				current_state = state.WALKING
 			if !climb_action.value_bool:
 				current_state = state.WALKING
-				
 
 		state.WALL_SLIDING:
+			handle_lateral_movement(delta, move_direction.x)
 			if !wall_jump_left.is_colliding() and !wall_jump_right.is_colliding():
 				current_state = state.WALKING
 			else:
@@ -276,10 +286,6 @@ func state_machine(delta: float) -> void:
 			if wall_slide_timer.is_stopped():
 				current_state = state.WALKING
 			#if climb_action.value_bool and !climb_spent:
-			if climb_action.value_bool and climb_timer.is_stopped():
-				current_state = state.CLIMBING
-				climb_spent = true
-				climb_timer.start(climb_cooldown)
 
 		state.WALKING:
 			handle_lateral_movement(delta, move_direction.x)
@@ -325,7 +331,8 @@ func state_machine(delta: float) -> void:
 		state.JUMPING:
 			handle_lateral_movement(delta, move_direction.x)
 			animated_sprite_2d.play("jump")
-			if velocity.y > -0.01:
+			if velocity.y < -0.01:
+				print_debug("hanging")
 				jump_hang_timer.start(jump_hang)
 				current_state = state.WALKING
 
@@ -338,13 +345,29 @@ func state_machine(delta: float) -> void:
 	if current_state == state.WALL_JUMP:
 		return
 
+	if looking < 0:
+		if wall_jump_left.is_colliding() and !is_on_floor() and velocity.y > 0.0:
+			if current_state != state.CLIMBING:
+				current_state = state.WALL_SLIDING
+
+	if looking > 0:
+		if wall_jump_right.is_colliding() and !is_on_floor() and velocity.y > 0.0:
+			if current_state != state.CLIMBING:
+				current_state = state.WALL_SLIDING
+				
 	if (wall_jump_right.is_colliding() or wall_jump_left.is_colliding()) and !is_on_floor():
-		aiming_for_wall = (direction_x * looking) > 0
-		if aiming_for_wall and current_state != state.CLIMBING:
-			if current_state != state.WALL_SLIDING:
-				if velocity.y < 0:
-					velocity.y/= 2
-			current_state = state.WALL_SLIDING
+			if climb_action.value_bool and climb_timer.is_stopped():
+				current_state = state.CLIMBING
+				climb_spent = true
+				climb_timer.start(climb_cooldown)
+				
+	#if (wall_jump_right.is_colliding() or wall_jump_left.is_colliding()) and !is_on_floor():
+		#aiming_for_wall = (direction_x * looking) > 0
+		#if aiming_for_wall and current_state != state.CLIMBING:
+			#if velocity.y > 0:
+				##if current_state != state.WALL_SLIDING:
+					##velocity.y/= 2
+				#current_state = state.WALL_SLIDING
 
 func change_state(new_state : state) -> void: 
 	current_state = new_state
