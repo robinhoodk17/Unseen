@@ -31,7 +31,11 @@ func _input(event: InputEvent) -> void:
 func _resume() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if ui:
-		ui.go_to("Game")
+		print_debug(Ui.current_scene, "current scene")
+		if Ui.current_scene == "uid://bggyqwvvg0xvl":
+			ui.go_to("Game")
+		else:
+			ui.go_to("Game2D")
 	get_tree().paused = false
 
 
