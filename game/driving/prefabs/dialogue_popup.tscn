@@ -3,10 +3,11 @@
 [ext_resource type="Script" uid="uid://72fd3v3hy5n3" path="res://game/driving/dialogue_popup.gd" id="1_pcggt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a4ecv"]
-size = Vector3(10, 10, 1)
+size = Vector3(73.169, 71.8393, 1)
 
 [node name="DialoguePopup" type="Area3D"]
 script = ExtResource("1_pcggt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_a4ecv")
+debug_color = Color(1, 1, 1, 1)

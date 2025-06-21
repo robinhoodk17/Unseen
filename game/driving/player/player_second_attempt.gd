@@ -72,6 +72,7 @@ var collision_vector : Vector3
 var current_direction : Vector2
 
 func _ready() -> void:
+	Signalbus.playerspotted.connect(respawn)
 	boost_input.triggered.connect(start_boost)
 	if curve_follow == null:
 		curve_follow = get_parent()
@@ -84,7 +85,7 @@ func _ready() -> void:
 	running = true
 
 func position_camera(delta) -> void :
-	var camera_point : Vector3 = curve_follow.curve.get_closest_point(global_position + mesh_container.global_basis.z * camera_offset) + curve_follow.global_position
+	var camera_point : Vector3 = curve_follow.curve.get_closest_point(global_position) + curve_follow.global_position
 	var offset = curve_follow.curve.get_closest_offset(global_position)
 	var target_transform : Transform3D = curve_follow.curve.sample_baked_with_rotation(offset,false,true)
 	camera_pivot.global_position = camera_point
@@ -95,7 +96,7 @@ func position_camera(delta) -> void :
 	var distance_on_x : float = camera_pivot.global_basis.x.dot(relative_position)
 	var distance_on_y : float = camera_pivot.global_basis.y.dot(relative_position)
 	#
-	camera_3d.position = lerp(camera_3d.position, Vector3(distance_on_x, distance_on_y, 0), delta * 5.0)
+	camera_3d.position = lerp(camera_3d.position, Vector3(distance_on_x, distance_on_y, camera_offset), delta * 5.0)
 	
 	#camera_3d.look_at(global_position)
 	#var target_camera_rotation : Basis = camera_3d.global_basis.looking_at(global_position)

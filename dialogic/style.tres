@@ -19,7 +19,9 @@ overrides = {}
 [sub_resource type="Resource" id="Resource_5ruix"]
 script = ExtResource("2_bsv77")
 scene = ExtResource("3_06sqv")
-overrides = {}
+overrides = {
+"disabled": "true"
+}
 
 [sub_resource type="Resource" id="Resource_c0who"]
 script = ExtResource("2_bsv77")
@@ -67,4 +69,4 @@ layer_info = {
 }
 base_overrides = {}
 layers = Array[ExtResource("2_bsv77")]([])
-metadata/_latest_layer = "12"
+metadata/_latest_layer = "16"
