@@ -4,7 +4,7 @@ extends CanvasLayer
 @export var change_mapping : GUIDEAction
 @export var fade_duration : float = 1.0
 @export var CLEAR : Color =  Color(0, 0, 0, 0)
-
+var current_scene : String
 var current_active_mapping : int = 0
 var _tween: Tween
 var tween2: Tween
@@ -89,6 +89,7 @@ func change_scene(new_scene : String) -> void:
 	get_tree().paused = true
 	fade_to_black(.5)
 	get_tree().call_deferred("change_scene_to_file", new_scene)
+	current_scene = new_scene
 	fade_to_clear(.5)
 	get_tree().paused = false
 

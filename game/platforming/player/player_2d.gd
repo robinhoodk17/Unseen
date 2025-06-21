@@ -6,7 +6,6 @@ enum inputs{JUMP, DASH, NONE}
 
 signal interacted
 signal break_interaction
-@onready var label: Label = $Label
 
 @export var slow_time : bool = false
 @export_group("Player Movement")
@@ -162,7 +161,7 @@ func handle_gravity(delta: float) -> void:
 
 	if !jump_hang_timer.is_stopped():
 		current_gravity_force = .01
-	if is_on_floor():
+	if is_on_floor() and current_state != state.DASHING:
 		invisibility_timer.start(invisibility_delay)
 		dash_spent = false
 		climb_spent = false
@@ -247,7 +246,6 @@ func dash(direction : Vector2) -> void:
 	dash_reset_timer.start(dash_duration)
 
 func state_machine(delta: float) -> void:
-	label.text = str(current_state)
 	var move_direction : Vector2 = move.value_axis_2d
 
 	var aiming_for_wall : bool = false
@@ -298,6 +296,8 @@ func state_machine(delta: float) -> void:
 				animated_sprite_2d.play("air")
 
 		state.DASHING:
+			invisible = true
+			animated_sprite_2d.self_modulate.a = 0.1
 			velocity = dash_position * current_dash_velocity
 			current_dash_velocity = move_toward(current_dash_velocity, 0, delta * 20.0)
 			if is_on_floor():
