@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bggyqwvvg0xvl"]
+[gd_scene load_steps=23 format=3 uid="uid://bggyqwvvg0xvl"]
 
 [ext_resource type="Script" uid="uid://cytuck1gttjie" path="res://game/driving/Level!/level_test_2.gd" id="1_q1xq3"]
 [ext_resource type="PackedScene" uid="uid://cikp8uuoalhq5" path="res://game/driving/player/player_second_attempt.tscn" id="1_t578y"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c3b6wrclraa3k" path="res://game/driving/prefabs/damage_upgrade/damage_upgrade.tscn" id="4_14eqd"]
 [ext_resource type="Resource" uid="uid://b5g5x82md43g0" path="res://input/shoot.tres" id="4_ycb0r"]
 [ext_resource type="Resource" uid="uid://u57h3v2w73ya" path="res://input/boost.tres" id="5_g8etj"]
+[ext_resource type="Script" uid="uid://corw87jehkhcl" path="res://game/driving/Level!/level_change.gd" id="7_bx6mp"]
 [ext_resource type="Script" uid="uid://cp2mumtpcw05u" path="res://game/driving/prefabs/truck/truck.gd" id="8_joms5"]
 [ext_resource type="Texture2D" uid="uid://bumrpyfk6kkqb" path="res://game/EnvirinmScene/skyBox/result1.png" id="9_18wxa"]
 [ext_resource type="PackedScene" uid="uid://bstld3j3n5kfs" path="res://game/driving/prefabs/dialogue_popup.tscn" id="11_2fdob"]
@@ -24,6 +25,9 @@ viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_2fdob"]
 viewport_path = NodePath("SubViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a4ecv"]
+size = Vector3(73.169, 71.8393, 1)
 
 [sub_resource type="Curve3D" id="Curve3D_ycb0r"]
 bake_interval = 512.0
@@ -69,19 +73,33 @@ texture = SubResource("ViewportTexture_ycb0r")
 
 [node name="Boost" parent="Extras" instance=ExtResource("2_waym2")]
 transform = Transform3D(0.999654, 0, -0.0263029, -9.09495e-13, 1, 5.82077e-11, 0.0263028, -5.82077e-11, 0.999654, -3.36153, 266.242, 4198.67)
+no_depth_test = true
 texture = SubResource("ViewportTexture_g8etj")
 interact_action = ExtResource("5_g8etj")
 message = "Boost (careful)"
 
 [node name="Shoot" parent="Extras" instance=ExtResource("2_waym2")]
 transform = Transform3D(0.999654, 0, -0.0263029, -9.09495e-13, 1, 5.82077e-11, 0.0263028, -5.82077e-11, 0.999654, -3.36153, 266.242, 4014.87)
+no_depth_test = true
 texture = SubResource("ViewportTexture_2fdob")
 interact_action = ExtResource("4_ycb0r")
 message = "Shoot"
 
 [node name="DialoguePopup" parent="Extras" instance=ExtResource("11_2fdob")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80205, 266.404, 4096.05)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80205, 266.404, 4137.09)
 timeline = "spotlights_driving"
+
+[node name="BoostNow" parent="Extras" instance=ExtResource("11_2fdob")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80205, 266.404, 4090.74)
+timeline = "boost_now"
+
+[node name="Scenechange" type="Area3D" parent="Extras"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80205, 266.247, 3202.04)
+script = ExtResource("7_bx6mp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Extras/Scenechange"]
+shape = SubResource("BoxShape3D_a4ecv")
+debug_color = Color(1, 1, 1, 1)
 
 [node name="Spotlight" parent="Extras" instance=ExtResource("12_c883t")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 15.1012, 247.068, 4058.58)
@@ -91,7 +109,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 266.165, 0)
 curve = SubResource("Curve3D_ycb0r")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.999626, 0, -0.0263023, 0, 0.999996, 0, 0.0263021, 0, 0.999633, -6.60748, 0.000274658, 4323.12)
+transform = Transform3D(0.999626, 0, -0.0263023, 0, 0.999996, 0, 0.0263021, 0, 0.999632, -6.60748, 0.000274658, 4323.12)
 
 [node name="_Node3D_71306" type="Node3D" parent="Path3D/PathFollow3D"]
 transform = Transform3D(0.999925, 0, 0.0129737, -2.17092e-09, 1, 1.67319e-07, -0.0129736, -1.67334e-07, 0.999919, -0.509972, 1.69229, -109.653)

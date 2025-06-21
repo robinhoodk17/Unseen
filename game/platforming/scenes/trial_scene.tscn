@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://bjk3ls1owsaib"]
+[gd_scene load_steps=18 format=4 uid="uid://bjk3ls1owsaib"]
 
 [ext_resource type="Texture2D" uid="uid://gts3t1lstmvw" path="res://game/platforming/assets/brackeys_platformer_assets/sprites/world_tileset.png" id="1_lvfh6"]
 [ext_resource type="Script" uid="uid://clj5jgt5wlei2" path="res://game/platforming/scenes/trial_scene.gd" id="1_xncqr"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://beppcdkycxsn5" path="res://game/platforming/prefabs/spotlight.tscn" id="9_pba42"]
 [ext_resource type="PackedScene" uid="uid://blj10034dnvuj" path="res://game/platforming/prefabs/killbox.tscn" id="10_y6l08"]
 [ext_resource type="PackedScene" uid="uid://n5evuawpos7q" path="res://game/platforming/prefabs/next_room.tscn" id="11_33spm"]
+[ext_resource type="PackedScene" uid="uid://ceuxrv2qojshk" path="res://game/platforming/prefabs/dialogue_popup.tscn" id="13_6tx2p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ujv01"]
 texture = ExtResource("1_lvfh6")
@@ -307,3 +308,6 @@ shape = SubResource("RectangleShape2D_33spm")
 
 [node name="Label" parent="." instance=ExtResource("11_33spm")]
 new_scene = "uid://cbtera7bpef48"
+
+[node name="Area2D" parent="." instance=ExtResource("13_6tx2p")]
+position = Vector2(-156, 22)

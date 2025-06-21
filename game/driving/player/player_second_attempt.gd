@@ -17,6 +17,7 @@ class_name player3d_second_attempt
 @export var bullet_spawns : Array[Marker3D]
 @export_group("camera")
 @export var camera_offset : float = 2.0
+@export var camera_vertical_offset : float = 0.8
 @export_group("combat and health")
 ##the amount of damage per shot
 @export var damage : float = 1.0
@@ -96,7 +97,7 @@ func position_camera(delta) -> void :
 	var distance_on_x : float = camera_pivot.global_basis.x.dot(relative_position)
 	var distance_on_y : float = camera_pivot.global_basis.y.dot(relative_position)
 	#
-	camera_3d.position = lerp(camera_3d.position, Vector3(distance_on_x, distance_on_y, camera_offset), delta * 5.0)
+	camera_3d.position = lerp(camera_3d.position, Vector3(distance_on_x, distance_on_y + camera_vertical_offset, camera_offset), delta * 5.0)
 	
 	#camera_3d.look_at(global_position)
 	#var target_camera_rotation : Basis = camera_3d.global_basis.looking_at(global_position)
