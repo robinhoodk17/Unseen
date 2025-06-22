@@ -24,5 +24,5 @@ func show_ui() -> void:
 	%Play.grab_focus()
 
 func _start_game() -> void:
-	Ui.go_to("Game")
-	Ui.change_scene("uid://bggyqwvvg0xvl")
+	Ui.go_to("Game2D")
+	Ui.change_scene("uid://bjk3ls1owsaib")

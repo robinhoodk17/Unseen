@@ -378,4 +378,4 @@ func respawn(_body : Node2D = null) -> void:
 	get_tree().paused = false
 	await Ui.fade_to_black(0.01)
 	get_tree().reload_current_scene()
-	await Ui.fade_to_clear(0.01)
+	Ui.fade_to_clear(0.01)
