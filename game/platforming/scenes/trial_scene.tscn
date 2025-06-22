@@ -310,4 +310,7 @@ shape = SubResource("RectangleShape2D_33spm")
 new_scene = "uid://cbtera7bpef48"
 
 [node name="Area2D" parent="." instance=ExtResource("13_6tx2p")]
-position = Vector2(-156, 22)
+position = Vector2(-112, 9)
+scale = Vector2(2, 2)
+
+[editable path="Area2D"]

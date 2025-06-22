@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/Car Jack B.mp3-7987fb73b7f3e79785e50d5da642bd
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

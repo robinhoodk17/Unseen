@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://4meo7rsc0hmc" path="res://game/driving/prefabs/health_pad/Health.glb" id="2_rmsfi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p1jd7"]
-size = Vector3(3, 3, 3)
+size = Vector3(7, 7, 3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_51rp1"]
 size = Vector3(100, 100, 100)
@@ -68,6 +68,7 @@ shape = SubResource("BoxShape3D_p1jd7")
 shape = SubResource("BoxShape3D_51rp1")
 
 [node name="Health" parent="Movable" instance=ExtResource("2_rmsfi")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="Cube" parent="Movable/Health" index="0"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.175, 0, 0, 0)

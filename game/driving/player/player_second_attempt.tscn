@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cikp8uuoalhq5"]
+[gd_scene load_steps=23 format=3 uid="uid://cikp8uuoalhq5"]
 
 [ext_resource type="Script" uid="uid://dtkyhmijc4ir" path="res://game/driving/player/player_second_attempt.gd" id="1_53b0o"]
 [ext_resource type="Resource" uid="uid://c6tovgnwacf3x" path="res://input/move.tres" id="2_03fqq"]
@@ -9,17 +9,29 @@
 [ext_resource type="PackedScene" uid="uid://vv4jopr7enj2" path="res://ui/assets/model/Mash1.glb" id="7_jibn3"]
 [ext_resource type="PackedScene" uid="uid://b17qvk5e2o1a" path="res://game/driving/player/superbullet.tscn" id="7_l2504"]
 [ext_resource type="Texture2D" uid="uid://cu0boovf1mytb" path="res://ui/assets/UI/aim.png" id="8_m2tcp"]
+[ext_resource type="FastNoiseLite" path="res://game/driving/player/shake_noise.tres" id="8_rp3n1"]
+[ext_resource type="Shader" uid="uid://dw37uuts2ggau" path="res://game/driving/player/speed_lines.gdshader" id="9_fvxkj"]
+[ext_resource type="AudioStream" uid="uid://ddafkutjbta2g" path="res://game/driving/assets/SFX/sfx_3d_single_shot.wav" id="10_7osts"]
+[ext_resource type="Texture2D" uid="uid://cpd8g8ivj22f2" path="res://game/driving/player/speed_noise.tres" id="10_a24kx"]
+[ext_resource type="AudioStream" uid="uid://bguksnxe8yst" path="res://game/driving/assets/SFX/sfx_3d_crash_small.wav" id="11_fvxkj"]
+[ext_resource type="AudioStream" uid="uid://xhvvdml88hyp" path="res://game/driving/assets/SFX/sfx_3d_hover.wav" id="12_a24kx"]
 
 [sub_resource type="Curve" id="Curve_22cry"]
 _data = [Vector2(0, 0), 0.0, 2.88304, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="SphereMesh" id="SphereMesh_el4t4"]
-radius = 0.1
-height = 0.2
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a24kx"]
+height = 40.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_22cry"]
-albedo_color = Color(1, 1, 0, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rp3n1"]
+render_priority = 0
+shader = ExtResource("9_fvxkj")
+shader_parameter/effectStrength = 0.0
+shader_parameter/color1 = Color(0.9, 0.9, 0.9, 1)
+shader_parameter/color2 = Color(0.9, 0.9, 0.9, 1)
+shader_parameter/noise_texture = ExtResource("10_a24kx")
+shader_parameter/direction = Vector2(0, -0.5)
+shader_parameter/speed = 1.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jko4k"]
 radius = 0.1
@@ -47,7 +59,10 @@ mesh_container = NodePath("MeshContainer")
 camera_pivot = NodePath("CameraPivot")
 superbullet = ExtResource("7_l2504")
 bullet_spawns = [NodePath("MeshContainer/BulletSpawns/SpawnLeft"), NodePath("MeshContainer/BulletSpawns/SpawnRight")]
+noise = ExtResource("8_rp3n1")
 speed_curve = SubResource("Curve_22cry")
+max_speed = 5.0
+boost_speed = 15.0
 
 [node name="MeshContainer" type="Node3D" parent="."]
 
@@ -70,17 +85,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00751538, 0.000262182, -0.1
 fov = 120.0
 near = 0.01
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraPivot"]
-visible = false
-mesh = SubResource("SphereMesh_el4t4")
-surface_material_override/0 = SubResource("StandardMaterial3D_22cry")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraPivot/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_a24kx")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_rp3n1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_jko4k")
 
 [node name="AimAssist" type="ShapeCast3D" parent="."]
 shape = SubResource("SphereShape3D_jibn3")
-target_position = Vector3(0, 0, -60)
+target_position = Vector3(0, 0, -100)
 
 [node name="Sprite3D" type="Sprite3D" parent="AimAssist"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.5)
@@ -97,3 +113,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 material_override = SubResource("StandardMaterial3D_l2504")
 mesh = SubResource("SphereMesh_l2504")
 skeleton = NodePath("../../CameraPivot/Camera3D")
+
+[node name="Shot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_7osts")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="Crash" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_fvxkj")
+bus = &"SFX"
+
+[node name="Engine" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_a24kx")
+volume_db = -10.0
+autoplay = true
+bus = &"SFX"

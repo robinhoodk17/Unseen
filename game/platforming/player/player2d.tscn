@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://bqks7dq4cdunv"]
+[gd_scene load_steps=55 format=3 uid="uid://bqks7dq4cdunv"]
 
 [ext_resource type="Script" uid="uid://glkl5sxcekl2" path="res://game/platforming/player/player_2d.gd" id="1_vi31g"]
 [ext_resource type="Resource" uid="uid://c6tovgnwacf3x" path="res://input/move.tres" id="2_gsscu"]
@@ -6,6 +6,11 @@
 [ext_resource type="Resource" uid="uid://dq10pdwoyx1kv" path="res://input/Jump.tres" id="3_lmkk1"]
 [ext_resource type="Resource" uid="uid://u57h3v2w73ya" path="res://input/boost.tres" id="4_lmkk1"]
 [ext_resource type="Resource" uid="uid://bq8qp6wd1vl60" path="res://input/climb.tres" id="5_hhcye"]
+[ext_resource type="AudioStream" uid="uid://dso4na15v47ra" path="res://game/driving/assets/SFX/sfx_2d_footstep_1.wav" id="7_lqg78"]
+[ext_resource type="AudioStream" uid="uid://dsqiq07dyqk6r" path="res://game/driving/assets/SFX/sfx_2d_footstep_2.wav" id="8_fxi0j"]
+[ext_resource type="AudioStream" uid="uid://bojj3beg1ow3f" path="res://game/driving/assets/SFX/sfx_2d_footstep_3.wav" id="9_b6mvr"]
+[ext_resource type="AudioStream" uid="uid://dax5ue1wewuvi" path="res://game/driving/assets/SFX/sfx_2d_jump.wav" id="9_lqg78"]
+[ext_resource type="AudioStream" uid="uid://cfa8mx5exehyx" path="res://game/driving/assets/SFX/sfx_2d_wall_jump.wav" id="9_p3yfj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jry8r"]
 radius = 5.0
@@ -364,3 +369,23 @@ target_position = Vector2(8, 0)
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_vi31g")
 target_position = Vector2(-8, 0)
+
+[node name="Footstep" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_lqg78")
+bus = &"SFX"
+
+[node name="Footstep2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_fxi0j")
+bus = &"SFX"
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_p3yfj")
+bus = &"SFX"
+
+[node name="Land" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_b6mvr")
+bus = &"SFX"
+
+[node name="Dash" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_lqg78")
+bus = &"SFX"

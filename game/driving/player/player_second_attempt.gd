@@ -18,6 +18,8 @@ class_name player3d_second_attempt
 @export_group("camera")
 @export var camera_offset : float = 2.0
 @export var camera_vertical_offset : float = 0.8
+@export var max_roll := Vector3(.1,.1,.075)
+@export var noise : FastNoiseLite #The source of random values.
 @export_group("combat and health")
 ##the amount of damage per shot
 @export var damage : float = 1.0
@@ -55,7 +57,11 @@ class_name player3d_second_attempt
 @onready var collision_timer : Timer = create_timer(collision_freeze)
 @onready var shot_timer: Timer = create_timer(fire_rate)
 @onready var aim_assist: ShapeCast3D = $AimAssist
+@onready var shot: AudioStreamPlayer = $Shot
+@onready var crash: AudioStreamPlayer = $Crash
+@onready var engine: AudioStreamPlayer = $Engine
 
+var speed_line_shader : ShaderMaterial
 var current_hp = max_hp
 var current_boost_speed : float = max_speed
 var invisible : bool = false
@@ -68,11 +74,12 @@ var correction_strength : float
 var current_wagon : wagon = null
 var current_velocity : float = 0.0
 var collision_vector : Vector3 
-
+var noise_y : int = 0
 
 var current_direction : Vector2
 
 func _ready() -> void:
+	speed_line_shader = $CameraPivot/Camera3D/MeshInstance3D.get_surface_override_material(0)
 	Signalbus.playerspotted.connect(respawn)
 	boost_input.triggered.connect(start_boost)
 	if curve_follow == null:
@@ -86,24 +93,40 @@ func _ready() -> void:
 	running = true
 
 func position_camera(delta) -> void :
-	var camera_point : Vector3 = curve_follow.curve.get_closest_point(global_position) + curve_follow.global_position
+	var camera_point : Vector3 = curve_follow.curve.get_closest_point(position) + curve_follow.global_position
 	var offset = curve_follow.curve.get_closest_offset(global_position)
 	var target_transform : Transform3D = curve_follow.curve.sample_baked_with_rotation(offset,false,true)
 	camera_pivot.global_position = camera_point
 	camera_pivot.basis = target_transform.basis
 	aim_assist.global_basis = camera_pivot.global_basis
+	speed_line_shader.set_shader_parameter("effectStrength", current_velocity/boost_speed)
 	
 	var relative_position : Vector3 = global_position - camera_pivot.global_position
 	var distance_on_x : float = camera_pivot.global_basis.x.dot(relative_position)
 	var distance_on_y : float = camera_pivot.global_basis.y.dot(relative_position)
 	#
 	camera_3d.position = lerp(camera_3d.position, Vector3(distance_on_x, distance_on_y + camera_vertical_offset, camera_offset), delta * 5.0)
-	
+	shake(current_velocity/boost_speed)
 	#camera_3d.look_at(global_position)
 	#var target_camera_rotation : Basis = camera_3d.global_basis.looking_at(global_position)
 	#camera_3d.global_basis = camera_3d.global_basis.slerp(target_camera_rotation,delta * 10.0)
 	#camera_3d.rotation.x = clamp(camera_3d.rotation.x,-PI/4, PI/4)
 	#camera_3d.rotation.y = clamp(camera_3d.rotation.y,-PI/4, PI/4)
+
+func shake(howMuch : float):
+	if !Globals.camera_shake:
+		camera_3d.basis = Basis.IDENTITY
+		return
+	var amt = pow(howMuch, 3)
+	noise_y += 1
+	var rollx = max_roll.x * amt * noise.get_noise_2d(5,noise_y)
+	var rolly = max_roll.y * amt * noise.get_noise_2d(33,noise_y)
+	var rollz = max_roll.z * amt * noise.get_noise_2d(60,noise_y)
+	var rotatingBasis : Basis = camera_pivot.basis
+	rotatingBasis = rotatingBasis.rotated(Vector3(1,0,0),rollx)
+	rotatingBasis = rotatingBasis.rotated(Vector3(0,1,0),rolly)
+	rotatingBasis = rotatingBasis.rotated(Vector3(0,0,1),rollz)
+	camera_3d.basis = rotatingBasis
 
 func _physics_process(delta) -> void:
 	if !running:
@@ -117,6 +140,7 @@ func _physics_process(delta) -> void:
 		return
 
 	position_camera(delta)
+	engine.pitch_scale = clamp(current_velocity/max_speed, .1, 2.0)
 	if acceleration_input.value_bool:
 		current_speed += delta / acceleration_speed
 		if current_speed > 1.0:
@@ -186,6 +210,7 @@ func _physics_process(delta) -> void:
 		handle_collision(collision)
 	
 func handle_collision(collision) -> void:
+	crash.play()
 	current_hp -= collision_hp_loss
 	Signalbus.player_hp_update.emit(current_hp)
 	collision_vector = velocity.bounce(collision.get_normal()) * 0.5
@@ -198,6 +223,7 @@ func shoot(_delta):
 	if !shot_timer.is_stopped():
 		return
 	shot_timer.start(fire_rate)
+	shot.play()
 	var actual_damage : float = damage
 	#the position of the shot in the target's local space
 	var offset : Vector3 = Vector3(0,0,0)
@@ -266,10 +292,18 @@ func handle_animations(delta : float, direction : Vector2) -> void:
 		previousBasis = mesh_animations.global_basis
 		mesh_animations.global_basis = mesh_animations.global_basis.slerp(target_rotation, delta * 5.0).orthonormalized()
 
-func take_damage(amount : float) -> void:
+func take_damage(amount : float, _stagger : Vector3 = Vector3.ZERO) -> void:
 	current_hp -= amount
 	current_hp = min(current_hp, max_hp)
 	Signalbus.player_hp_update.emit(current_hp)
+	if _stagger != Vector3.ZERO:
+		collision_vector = _stagger
+		var speed_penalty = collision_vector.dot(-global_basis.z)
+		current_speed = (max_speed * speed_curve.sample(current_speed) + speed_penalty) / max_speed
+		current_speed = clamp(current_speed, 0, 1.0)
+		collision_timer.start(collision_freeze)
+		
+		
 
 #region utilities
 func create_timer(wait_time: float = 1.0, one_shot: bool = true) -> Timer:

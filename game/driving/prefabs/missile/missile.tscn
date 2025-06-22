@@ -1,11 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbyg0idpjsj7y"]
+[gd_scene load_steps=7 format=3 uid="uid://dbyg0idpjsj7y"]
 
 [ext_resource type="Script" uid="uid://croi5jh6shkfr" path="res://game/driving/prefabs/missile/missile.gd" id="1_scs0r"]
+[ext_resource type="AudioStream" uid="uid://cimluti6aowpx" path="res://game/driving/assets/SFX/sfx_3d_explosion_small_2.wav" id="2_skv6v"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_scs0r"]
-radius = 1.03294
+radius = 0.8
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_skv6v"]
+radius = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_skv6v"]
+albedo_color = Color(0.479114, 9.8668e-07, 1.68458e-07, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_skv6v"]
+radius = 0.6
+height = 2.6
 
 [node name="Missile" type="CharacterBody3D" node_paths=PackedStringArray("mesh_instance_3d")]
 collision_mask = 2
@@ -18,6 +27,7 @@ shape = SubResource("SphereShape3D_scs0r")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -5.96046e-08, 1, 0, -1, -5.96046e-08, 0, 0, 0)
 mesh = SubResource("CapsuleMesh_skv6v")
+surface_material_override/0 = SubResource("StandardMaterial3D_skv6v")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.24535)
@@ -26,3 +36,16 @@ collision_mask = 0
 hit_back_faces = false
 debug_shape_custom_color = Color(1, 0, 0, 1)
 debug_shape_thickness = 5
+
+[node name="Exlosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_skv6v")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="HitBox" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_skv6v")

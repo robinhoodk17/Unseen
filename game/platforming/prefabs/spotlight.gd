@@ -15,3 +15,4 @@ func _process(delta: float) -> void:
 			if i.landing_timer.is_stopped() or i.current_state == PlayerController.state.CLIMBING:
 				if !i.invisible:
 					Signalbus.playerspotted.emit()
+					$AudioStreamPlayer.play()

@@ -12,3 +12,6 @@ script = ExtResource("1_qme86")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ytqel")
+volume_db = 10.0
+stream_paused = true
+bus = &"Music"

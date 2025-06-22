@@ -11,7 +11,12 @@ signal died
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var player: player3d_second_attempt = %Player
+@onready var take_damage_audio: AudioStreamPlayer = $Take_damage
+@onready var take_damage_2: AudioStreamPlayer = $Take_damage2
+@onready var resist_damage_audio: AudioStreamPlayer = $ResistDamage
+@onready var truckwagon: MeshInstance3D = $"game jam truck/truckwagon"
 
+var damage_timer : Timer
 var missile_scene : PackedScene = preload("res://game/driving/prefabs/missile/missile.tscn")
 var vulnerable : bool = false
 var previous_wagon : wagon = null
@@ -33,6 +38,10 @@ func extensible_process(delta) -> void:
 	pass
 
 func _ready() -> void:
+	damage_timer = Utils.create_timer(.2)
+	add_child(damage_timer)
+	damage_timer.timeout.connect(return_to_normal_color)
+
 	call_deferred("late_ready")
 	
 func late_ready() -> void:
@@ -57,25 +66,35 @@ func weak_spot_died(weak_spot_number) -> void:
 		print_debug("enabled ", weak_spot_number + 1)
 	else:
 		vulnerable = true
+	$WeakSpotDestroyed.play()
 
 func previous_wagon_died() -> void:
+	$WagonDestroyed.play()
 	extensible_wagon_event()
 	weak_spots[0].enable()
 	player.current_wagon = self
 
 func takeDamage(amount) -> void:
 	if !vulnerable:
+		resist_damage_audio.play()
 		return
-	animation_player.play("take_damage")
 	current_hp -= amount
+	take_damage_audio.play()
+	take_damage_2.play()
+	truckwagon.material_override = Globals.DAMAGED_MATERIAL
+	damage_timer.start()
 	if current_hp <= 0:
 		if wagon_number == 2:
+			Utils.start_dialogue("final")
 			Ui.change_scene("uid://bjk3ls1owsaib")
 		died.emit()
 		queue_free()
 
 func takeDamageFromWeakSpot(amount) -> void:
-	animation_player.play("take_damage")
+	truckwagon.material_override = Globals.DAMAGED_MATERIAL
+	damage_timer.start()
+	take_damage_audio.play()
+	take_damage_2.play()
 
 func _physics_process(delta: float) -> void:
 	if !active:
@@ -97,3 +116,6 @@ func spawn_missile() -> void:
 		newMissile.shot = -missile_spawn_points[i].basis.z
 		newMissile.look_at(newMissile.global_position + global_basis * -missile_spawn_points[i].basis.z)
 		newMissile.initialize()
+
+func return_to_normal_color() -> void:
+	truckwagon.material_override = null

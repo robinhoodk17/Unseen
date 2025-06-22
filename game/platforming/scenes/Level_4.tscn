@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://dihn1lyafglhw"]
+[gd_scene load_steps=15 format=4 uid="uid://dihn1lyafglhw"]
 
 [ext_resource type="Script" uid="uid://clj5jgt5wlei2" path="res://game/platforming/scenes/trial_scene.gd" id="1_qgaim"]
 [ext_resource type="Texture2D" uid="uid://dyawvywgjqpox" path="res://game/platforming/assets/Background/background.png" id="2_g4pbc"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://blj10034dnvuj" path="res://game/platforming/prefabs/killbox.tscn" id="6_ajd6v"]
 [ext_resource type="PackedScene" uid="uid://cjx6khar03mxf" path="res://game/platforming/assets/Spikes/spikes.tscn" id="7_hjrgv"]
 [ext_resource type="PackedScene" uid="uid://beppcdkycxsn5" path="res://game/platforming/prefabs/spotlight.tscn" id="8_xjf1n"]
+[ext_resource type="PackedScene" uid="uid://n5evuawpos7q" path="res://game/platforming/prefabs/next_room.tscn" id="9_g4pbc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ujv01"]
 texture = ExtResource("3_k75k5")
@@ -301,3 +302,10 @@ polygon = PackedVector2Array(-12, 1, -50, 65, -26, 65)
 position = Vector2(170, -33)
 rotation = -1.5708
 polygon = PackedVector2Array(-12, 1, -64, -12, -64, 19)
+
+[node name="Label" parent="." instance=ExtResource("9_g4pbc")]
+offset_left = 345.0
+offset_top = -40.0
+offset_right = 428.0
+offset_bottom = -17.0
+new_scene = "uid://cggq0xwbdpnqk"

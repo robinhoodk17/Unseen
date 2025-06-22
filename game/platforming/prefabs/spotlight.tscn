@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://beppcdkycxsn5"]
+[gd_scene load_steps=64 format=3 uid="uid://beppcdkycxsn5"]
 
 [ext_resource type="Script" uid="uid://c4sypk63iqldv" path="res://game/platforming/prefabs/spotlight.gd" id="1_b6xtj"]
 [ext_resource type="Texture2D" uid="uid://cnjslulqq88to" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0001.png" id="3_adix8"]
@@ -61,6 +61,7 @@
 [ext_resource type="Texture2D" uid="uid://cqxl8hj6dyun5" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0058.png" id="60_5q7bo"]
 [ext_resource type="Texture2D" uid="uid://b0s3qac72ldt1" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0059.png" id="61_71uwh"]
 [ext_resource type="Texture2D" uid="uid://2bwxh2ktcuhi" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0060.png" id="62_03cih"]
+[ext_resource type="AudioStream" uid="uid://b0fbyil1kqwx3" path="res://game/driving/assets/SFX/sfx_spotlight.wav" id="62_adix8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p25vr"]
 animations = [{
@@ -265,3 +266,7 @@ scale = Vector2(0.0319004, 0.0319004)
 sprite_frames = SubResource("SpriteFrames_p25vr")
 animation = &"Search"
 autoplay = "Search"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("62_adix8")

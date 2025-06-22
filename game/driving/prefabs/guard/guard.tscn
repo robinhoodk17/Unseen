@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dp00cghmqi7fb"]
+[gd_scene load_steps=7 format=3 uid="uid://dp00cghmqi7fb"]
 
 [ext_resource type="Script" uid="uid://be453ygfyxek1" path="res://game/driving/prefabs/guard/guard.gd" id="1_hwl8n"]
+[ext_resource type="AudioStream" uid="uid://cqtvsttfitcuf" path="res://game/driving/assets/SFX/sfx_3d_taking_damage.wav" id="2_x2odh"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_bs8el"]
 
@@ -30,3 +31,6 @@ shape = SubResource("CapsuleShape3D_hl10e")
 
 [node name="MissileSpawnPoint" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35485, -0.423192)
+
+[node name="TakeDamage" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_x2odh")

@@ -9,7 +9,10 @@ class_name Missile
 @export var delay : float = 0.0
 @export var shot : Vector3
 @export var mesh_instance_3d : MeshInstance3D
+@onready var exlosion: AudioStreamPlayer = $Exlosion
+@onready var hit_box: Area3D = $HitBox
 
+var dead : bool = false
 var player : player3d_second_attempt
 var current_delay : float = 0.0
 var current_hp : float = maxHealth
@@ -31,8 +34,7 @@ func takeDamage(amount):
 	mesh_instance_3d.material_override = Globals.DAMAGED_MATERIAL
 	damage_timer.start()
 	if current_hp <= 0:
-		queue_free()
-	
+		die()
 	
 func rotateObject(delta):
 	var heading : Vector3
@@ -51,7 +53,18 @@ func rotateObject(delta):
 	#global_transform.basis.z=lerp(global_transform.basis.z, look_atMatrix.basis.z, delta*turn_speed)
 	#transform.basis = transform.basis.orthonormalized()
 
+func die() -> void:
+	dead = true
+	collision_layer = 0
+	collision_mask = 0
+	exlosion.play()
+	queue_free()
+
 func _physics_process(delta):
+	if dead:
+		velocity = Vector3.ZERO
+		move_and_slide()
+		return
 	if current_delay < delay:
 		current_delay += delta
 		velocity = shot.normalized()
@@ -63,12 +76,12 @@ func _physics_process(delta):
 		speed += acceleration * delta
 	rotateObject(delta)
 	#print_debug(velocity)
-	var collision = move_and_collide(velocity*delta)
-	if collision != null:
-		if collision.get_collider() != null:
-			if collision.get_collider().has_method("take_damage"):
-				collision.get_collider().take_damage(damage)
-			queue_free()
+	move_and_slide()
+	if hit_box.has_overlapping_bodies():
+		var collision_with = hit_box.get_overlapping_bodies()[0] 
+		if collision_with.is_in_group("player"):
+			collision_with.take_damage(damage, velocity.normalized())
+			die()
 
 func return_to_normal_color() -> void:
 	mesh_instance_3d.material_override = null

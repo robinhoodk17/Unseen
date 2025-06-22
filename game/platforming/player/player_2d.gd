@@ -123,7 +123,6 @@ func store_checkpoint(body : Node2D = null, _position : Vector2 = Vector2.ZERO) 
 		checkpoint = body.global_position
 	if _position != Vector2.ZERO:
 		checkpoint = _position
-	print_debug("current checkpoint", checkpoint)
 
 func _physics_process(delta: float) -> void:
 	if slow_time:
@@ -167,6 +166,7 @@ func handle_gravity(delta: float) -> void:
 		climb_spent = false
 		coyote_timer.start(coyote_time)
 		if airborne:
+			$Land.play()
 			landing_timer.start(landing_time)
 			velocity.x *= 0.9
 			current_state = state.LANDING
@@ -203,7 +203,9 @@ func jump() -> void:
 		input_queued = inputs.NONE
 	else:
 		return
-
+	
+	$Jump.play()
+	
 	if coyote_timer.is_stopped():
 		if wall_jump_left.is_colliding() or wall_jump_right.is_colliding():
 			do_wall_jump()
@@ -215,6 +217,7 @@ func jump() -> void:
 	
 	jumping_time = 0.0
 	velocity.y = jump_velocity
+	
 	#if current_state == state.CLIMBING:
 		#velocity.y *= 2.0
 	current_state = state.JUMPING
@@ -244,6 +247,7 @@ func dash(direction : Vector2) -> void:
 	velocity = direction.normalized() * dash_velocity
 	current_state = state.DASHING
 	dash_reset_timer.start(dash_duration)
+	$Dash.play()
 
 func state_machine(delta: float) -> void:
 	var move_direction : Vector2 = move.value_axis_2d
@@ -286,12 +290,19 @@ func state_machine(delta: float) -> void:
 			#if climb_action.value_bool and !climb_spent:
 
 		state.WALKING:
+
+			
 			handle_lateral_movement(delta, move_direction.x)
 			if move_direction.x == 0.0:
 				current_state = state.IDLE
 				velocity.x = 0.0
 			if is_on_floor():
 				animated_sprite_2d.play("walk")
+				#if !$Footstep.playing:
+					#$Footstep.play()
+			#
+				#if !$Footstep2.playing:
+					#$Footstep2.play()
 			else:
 				animated_sprite_2d.play("air")
 
@@ -373,9 +384,9 @@ func change_state(new_state : state) -> void:
 	current_state = new_state
 
 func respawn(_body : Node2D = null) -> void:
-	get_tree().paused = true
-	await get_tree().create_timer(0.75).timeout
-	get_tree().paused = false
-	await Ui.fade_to_black(0.01)
+	#get_tree().paused = true
+	#await get_tree().create_timer(0.75).timeout
+	#get_tree().paused = false
+	await Ui.fade_to_black(0.25)
 	get_tree().reload_current_scene()
-	Ui.fade_to_clear(0.01)
+	Ui.fade_to_clear(0.25)

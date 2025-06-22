@@ -22,7 +22,7 @@ func takeDamage(amount) -> void:
 	if hp <= 0.0:
 		dead = true
 		#await get_tree().create_timer(0.2).timeout
-		queue_free()
+		get_parent().queue_free()
 	damage_timer.start()
 func return_to_normal_color() -> void:
 	mesh_instance_3d.material_override = null

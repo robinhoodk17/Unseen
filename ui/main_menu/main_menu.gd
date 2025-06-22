@@ -20,6 +20,7 @@ func _connect_buttons() -> void:
 		%Play.grab_focus()
 
 func show_ui() -> void:
+	Utils.start_dialogue("controller recommended")
 	show()
 	%Play.grab_focus()
 

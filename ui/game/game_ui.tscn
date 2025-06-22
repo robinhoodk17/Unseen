@@ -35,7 +35,7 @@ text = "Game UI"
 layout_mode = 1
 offset_right = 504.0
 offset_bottom = 109.0
-scale = Vector2(0.23, 0.23)
+scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(10, 10)
 max_value = 1.0
 step = 0.01
@@ -78,8 +78,8 @@ offset_right = -42.529
 offset_bottom = -384.0
 grow_horizontal = 0
 grow_vertical = 0
-scale = Vector2(0.225, 0.225)
-pivot_offset = Vector2(10, 130)
+scale = Vector2(0.415, 0.415)
+pivot_offset = Vector2(10, 215.4)
 texture = ExtResource("6_b3mny")
 expand_mode = 3
 
@@ -88,3 +88,5 @@ texture = ExtResource("7_b3mny")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_pc3ud")
+volume_db = 10.0
+bus = &"Music"

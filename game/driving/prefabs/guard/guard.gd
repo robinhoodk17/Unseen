@@ -6,6 +6,7 @@ class_name Guard
 @export var max_hp : float = 10.0
 @export var missile_spawn_location : Marker3D
 @export var shot_direction : Vector3 = Vector3(0,1,-1)
+@export var animation_player : AnimationPlayer
 
 var player : player3d_second_attempt
 var current_hp = max_hp
@@ -19,7 +20,7 @@ func _ready() -> void:
 	add_child(damage_timer)
 	damage_timer.timeout.connect(return_to_normal_color)
 	
-	spawn_missile_timer = Utils.create_timer(5.0, false)
+	spawn_missile_timer = Utils.create_timer(7.5, false)
 	add_child(spawn_missile_timer)
 	spawn_missile_timer.timeout.connect(spawn_missile)
 	
@@ -30,6 +31,7 @@ func _ready() -> void:
 	collision_layer = 0
 
 func spawn() -> void:
+	animation_player.play("spawn")
 	show()
 	dead = false
 	spawn_missile_timer.start()

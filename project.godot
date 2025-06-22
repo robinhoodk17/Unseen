@@ -43,8 +43,13 @@ directories/dch_directory={
 directories/dtl_directory={
 "boost_now": "res://dialogic/timelines/boost_now.dtl",
 "catch_up": "res://dialogic/timelines/catch_up.dtl",
+"controller recommended": "res://dialogic/timelines/controller recommended.dtl",
+"final": "res://dialogic/timelines/final.dtl",
+"guards": "res://dialogic/timelines/guards.dtl",
 "inside": "res://dialogic/timelines/inside.dtl",
-"spotlights_driving": "res://dialogic/timelines/spotlights_driving.dtl"
+"last": "res://dialogic/timelines/last.dtl",
+"spotlights_driving": "res://dialogic/timelines/spotlights_driving.dtl",
+"wagon_vulnerable": "res://dialogic/timelines/wagon_vulnerable.dtl"
 }
 extensions_folder="res://addons/dialogic_additions"
 text/letter_speed=0.01
