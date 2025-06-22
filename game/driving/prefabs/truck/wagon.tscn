@@ -60,7 +60,7 @@ albedo_color = Color(0, 1, 0, 1)
 [node name="Wagon" type="PathFollow3D" node_paths=PackedStringArray("weak_spots", "guards")]
 script = ExtResource("1_u84f1")
 weak_spots = [NodePath("ActualWeakPoint"), NodePath("ActualWeakPoint2"), NodePath("ActualWeakPoint3")]
-guards = [NodePath("Guard")]
+guards = [NodePath("Guard"), NodePath("Guard2"), NodePath("Guard3")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_qt2gw")
@@ -121,3 +121,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vk28q")
 
 [node name="Guard" parent="." instance=ExtResource("4_3to55")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.0596142, 2, 2.78712)
+
+[node name="Guard2" parent="." instance=ExtResource("4_3to55")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.03633, 0.159985, 2.78712)
+
+[node name="Guard3" parent="." instance=ExtResource("4_3to55")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.00567, 0.159985, 2.78712)
