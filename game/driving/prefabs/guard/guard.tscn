@@ -29,4 +29,4 @@ mesh = SubResource("BoxMesh_hwl8n")
 shape = SubResource("CapsuleShape3D_hl10e")
 
 [node name="MissileSpawnPoint" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.957865, -4.77423)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35485, -0.423192)

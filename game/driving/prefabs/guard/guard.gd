@@ -19,7 +19,7 @@ func _ready() -> void:
 	add_child(damage_timer)
 	damage_timer.timeout.connect(return_to_normal_color)
 	
-	spawn_missile_timer = Utils.create_timer(7.5, false)
+	spawn_missile_timer = Utils.create_timer(5.0, false)
 	add_child(spawn_missile_timer)
 	spawn_missile_timer.timeout.connect(spawn_missile)
 	
@@ -42,7 +42,7 @@ func spawn_missile() -> void:
 	var newMissile : Missile = missile_scene.instantiate()
 	newMissile.player = player
 	newMissile.shot = shot_direction
-	newMissile.delay = 3.0
+	newMissile.delay = 1.0
 	add_child(newMissile)
 	newMissile.add_collision_exception_with(self)
 	newMissile.global_position = missile_spawn_location.global_position

@@ -57,10 +57,11 @@ _data = {
 shading_mode = 0
 albedo_color = Color(0, 1, 0, 1)
 
-[node name="Wagon" type="PathFollow3D" node_paths=PackedStringArray("weak_spots", "guards")]
+[node name="Wagon" type="PathFollow3D" node_paths=PackedStringArray("weak_spots", "guards", "missile_spawn_points")]
 script = ExtResource("1_u84f1")
 weak_spots = [NodePath("ActualWeakPoint"), NodePath("ActualWeakPoint2"), NodePath("ActualWeakPoint3")]
 guards = [NodePath("Guard"), NodePath("Guard2"), NodePath("Guard3")]
+missile_spawn_points = [NodePath("MissileSpawn")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_qt2gw")
@@ -127,3 +128,6 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.0363
 
 [node name="Guard3" parent="." instance=ExtResource("4_3to55")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.00567, 0.159985, 2.78712)
+
+[node name="MissileSpawn" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, -0.208704, 6.90676)
