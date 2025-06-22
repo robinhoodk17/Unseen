@@ -1,7 +1,7 @@
 extends CharacterBody3D
 class_name Missile
 
-@export var acceleration : float = 12.5
+@export var acceleration : float = 1.25
 @export_range (3, 10, 0.2) var turn_speed : float = 25.0
 @export var maxSpeed : float = 100.0
 @export var damage : float = 20
@@ -54,7 +54,7 @@ func rotateObject(delta):
 func _physics_process(delta):
 	if current_delay < delay:
 		current_delay += delta
-		velocity = shot.normalized() / 2.0
+		velocity = shot.normalized()
 		move_and_slide()
 		return
 

@@ -6,10 +6,13 @@ signal died
 @export var wagon_number : int = 0
 @export var weak_spots : Array[WeakSpot]
 @export var guards : Array[Guard]
+@export var missile_spawn_points : Array[Marker3D]
+@export var missile_delay : float = 1.0
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var player: player3d_second_attempt = %Player
 
+var missile_scene : PackedScene = preload("res://game/driving/prefabs/missile/missile.tscn")
 var vulnerable : bool = false
 var previous_wagon : wagon = null
 var current_speed : float
@@ -83,3 +86,14 @@ func _physics_process(delta: float) -> void:
 
 func react_to_boost() -> void:
 	current_speed = player.boost_speed * .8
+
+func spawn_missile() -> void:
+	for i in missile_spawn_points.size():
+		var newMissile : Missile = missile_scene.instantiate()
+		newMissile.player = player
+		add_child(newMissile)
+		newMissile.global_position = missile_spawn_points[i].global_position
+		newMissile.delay = missile_delay
+		newMissile.shot = -missile_spawn_points[i].basis.z
+		newMissile.look_at(newMissile.global_position + global_basis * -missile_spawn_points[i].basis.z)
+		newMissile.initialize()

@@ -19,7 +19,7 @@ func _ready() -> void:
 	add_child(damage_timer)
 	damage_timer.timeout.connect(return_to_normal_color)
 	
-	spawn_missile_timer = Utils.create_timer(7.5, false)
+	spawn_missile_timer = Utils.create_timer(5.0, false)
 	add_child(spawn_missile_timer)
 	spawn_missile_timer.timeout.connect(spawn_missile)
 	
