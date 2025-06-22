@@ -15,7 +15,7 @@ func reparent_node(node: Node, parent: Node, position_reset: bool = true) -> voi
 		old_parent.call_deferred("remove_child", node)
 		await get_tree().process_frame
 	if position_reset:
-		node.set("position", Vector2.ZERO)
+		node.set("position", Vector3.ZERO)
 	if is_instance_valid(parent):
 		parent.add_child(node)
 	# Is the 2nd await required or could we set_deferred instead?
@@ -23,3 +23,15 @@ func reparent_node(node: Node, parent: Node, position_reset: bool = true) -> voi
 	# await get_tree().process_frame
 	if position_reset and pos:
 		node.set("global_position", pos)
+
+func start_dialogue(timeline : String) -> void:
+		Dialogic.process_mode = Node.PROCESS_MODE_ALWAYS
+		get_tree().paused = true
+		Dialogic.start(timeline).process_mode = Node.PROCESS_MODE_ALWAYS
+		Dialogic.timeline_ended.connect(func():get_tree().set('paused', false))
+
+func create_timer(wait_time: float = 1.0, one_shot: bool = true) -> Timer:
+	var timer : Timer = Timer.new()
+	timer.wait_time = wait_time
+	timer.one_shot = one_shot
+	return timer

@@ -1,9 +1,14 @@
 extends UiPage
 
 var _audio_bus_name_idx_mapping: Dictionary = {}
+@onready var check_box: CheckBox = $VBoxContainer/HBoxContainer/CheckBox
 
+func cam_shake() -> void:
+	Globals.camera_shake = check_box.button_pressed
+	print_debug(check_box.button_pressed)
 
 func _ready() -> void:
+	check_box.pressed.connect(cam_shake)
 	Settings.load_settings()
 	%Back.pressed.connect(go_back)
 	$VBoxContainer/ResetControls.pressed.connect(Settings.reset_controls)

@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://dp00cghmqi7fb"]
+
+[ext_resource type="Script" uid="uid://be453ygfyxek1" path="res://game/driving/prefabs/guard/guard.gd" id="1_hwl8n"]
+[ext_resource type="AudioStream" uid="uid://cqtvsttfitcuf" path="res://game/driving/assets/SFX/sfx_3d_taking_damage.wav" id="2_x2odh"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bs8el"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00bo8"]
+albedo_color = Color(0.295867, 0.295866, 0.295866, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hwl8n"]
+size = Vector3(0.5, 0.1, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hl10e"]
+
+[node name="Guard" type="StaticBody3D" node_paths=PackedStringArray("mesh_instance_3d", "missile_spawn_location")]
+script = ExtResource("1_hwl8n")
+mesh_instance_3d = NodePath("MeshInstance3D")
+missile_spawn_location = NodePath("MissileSpawnPoint")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_bs8el")
+surface_material_override/0 = SubResource("StandardMaterial3D_00bo8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59941, -0.158786)
+mesh = SubResource("BoxMesh_hwl8n")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_hl10e")
+
+[node name="MissileSpawnPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35485, -0.423192)
+
+[node name="TakeDamage" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_x2odh")

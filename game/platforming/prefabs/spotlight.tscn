@@ -1,0 +1,272 @@
+[gd_scene load_steps=64 format=3 uid="uid://beppcdkycxsn5"]
+
+[ext_resource type="Script" uid="uid://c4sypk63iqldv" path="res://game/platforming/prefabs/spotlight.gd" id="1_b6xtj"]
+[ext_resource type="Texture2D" uid="uid://cnjslulqq88to" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0001.png" id="3_adix8"]
+[ext_resource type="Texture2D" uid="uid://bulqvg7hs1jl2" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0002.png" id="4_5428j"]
+[ext_resource type="Texture2D" uid="uid://ybm3f0y8q05k" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0003.png" id="5_gd8f4"]
+[ext_resource type="Texture2D" uid="uid://ctjn1hv2bldnt" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0004.png" id="6_lbobe"]
+[ext_resource type="Texture2D" uid="uid://ckte2timlh8r5" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0005.png" id="7_7mgq2"]
+[ext_resource type="Texture2D" uid="uid://clfw1xs6q7yyk" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0006.png" id="8_jlfbj"]
+[ext_resource type="Texture2D" uid="uid://bt0nrvty774rs" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0007.png" id="9_t17es"]
+[ext_resource type="Texture2D" uid="uid://bfhl8bxbub2yd" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0008.png" id="10_fbnqr"]
+[ext_resource type="Texture2D" uid="uid://8eo47ufbxeg3" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0009.png" id="11_h0gry"]
+[ext_resource type="Texture2D" uid="uid://doe4e7rqxilbs" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0010.png" id="12_1wlld"]
+[ext_resource type="Texture2D" uid="uid://boyhvheowol38" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0011.png" id="13_jals8"]
+[ext_resource type="Texture2D" uid="uid://doco8md0qj4c0" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0012.png" id="14_01iyl"]
+[ext_resource type="Texture2D" uid="uid://dml8w85oq0ok4" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0013.png" id="15_0wpkh"]
+[ext_resource type="Texture2D" uid="uid://brsnkr185vk2q" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0014.png" id="16_gwrri"]
+[ext_resource type="Texture2D" uid="uid://e0v4kpmbo3x4" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0015.png" id="17_6y4uw"]
+[ext_resource type="Texture2D" uid="uid://dw3y1ltteprd3" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0016.png" id="18_g2xg6"]
+[ext_resource type="Texture2D" uid="uid://dbo30x7my5iy3" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0017.png" id="19_xp6fe"]
+[ext_resource type="Texture2D" uid="uid://d4a35nwukbgsn" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0018.png" id="20_nhe0f"]
+[ext_resource type="Texture2D" uid="uid://bvsgsarihu033" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0019.png" id="21_2l640"]
+[ext_resource type="Texture2D" uid="uid://b6eselcyc7tka" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0020.png" id="22_i4ptn"]
+[ext_resource type="Texture2D" uid="uid://0kwo8m26iwa4" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0021.png" id="23_35v5l"]
+[ext_resource type="Texture2D" uid="uid://cw13vua6xq7wk" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0022.png" id="24_s2ohk"]
+[ext_resource type="Texture2D" uid="uid://dtv1atabl0mum" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0023.png" id="25_k4ede"]
+[ext_resource type="Texture2D" uid="uid://cju7s1g4d0ixt" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0024.png" id="26_dh1g2"]
+[ext_resource type="Texture2D" uid="uid://bevh6grqs7owi" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0025.png" id="27_xxbyd"]
+[ext_resource type="Texture2D" uid="uid://b67k6hqq7o3ub" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0026.png" id="28_2or7f"]
+[ext_resource type="Texture2D" uid="uid://dsbqasr71sv0o" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0027.png" id="29_1il5r"]
+[ext_resource type="Texture2D" uid="uid://bbtjouk2q52sq" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0028.png" id="30_6uhyd"]
+[ext_resource type="Texture2D" uid="uid://cw3xx243qy4p3" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0029.png" id="31_v5cax"]
+[ext_resource type="Texture2D" uid="uid://dthr56cf8ww6f" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0030.png" id="32_tklwi"]
+[ext_resource type="Texture2D" uid="uid://c0elnhu8gudt" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0031.png" id="33_8l5po"]
+[ext_resource type="Texture2D" uid="uid://cvboxg1u7ua04" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0032.png" id="34_b2vnp"]
+[ext_resource type="Texture2D" uid="uid://d0dhxkugy8xxd" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0033.png" id="35_ex044"]
+[ext_resource type="Texture2D" uid="uid://dl00626p5vb0j" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0034.png" id="36_rpn45"]
+[ext_resource type="Texture2D" uid="uid://dnex5slmsvgt7" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0035.png" id="37_1so2a"]
+[ext_resource type="Texture2D" uid="uid://bgr4efsouk75y" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0036.png" id="38_aea6e"]
+[ext_resource type="Texture2D" uid="uid://bnyn7okwxnxme" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0037.png" id="39_k0eog"]
+[ext_resource type="Texture2D" uid="uid://dke7i75tso8ea" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0038.png" id="40_sb3p1"]
+[ext_resource type="Texture2D" uid="uid://iqb1nfvhljvn" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0039.png" id="41_4sw7f"]
+[ext_resource type="Texture2D" uid="uid://cdtl8v86f3nq4" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0040.png" id="42_gi2jq"]
+[ext_resource type="Texture2D" uid="uid://7ixbdgohkk32" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0041.png" id="43_81mc4"]
+[ext_resource type="Texture2D" uid="uid://dbekoqe2wdgo5" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0042.png" id="44_ecehb"]
+[ext_resource type="Texture2D" uid="uid://bxwkmb5apqksh" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0043.png" id="45_o6g5h"]
+[ext_resource type="Texture2D" uid="uid://cj1vwyrsirew7" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0044.png" id="46_b027o"]
+[ext_resource type="Texture2D" uid="uid://c106pvm1v4h46" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0045.png" id="47_nc1y5"]
+[ext_resource type="Texture2D" uid="uid://c5guwcsylhccs" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0046.png" id="48_ap8or"]
+[ext_resource type="Texture2D" uid="uid://dvh30byo1jsp0" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0047.png" id="49_mm0lb"]
+[ext_resource type="Texture2D" uid="uid://dktjroucwsh8l" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0048.png" id="50_fevqd"]
+[ext_resource type="Texture2D" uid="uid://bo0hw2rki60gk" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0049.png" id="51_7myc5"]
+[ext_resource type="Texture2D" uid="uid://ckbewkl58o85w" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0050.png" id="52_uukhq"]
+[ext_resource type="Texture2D" uid="uid://dt4trha1nu3y1" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0051.png" id="53_k7jgd"]
+[ext_resource type="Texture2D" uid="uid://cwu0s37i1xjnp" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0052.png" id="54_7mm0r"]
+[ext_resource type="Texture2D" uid="uid://rux3viv47rcp" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0053.png" id="55_j6qf3"]
+[ext_resource type="Texture2D" uid="uid://d4jwlx88fkrhk" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0054.png" id="56_aj8rk"]
+[ext_resource type="Texture2D" uid="uid://djlh431yfl1gs" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0055.png" id="57_mm50f"]
+[ext_resource type="Texture2D" uid="uid://c5xujqfmt146e" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0056.png" id="58_w8ha3"]
+[ext_resource type="Texture2D" uid="uid://dsywm08qx022q" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0057.png" id="59_tf4nr"]
+[ext_resource type="Texture2D" uid="uid://cqxl8hj6dyun5" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0058.png" id="60_5q7bo"]
+[ext_resource type="Texture2D" uid="uid://b0s3qac72ldt1" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0059.png" id="61_71uwh"]
+[ext_resource type="Texture2D" uid="uid://2bwxh2ktcuhi" path="res://game/platforming/assets/Enemies/Spider/Animation/spider search/0060.png" id="62_03cih"]
+[ext_resource type="AudioStream" uid="uid://b0fbyil1kqwx3" path="res://game/driving/assets/SFX/sfx_spotlight.wav" id="62_adix8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p25vr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_adix8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5428j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_gd8f4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lbobe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7mgq2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_jlfbj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_t17es")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_fbnqr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_h0gry")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_1wlld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_jals8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_01iyl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_0wpkh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_gwrri")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_6y4uw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_g2xg6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_xp6fe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_nhe0f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_2l640")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_i4ptn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_35v5l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_s2ohk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_k4ede")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_dh1g2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_xxbyd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_2or7f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_1il5r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_6uhyd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_v5cax")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_tklwi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_8l5po")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_b2vnp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_ex044")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_rpn45")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_1so2a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_aea6e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_k0eog")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_sb3p1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_4sw7f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_gi2jq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_81mc4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_ecehb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_o6g5h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_b027o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_nc1y5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_ap8or")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_mm0lb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_fevqd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_7myc5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_uukhq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_k7jgd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_7mm0r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_j6qf3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_aj8rk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_mm50f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_w8ha3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_tf4nr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_5q7bo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_71uwh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_03cih")
+}],
+"loop": true,
+"name": &"Search",
+"speed": 10.0
+}]
+
+[node name="Spotlight" type="Polygon2D"]
+color = Color(1, 1, 1, 0.439216)
+script = ExtResource("1_b6xtj")
+
+[node name="Area2D2" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D2"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-7, 1)
+rotation = -1.57079
+scale = Vector2(0.0319004, 0.0319004)
+sprite_frames = SubResource("SpriteFrames_p25vr")
+animation = &"Search"
+autoplay = "Search"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("62_adix8")

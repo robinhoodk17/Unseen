@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://b17qvk5e2o1a"]
+
+[ext_resource type="Script" uid="uid://b8825u4b3twjh" path="res://game/driving/player/bullet.gd" id="1_58aw2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_58aw2"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 100, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xhdg3"]
+size = Vector3(0.05, 0.05, 1)
+
+[sub_resource type="Animation" id="Animation_1v0gl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:material_override:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 100, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6fru6"]
+resource_name = "vanish"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:material_override:albedo_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 100, 1), Color(0, 0, 100, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.25),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"destroy"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tkxls"]
+_data = {
+&"RESET": SubResource("Animation_1v0gl"),
+&"vanish": SubResource("Animation_6fru6")
+}
+
+[node name="Bullet" type="Node3D"]
+script = ExtResource("1_58aw2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+material_override = SubResource("StandardMaterial3D_58aw2")
+mesh = SubResource("BoxMesh_xhdg3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_tkxls")
+}

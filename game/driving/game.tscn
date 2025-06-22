@@ -1,29 +1,73 @@
-[gd_scene load_steps=5 format=3 uid="uid://bhsiyh7htemxt"]
+[gd_scene load_steps=14 format=3 uid="uid://bhsiyh7htemxt"]
 
-[ext_resource type="PackedScene" uid="uid://dv61y0i4k1uj4" path="res://game/driving/player/player.tscn" id="1_55ww7"]
-[ext_resource type="PackedScene" uid="uid://cwlsmyqfrwdd4" path="res://game/driving/level.blend" id="1_dqe0k"]
+[ext_resource type="PackedScene" uid="uid://bs2ir8ft4u7rs" path="res://game/driving/level.blend" id="1_dqe0k"]
+[ext_resource type="PackedScene" uid="uid://cikp8uuoalhq5" path="res://game/driving/player/player_second_attempt.tscn" id="2_nmmbj"]
+[ext_resource type="Script" uid="uid://cp2mumtpcw05u" path="res://game/driving/prefabs/truck/truck.gd" id="3_6uque"]
+[ext_resource type="PackedScene" uid="uid://7teeqq7nerpm" path="res://game/driving/prefabs/spotlight3d.tscn" id="3_nmmbj"]
+[ext_resource type="PackedScene" uid="uid://c2xuba36ro24p" path="res://game/driving/prefabs/truck/wagon.tscn" id="4_n7lqk"]
+[ext_resource type="PackedScene" uid="uid://c0wvi3ixdpqmu" path="res://game/driving/prefabs/boost_pad/boost_pad.tscn" id="6_17euv"]
+[ext_resource type="PackedScene" uid="uid://bstld3j3n5kfs" path="res://game/driving/prefabs/dialogue_popup.tscn" id="6_a4ecv"]
+[ext_resource type="PackedScene" uid="uid://c3b6wrclraa3k" path="res://game/driving/prefabs/damage_upgrade/damage_upgrade.tscn" id="6_eyqbd"]
+[ext_resource type="PackedScene" uid="uid://c4tighgrqejbq" path="res://game/driving/prefabs/health_pad/health_pad.tscn" id="7_cy5fq"]
+[ext_resource type="PackedScene" uid="uid://rv836bpusitt" path="res://game/driving/prefabs/destructible/create_destrucible.tscn" id="10_cy5fq"]
 
-[sub_resource type="Curve3D" id="Curve3D_nmmbj"]
+[sub_resource type="Curve3D" id="Curve3D_n7lqk"]
 closed = true
 bake_interval = 512.0
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.956758, 56.4835, -73.8246, 0, 0, 0, 0, 0, 0, -117.842, 17.2727, -614.326, 0, 0, 0, 0, 0, 0, -121.335, 22.2798, -799.453, 0, 0, 0, 0, 0, 0, -47.9829, 0, -813.425, 0, 0, 0, 0, 0, 0, 28.8623, 0, -722.608, 0, 0, 0, 0, 0, 0, 210.496, 0, -684.185, 0, 0, 0, 0, 0, 0, 231.454, 0, -607.34, 0, 0, 0, 0, 0, 0, 227.961, 55.4842, -188.184, 0, 0, 0, 0, 0, 0, 264.141, 0, 123.376, 0, 0, 0, 0, 0, 0, 375.777, 18.5633, 323.998, 0, 0, 0, 0, 0, 0, 621.303, 27.5645, 732.956, 0, 0, 0, 0, 0, 0, 410.955, 27.9437, 933.958, 0, 0, 0, 0, 0, 0, 253.649, 0, 1084.28, 0, 0, 0, 0, 0, 0, 37.0854, 14.9192, 1042.36, 0, 0, 0, 0, 0, 0, 26.6066, 48.2739, 920.106, 0, 0, 0, 0, 0, 0, 176.804, 9.33459, 846.754, 0, 0, 0, 0, 0, 0, 253.649, 8.73162, 864.219, 0, 0, 0, 0, 0, 0, 299.058, 0, 944.557, 0, 0, 0, 0, 0, 0, 288.562, -2.14672, 1024.71, 0, 0, 0, 0, 0, 0, 288.696, 16.4234, 1149.29, 0, 0, 0, 0, 0, 0, 401.868, 54.4447, 1209.06, 0, 0, 0, 0, 0, 0, 523.256, 78.0092, 1084.3, 0, 0, 0, 0, 0, 0, 514.452, 83.0793, 1018.26, 0, 0, 0, 0, 0, 0, 317.437, 39.131, 735.383, 0, 0, 0, 0, 0, 0, 200.776, -5.50371, 475.646, 0, 0, 0, 0, 0, 0, 46.6943, 32.0163, 516.247, 0, 0, 0, 0, 0, 0, -25.944, 32.0163, 528.474, 0, 0, 0, 0, 0, 0, -56.7603, 32.0163, 477.847, 0, 0, 0, 0, 0, 0, -39.151, 32.0163, 451.433, 0, 0, 0, 0, 0, 0, 70.907, 32.0163, 420.617, 0, 0, 0, 0, 0, 0, 156.752, 32.0163, 398.605, 0, 0, 0, 0, 0, 0, 167.758, 32.0163, 356.783, 0, 0, 0, 0, 0, 0, 143.545, 32.0163, 297.352, 0, 0, 0, 0, 0, 0, 92.9186, 32.0163, 284.145, 0, 0, 0, 0, 0, 0, 11.4757, 32.0163, 288.547, 0, 0, 0, 0, 0, 0, -1.88672, 32.0163, 161.7),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.537712, 0, 0.838134, 0, 0, 0, 0, 0, 0, -0.537712, 0, -27.5355, 0, 0, 0, 0, 0, 0, -0.114235, 0, -60.9909, 0, 0, 0, 0, 0, 0, -0.687965, 0, -174.629, 0, 0, 0, 0, 0, 0, 0.694855, 0, -261.153, 0, 0, 0, 0, 0, 0, 14.5224, 0, -294.57, 0, 0, 0, 0, 0, 0, 41.6014, 0, -313.006, 0, 0, 0, 0, 0, 0, 76.7465, 0, -322.801, 0, 0, 0, 0, 0, 0, 113.044, 0, -322.801, 0, 0, 0, 0, 0, 0, 274.297, 0, -321.945, 0, 0, 0, 0, 0, 0, 302.528, 0, -311.574, 0, 0, 0, 0, 0, 0, 317.508, 0, -297.747, 0, 0, 0, 0, 0, 0, 323.846, 0, -273.548, 0, 0, 0, 0, 0, 0, 323.846, 0, -144.491, 0, 0, 0, 0, 0, 0, 315.304, 0, -127.313, 0, 0, 0, 0, 0, 0, 297.939, 0, -124.028, 0, 0, 0, 0, 0, 0, 284.798, 0, -129.66, 0, 0, 0, 0, 0, 0, 275.881, 0, -139.515, 0, 0, 0, 0, 0, 0, 273.535, 0, -159.227, 0, 0, 0, 0, 0, 0, 276.82, 0, -182.224, 0, 0, 0, 0, 0, 0, 306.387, 0, -192.08, 0, 0, 0, 0, 0, 0, 312.019, 0, -198.65, 0, 0, 0, 0, 0, 0, 306.387, 0, -208.506, 0, 0, 0, 0, 0, 0, 287.413, 0, -220.531, 0, 0, 0, 0, 0, 0, 273.803, 0, -224.286, 0, 0, 0, 0, 0, 0, 133.945, 0, -288.583, 0, 0, 0, 0, 0, 0, 119.865, 0, -289.991, 0, 0, 0, 0, 0, 0, 103.908, 0, -282.012, 0, 0, 0, 0, 0, 0, 75.4376, 0, -253.295, 0, 0, 0, 0, 0, 0, 75.6549, 0, -245.687, 0, 0, 0, 0, 0, 0, 80.8722, 0, -240.252, 0, 0, 0, 0, 0, 0, 134.167, 0, -225.01, 0, 0, 0, 0, 0, 0, 160.036, 0, -219.575, 0, 0, 0, 0, 0, 0, 219.456, 0, -208.686, 0, 0, 0, 0, 0, 0, 233.368, 0, -194.121, 0, 0, 0, 0, 0, 0, 239.021, 0, -176.296, 0, 0, 0, 0, 0, 0, 238.323, 0, -164.579, 0, 0, 0, 0, 0, 0, 227.019, 0, -156.753, 0, 0, 0, 0, 0, 0, 212.237, 0, -154.796, 0, 0, 0, 0, 0, 0, 185.61, 0, -161.287, 0, 0, 0, 0, 0, 0, 164.741, 0, -172.156, 0, 0, 0, 0, 0, 0, 149.089, 0, -179.548, 0, 0, 0, 0, 0, 0, 131.046, 0, -190.199, 0, 0, 0, 0, 0, 0, 117.786, 0, -200.417, 0, 0, 0, 0, 0, 0, 111.481, 0, -203.025, 0, 0, 0, 0, 0, 0, 97.5686, 0, -197.373, 0, 0, 0, 0, 0, 0, 84.5254, 0, -186.939, 0, 0, 0, 0, 0, 0, 74.0908, 0, -171.504, 0, 0, 0, 0, 0, 0, 63.2111, 0, -147.857, 0, 0, 0, 0, 0, 0, 74.595, 0, -131.988, 0, 0, 0, 0, 0, 0, 77.6997, 0, -121.984, 0, 0, 0, 0, 0, 0, 75.7816, 0, 53.0409, 0, 0, 0, 0, 0, 0, 89.2371, 0, 75.2404, 0, 0, 0, 0, 0, 0, 102.933, 0, 77.1969, 0, 0, 0, 0, 0, 0, 117.063, 0, 72.197, 0, 0, 0, 0, 0, 0, 123.584, 0, 65.6754, 0, 0, 0, 0, 0, 0, 125.106, 0, 56.9799, 0, 0, 0, 0, 0, 0, 125.758, 0, 45.4584, 0, 0, 0, 0, 0, 0, 125.871, 0, 18.2065, 0, 0, 0, 0, 0, 0, 140.653, 0, 6.03284, 0, 0, 0, 0, 0, 0, 162.174, 0, 4.07635, 0, 0, 0, 0, 0, 0, 184.348, 0, 1.68509, 0, 0, 0, 0, 0, 0, 301.111, 0, 0.577236, 0, 0, 0, 0, 0, 0, 322.85, 0, 11.2292, 0, 0, 0, 0, 0, 0, 327.415, 0, 30.7941, 0, 0, 0, 0, 0, 0, 327.32, 0, 89.2722, 0, 0, 0, 0, 0, 0, 325.423, 0, 125.58, 0, 0, 0, 0, 0, 0, 305.07, 0, 155.592, 0, 0, 0, 0, 0, 0, 279.887, 0, 175.945, 0, 0, 0, 0, 0, 0, 197.785, 0, 176.29, 0, 0, 0, 0, 0, 0, 59.3486, 0, 177.416, 0, 0, 0, 0, 0, 0, 28.9915, 0, 167.067, 0, 0, 0, 0, 0, 0, 0.014389, 0, 127.051, 0, 0, 0, 0, 0, 0, -0.672606, 0, 77.9279),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 36
-up_vector_enabled = false
+point_count = 74
 
 [sub_resource type="Environment" id="Environment_dqe0k"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qnipa"]
+size = Vector3(7.11, 3.65, 1)
 
 [node name="Game_tscn" type="Node3D"]
 
 [node name="level" parent="." instance=ExtResource("1_dqe0k")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="Path3D" type="Path3D" parent="."]
-curve = SubResource("Curve3D_nmmbj")
+curve = SubResource("Curve3D_n7lqk")
 
-[node name="Player" parent="Path3D" instance=ExtResource("1_55ww7")]
-transform = Transform3D(0.977406, -0.0149497, 0.210838, 4.65661e-10, 0.997495, 0.0707285, -0.211368, -0.0691305, 0.974958, -0.956758, 56.4835, -73.8246)
+[node name="Truck" type="Node3D" parent="Path3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.54015)
+script = ExtResource("3_6uque")
+
+[node name="Wagon" parent="Path3D/Truck" instance=ExtResource("4_n7lqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.13436)
+wagon_number = 2
+
+[node name="Wagon2" parent="Path3D/Truck" instance=ExtResource("4_n7lqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.3011)
+wagon_number = 1
+
+[node name="Wagon3" parent="Path3D/Truck" instance=ExtResource("4_n7lqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.3011)
+
+[node name="Player" parent="Path3D" instance=ExtResource("2_nmmbj")]
+unique_name_in_owner = true
+
+[node name="DamageUpgrade" parent="Path3D" instance=ExtResource("6_eyqbd")]
+transform = Transform3D(0.999974, 0, -0.00677883, 0, 1, 0, 0.00677883, 0, 0.999974, -0.302877, 0, -93.7775)
+progress = 99.56
+
+[node name="Movable" parent="Path3D/DamageUpgrade" index="0"]
+transform = Transform3D(1, 0, 4.65661e-10, 0, 1, 0, -4.65661e-10, 0, 1, 1.67382, 0, -0.0113449)
+
+[node name="BoostPad" parent="Path3D" instance=ExtResource("6_17euv")]
+transform = Transform3D(0.999997, 0, 0, 0, 1, 0, 0, 0, 0.999997, -0.548834, 0, -4.59146)
+progress = 7.6
+
+[node name="HealthPad" parent="Path3D" instance=ExtResource("7_cy5fq")]
+transform = Transform3D(0.999955, 0, -0.00912343, 0, 1, 0, 0.00912343, 0, 0.999955, -0.747636, 0, -237.844)
+progress = 233.79
+
+[node name="DialoguePopup" parent="Path3D" instance=ExtResource("6_a4ecv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.70745)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dqe0k")
@@ -31,3 +75,22 @@ environment = SubResource("Environment_dqe0k")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
 transform = Transform3D(1, 0, 0, 0, 0.124589, 0.992208, 0, -0.992208, 0.124589, 0, 0, 0)
 directional_shadow_mode = 0
+
+[node name="Spotlights" type="Node3D" parent="."]
+visible = false
+
+[node name="Spotlight" parent="Spotlights" instance=ExtResource("3_nmmbj")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 22.7045, -4.70654, 0)
+
+[node name="Spotlight2" parent="Spotlights" instance=ExtResource("3_nmmbj")]
+transform = Transform3D(0.272297, 0, -0.962213, 0, 1, 0, 0.962213, 0, 0.272297, -53.8871, 0.337573, -441.682)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -57.18)
+mesh = SubResource("BoxMesh_qnipa")
+
+[node name="StaticBody3D" parent="MeshInstance3D" instance=ExtResource("10_cy5fq")]
+
+[editable path="Path3D/DamageUpgrade"]
+[editable path="Path3D/HealthPad"]
+[editable path="Path3D/HealthPad/Movable/Health"]

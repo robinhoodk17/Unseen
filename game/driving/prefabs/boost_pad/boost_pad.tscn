@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://c0wvi3ixdpqmu"]
+
+[ext_resource type="Script" uid="uid://dp77ldkppqla8" path="res://game/driving/prefabs/boost_pad/movable.gd" id="1_4qbv4"]
+[ext_resource type="PackedScene" uid="uid://bysdb4gfuutty" path="res://game/driving/prefabs/boost_pad/boost_pad.blend" id="2_4qbv4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p1jd7"]
+size = Vector3(3, 3, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_51rp1"]
+size = Vector3(100, 100, 100)
+
+[sub_resource type="Gradient" id="Gradient_lv1pp"]
+offsets = PackedFloat32Array(0.495536, 0.5)
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_v0ia7"]
+noise_type = 4
+frequency = 0.0011
+fractal_type = 3
+fractal_lacunarity = 3.305
+fractal_ping_pong_strength = 3.24
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c8kys"]
+color_ramp = SubResource("Gradient_lv1pp")
+noise = SubResource("FastNoiseLite_v0ia7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y0sd4"]
+albedo_texture = SubResource("NoiseTexture2D_c8kys")
+
+[node name="BoostPad" type="PathFollow3D"]
+transform = Transform3D(0.999974, 0, -0.00677883, 0, 1, 0, 0.00677883, 0, 0.999974, 0, 0, 0)
+progress = 99.56
+
+[node name="Movable" type="Area3D" parent="."]
+transform = Transform3D(2, 0, 9.31322e-10, 0, 2, 0, -9.31322e-10, 0, 2, 0, 0, 0)
+script = ExtResource("1_4qbv4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Movable"]
+shape = SubResource("BoxShape3D_p1jd7")
+
+[node name="StartMoving" type="Area3D" parent="Movable"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Movable/StartMoving"]
+shape = SubResource("BoxShape3D_51rp1")
+
+[node name="boost_pad" parent="Movable" instance=ExtResource("2_4qbv4")]
+
+[node name="Torus" parent="Movable/boost_pad" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_y0sd4")
+
+[editable path="Movable/boost_pad"]

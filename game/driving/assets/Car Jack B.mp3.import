@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://066oarm3ydvc"
+path="res://.godot/imported/Car Jack B.mp3-7987fb73b7f3e79785e50d5da642bd75.mp3str"
+
+[deps]
+
+source_file="res://game/driving/assets/Car Jack B.mp3"
+dest_files=["res://.godot/imported/Car Jack B.mp3-7987fb73b7f3e79785e50d5da642bd75.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

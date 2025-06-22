@@ -1,0 +1,362 @@
+[gd_scene load_steps=31 format=3 uid="uid://c2xuba36ro24p"]
+
+[ext_resource type="Script" uid="uid://ce5l4gyh2d6pp" path="res://game/driving/prefabs/truck/truck_wagon.gd" id="1_u84f1"]
+[ext_resource type="PackedScene" uid="uid://dixyuut8swr4n" path="res://game/driving/assets/game jam truck.blend" id="2_8umep"]
+[ext_resource type="Script" uid="uid://6738gjeeqax7" path="res://game/driving/prefabs/truck/damage_bus.gd" id="2_qt2gw"]
+[ext_resource type="Script" uid="uid://bkhok4mw5rs1k" path="res://game/driving/prefabs/truck/weak_spot.gd" id="3_vk28q"]
+[ext_resource type="PackedScene" uid="uid://dp00cghmqi7fb" path="res://game/driving/prefabs/guard/guard.tscn" id="4_3to55"]
+[ext_resource type="AudioStream" uid="uid://cm7u1i3fnxvcw" path="res://game/driving/assets/SFX/sfx_3d_dealing_damage.wav" id="6_vtwxe"]
+[ext_resource type="AudioStream" uid="uid://cqtvsttfitcuf" path="res://game/driving/assets/SFX/sfx_3d_taking_damage.wav" id="7_am2mi"]
+[ext_resource type="AudioStream" uid="uid://bddstxbv136ym" path="res://game/driving/assets/SFX/sfx_3d_taking_damage_2.wav" id="7_w5lw8"]
+[ext_resource type="AudioStream" uid="uid://cimluti6aowpx" path="res://game/driving/assets/SFX/sfx_3d_explosion_small_2.wav" id="9_am2mi"]
+[ext_resource type="AudioStream" uid="uid://mpv6g5fgrjwv" path="res://game/driving/assets/SFX/sfx_3d_explosion_big_2.wav" id="10_kpoxt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vk28q"]
+size = Vector3(3.49219, 4.73157, 10)
+
+[sub_resource type="Animation" id="Animation_vk28q"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_qt2gw"]
+resource_name = "take_damage"
+length = 0.2
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3to55"]
+_data = {
+&"RESET": SubResource("Animation_vk28q"),
+&"take_damage": SubResource("Animation_qt2gw")
+}
+
+[sub_resource type="SphereMesh" id="SphereMesh_3to55"]
+radius = 0.7
+height = 1.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uwxfd"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.8, 0.8, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vtwxe"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.8, 0.8, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vk28q"]
+shading_mode = 0
+albedo_color = Color(0.8, 0.8, 0, 1)
+
+[sub_resource type="Animation" id="Animation_8umep"]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.183011, 1),
+"update": 0,
+"values": [Vector3(0.801588, 2.83037, 2.78712), Vector3(0.801588, 5.04725, 2.78712)]
+}
+
+[sub_resource type="Animation" id="Animation_uwxfd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.801588, 2.83037, 2.78712)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vtwxe"]
+_data = {
+&"RESET": SubResource("Animation_uwxfd"),
+&"spawn": SubResource("Animation_8umep")
+}
+
+[sub_resource type="Animation" id="Animation_w5lw8"]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.210224, 1),
+"update": 0,
+"values": [Vector3(-0.809573, 3.23495, 2.78712), Vector3(-0.809573, 4.95846, 2.78712)]
+}
+
+[sub_resource type="Animation" id="Animation_am2mi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.809573, 3.23495, 2.78712)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kpoxt"]
+_data = {
+&"RESET": SubResource("Animation_am2mi"),
+&"spawn": SubResource("Animation_w5lw8")
+}
+
+[sub_resource type="Animation" id="Animation_d57hv"]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(3.4822, 1),
+"update": 0,
+"values": [Vector3(1.22125, 0.816968, 0.242632), Vector3(2.24216, 0.816968, 0.242632)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.258816, 1),
+"update": 0,
+"values": [Vector3(-1.20033e-08, 3.14159, 0.323183), Vector3(6.18173e-08, 3.14159, 0.785398)]
+}
+
+[sub_resource type="Animation" id="Animation_p0qp2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.24216, 0.816968, 0.242632)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(6.18173e-08, 3.14159, 0.785398)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fu2on"]
+_data = {
+&"RESET": SubResource("Animation_p0qp2"),
+&"spawn": SubResource("Animation_d57hv")
+}
+
+[sub_resource type="Animation" id="Animation_akx6h"]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.225313, 1),
+"update": 0,
+"values": [Vector3(-1.14049, 0.817, 0.0481586), Vector3(-2.242, 0.817, 0.0481586)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.170755, 1),
+"update": 0,
+"values": [Vector3(-8.21431e-08, -3.14159, -0.21019), Vector3(0, -3.14159, -0.785398)]
+}
+
+[sub_resource type="Animation" id="Animation_8oe4b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-2.242, 0.817, 0.0481586)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -3.14159, -0.785398)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x0wgl"]
+_data = {
+&"RESET": SubResource("Animation_8oe4b"),
+&"spawn": SubResource("Animation_akx6h")
+}
+
+[node name="Wagon" type="PathFollow3D" node_paths=PackedStringArray("weak_spots", "guards", "missile_spawn_points")]
+script = ExtResource("1_u84f1")
+weak_spots = [NodePath("ActualWeakPoint"), NodePath("ActualWeakPoint2"), NodePath("ActualWeakPoint3")]
+guards = [NodePath("Guard0"), NodePath("Guard1"), NodePath("Guard2"), NodePath("Guard3")]
+missile_spawn_points = [NodePath("MissileSpawn")]
+
+[node name="game jam truck" parent="." instance=ExtResource("2_8umep")]
+transform = Transform3D(0.805, 0, 0, 0, 0.805, 0, 0, 0, 0.805, 0, -0.888732, 1.96262)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+script = ExtResource("2_qt2gw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.366, 0)
+shape = SubResource("BoxShape3D_vk28q")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_3to55")
+}
+
+[node name="ActualWeakPoint" type="StaticBody3D" parent="." node_paths=PackedStringArray("mesh_instance_3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.13756, -1.24079, 5.51133)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("3_vk28q")
+mesh_instance_3d = NodePath("WeakPoint")
+
+[node name="WeakPoint" type="MeshInstance3D" parent="ActualWeakPoint"]
+mesh = SubResource("SphereMesh_3to55")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_uwxfd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ActualWeakPoint"]
+
+[node name="ActualWeakPoint2" type="StaticBody3D" parent="." node_paths=PackedStringArray("mesh_instance_3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.05243, -1.11714, 5.57595)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("3_vk28q")
+mesh_instance_3d = NodePath("WeakPoint")
+weak_spot_number = 1
+
+[node name="WeakPoint" type="MeshInstance3D" parent="ActualWeakPoint2"]
+transform = Transform3D(0.999892, 0.0147126, 0, -0.0147126, 0.999892, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("SphereMesh_3to55")
+surface_material_override/0 = SubResource("StandardMaterial3D_vtwxe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ActualWeakPoint2"]
+
+[node name="ActualWeakPoint3" type="StaticBody3D" parent="." node_paths=PackedStringArray("mesh_instance_3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0162158, 1.58176, 5.62526)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("3_vk28q")
+mesh_instance_3d = NodePath("WeakPoint")
+weak_spot_number = 2
+
+[node name="WeakPoint" type="MeshInstance3D" parent="ActualWeakPoint3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0233355, 0, 0)
+mesh = SubResource("SphereMesh_3to55")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_vk28q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ActualWeakPoint3"]
+
+[node name="Guard0" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("4_3to55")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.801588, 2.83037, 2.78712)
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Guard0"]
+libraries = {
+&"": SubResource("AnimationLibrary_vtwxe")
+}
+
+[node name="Guard1" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("4_3to55")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.809573, 3.23495, 2.78712)
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Guard1"]
+libraries = {
+&"": SubResource("AnimationLibrary_kpoxt")
+}
+
+[node name="Guard2" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("4_3to55")]
+transform = Transform3D(-0.707107, 0.707107, 1.50996e-07, 0.707107, 0.707107, -6.18173e-08, -1.50482e-07, 6.30588e-08, -1, 2.24216, 0.816968, 0.242632)
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Guard2"]
+libraries = {
+&"": SubResource("AnimationLibrary_fu2on")
+}
+
+[node name="Guard3" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("4_3to55")]
+transform = Transform3D(-0.707107, -0.707107, -1.50996e-07, -0.707107, 0.707107, 0, 1.0677e-07, 1.0677e-07, -1, -2.242, 0.817, 0.0481586)
+animation_player = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Guard3"]
+libraries = {
+&"": SubResource("AnimationLibrary_x0wgl")
+}
+
+[node name="MissileSpawn" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 3.57793, 5.13587)
+
+[node name="Take_damage" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_vtwxe")
+
+[node name="Take_damage2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_am2mi")
+
+[node name="ResistDamage" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_w5lw8")
+
+[node name="WeakSpotDestroyed" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_am2mi")
+volume_db = 5.0
+
+[node name="WagonDestroyed" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_kpoxt")
+volume_db = 5.0
+
+[editable path="game jam truck"]

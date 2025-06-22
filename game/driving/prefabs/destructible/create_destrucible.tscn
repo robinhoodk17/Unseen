@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://rv836bpusitt"]
+
+[ext_resource type="Script" uid="uid://vt4g8gefqafa" path="res://game/driving/prefabs/destructible.gd" id="1_0uhec"]
+
+[node name="StaticBody3D" type="StaticBody3D"]
+script = ExtResource("1_0uhec")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
