@@ -117,7 +117,6 @@ point_count = 11
 transform = Transform3D(100, 0, 0, 0, 88.3651, -46.8146, 0, 46.8146, 88.3651, 0, 0, 0)
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 operation = 2
 size = Vector3(42.7269, 53.197, 70.05)
 
@@ -1130,4 +1129,4 @@ acceleration_speed = 10.0
 move_speed = Vector2(3, 5)
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.999995, 0, -0.00245825, 0, 1, 0, 0.00245825, 0, 0.999995, -977.026, 2205.06, 41022.2)
+transform = Transform3D(0.999995, 0, -0.00245807, 0, 1, 0, 0.00245807, 0, 0.999995, -977.026, 2205.06, 41022.2)

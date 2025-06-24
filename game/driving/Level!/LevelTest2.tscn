@@ -240,7 +240,7 @@ progress = 617.33
 transform = Transform3D(1, 0, 0, -7.27596e-12, 1, 0, -7.45058e-09, 0, 1, 2.05859, 3.05176e-05, -0.081543)
 
 [node name="BoostPad" parent="Path3D" instance=ExtResource("16_ky0b1")]
-transform = Transform3D(0.999948, -8.7103e-06, -0.00979856, 8.70836e-06, 1, -2.38117e-07, 0.00979856, 1.52777e-07, 0.999948, -3.19875, 0.102275, 3654.8)
+transform = Transform3D(0.999948, -8.7103e-06, -0.00979855, 8.70835e-06, 1, -2.38117e-07, 0.00979855, 1.52777e-07, 0.999948, -3.19875, 0.102275, 3654.8)
 progress = 668.346
 
 [node name="BoostPad2" parent="Path3D" instance=ExtResource("16_ky0b1")]
@@ -248,14 +248,14 @@ transform = Transform3D(0.999968, -8.71219e-06, -0.0073229, 8.70918e-06, 1, -4.3
 progress = 1074.34
 
 [node name="HealthPad" parent="Path3D" instance=ExtResource("17_6fhbj")]
-transform = Transform3D(0.999984, -8.71079e-06, 0.00497857, 8.71218e-06, 1, -2.63606e-07, -0.00497857, 3.06978e-07, 0.999984, -5.55586, 0.102229, 3854.45)
+transform = Transform3D(0.999984, -8.71079e-06, 0.00497854, 8.71218e-06, 1, -2.63606e-07, -0.00497854, 3.06978e-07, 0.999984, -5.55586, 0.102229, 3854.45)
 progress = 471.587
 
 [node name="Movable" parent="Path3D/HealthPad" index="0"]
 transform = Transform3D(1, 0, 4.65661e-10, 0, 1, 0, -4.65661e-10, 0, 1, 0, 0, -0.011)
 
 [node name="HealthPad2" parent="Path3D" instance=ExtResource("17_6fhbj")]
-transform = Transform3D(0.999947, -8.7103e-06, -0.00979855, 8.70835e-06, 1, -2.38117e-07, 0.00979855, 1.52777e-07, 0.999947, -2.93264, 0.10228, 3628.88)
+transform = Transform3D(0.999947, -8.7103e-06, -0.00979854, 8.70834e-06, 1, -2.38117e-07, 0.00979854, 1.52777e-07, 0.999947, -2.93264, 0.10228, 3628.88)
 progress = 694.19
 
 [node name="Movable" parent="Path3D/HealthPad2" index="0"]
@@ -276,7 +276,7 @@ progress = 1062.77
 transform = Transform3D(1, -1.14353e-13, 9.31323e-10, -8.32001e-12, 1, 2.84217e-14, -8.3819e-09, -2.84217e-14, 1, 0, 0, 0)
 
 [node name="DamageUpgrade3" parent="Path3D" instance=ExtResource("4_14eqd")]
-transform = Transform3D(0.999984, -8.71219e-06, 0.00429835, 8.71249e-06, 1, -6.37262e-08, -0.00429834, 1.01176e-07, 0.999987, -0.580531, 0.102453, 2992.58)
+transform = Transform3D(0.999984, -8.7122e-06, 0.00429836, 8.71249e-06, 1, -6.37988e-08, -0.00429835, 1.01248e-07, 0.999987, -0.580532, 0.102453, 2992.58)
 progress = 1331.77
 
 [node name="Movable" parent="Path3D/DamageUpgrade3" index="0"]
