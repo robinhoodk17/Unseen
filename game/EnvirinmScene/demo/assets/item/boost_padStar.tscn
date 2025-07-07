@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://qxkph8l1vaho"]
+
+[ext_resource type="Script" uid="uid://dp77ldkppqla8" path="res://game/driving/prefabs/boost_pad/movable.gd" id="1_jg2tr"]
+[ext_resource type="PackedScene" uid="uid://17wbmjaeeukf" path="res://game/EnvirinmScene/demo/assets/item/star.tscn" id="2_jg2tr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p1jd7"]
+size = Vector3(1.4541, 1.56934, 0.375977)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_51rp1"]
+size = Vector3(100, 100, 100)
+
+[node name="BoostPad" type="PathFollow3D"]
+transform = Transform3D(0.999948, -8.7103e-06, -0.00979855, 8.70835e-06, 1, -2.38117e-07, 0.00979855, 1.52777e-07, 0.999948, 0, 0, 0)
+progress = 668.346
+
+[node name="Movable" type="Area3D" parent="."]
+transform = Transform3D(2, 0, 9.31322e-10, 0, 2, 0, -9.31322e-10, 0, 2, 0, 0, 0)
+script = ExtResource("1_jg2tr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Movable"]
+transform = Transform3D(1, -1.20083e-10, 0, 1.20015e-10, 1, -1.42109e-14, 0, 5.25802e-13, 1, 0.0127382, 1.9861e-07, -0.0120691)
+shape = SubResource("BoxShape3D_p1jd7")
+
+[node name="StartMoving" type="Area3D" parent="Movable"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Movable/StartMoving"]
+shape = SubResource("BoxShape3D_51rp1")
+
+[node name="boost_pad" parent="Movable" instance=ExtResource("2_jg2tr")]
+transform = Transform3D(0.062997, 5.48626e-07, 0.000617311, -5.48746e-07, 0.063, 9.62499e-09, -0.000617311, -1.50015e-08, 0.062997, -0.0276033, 2.49906e-07, 0.0400078)
