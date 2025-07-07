@@ -180,7 +180,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 266.165, 0)
 curve = SubResource("Curve3D_ycb0r")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.999619, 0, -0.0263021, 0, 0.999996, 0, 0.0263019, 0, 0.999625, -6.60748, 0.000274658, 4323.12)
+transform = Transform3D(0.999618, 0, -0.0263021, 0, 0.999996, 0, 0.0263019, 0, 0.999624, -6.60748, 0.000274658, 4323.12)
 
 [node name="_Node3D_71306" type="Node3D" parent="Path3D/PathFollow3D"]
 transform = Transform3D(0.999925, 0, 0.0129737, -2.17092e-09, 1, 1.67319e-07, -0.0129736, -1.67334e-07, 0.999919, -0.509972, 1.69229, -109.653)

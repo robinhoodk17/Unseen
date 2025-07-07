@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://xu1lw67temet"]
+[gd_scene load_steps=43 format=4 uid="uid://xu1lw67temet"]
 
 [ext_resource type="Script" uid="uid://cytuck1gttjie" path="res://game/driving/Level!/level_test_2.gd" id="1_expyj"]
 [ext_resource type="PackedScene" uid="uid://cnjw54m0awi81" path="res://game/driving/prefabs/prompt/prompt.tscn" id="2_uv6fq"]
@@ -24,7 +24,11 @@
 [ext_resource type="Texture2D" uid="uid://cvaos42tj346f" path="res://game/EnvirinmScene/demo/assets/models/Rock/Cube_045_gray_rocks_diff_1k.jpg" id="21_2xcrt"]
 [ext_resource type="Texture2D" uid="uid://6flea7rx7ddr" path="res://game/EnvirinmScene/demo/assets/models/Rock/Cube_045_gray_rocks_rough_1k.png" id="22_rtttp"]
 [ext_resource type="Texture2D" uid="uid://hypwqff4qqhj" path="res://game/EnvirinmScene/demo/assets/models/Rock/Cube_045_gray_rocks_nor_gl_1k.png" id="23_2uojr"]
-[ext_resource type="PackedScene" uid="uid://kfdjle8x4cl2" path="res://game/EnvirinmScene/demo/assets/models/City/CityPack1.glb" id="24_uv6fq"]
+[ext_resource type="PackedScene" uid="uid://025wfjrrqecu" path="res://game/EnvirinmScene/demo/assets/models/City/City2.tscn" id="25_7nxqd"]
+[ext_resource type="PackedScene" uid="uid://yb6ebu7j1j5j" path="res://game/EnvirinmScene/demo/assets/models/City/City3.tscn" id="26_4l3m5"]
+[ext_resource type="PackedScene" uid="uid://17wbmjaeeukf" path="res://game/EnvirinmScene/demo/assets/item/star.tscn" id="27_oqouj"]
+[ext_resource type="PackedScene" uid="uid://banan8qt2xe18" path="res://game/EnvirinmScene/demo/assets/models/light/spotlight2.tscn" id="28_q8dl7"]
+[ext_resource type="PackedScene" uid="uid://ijdw1cwuxe4d" path="res://game/EnvirinmScene/demo/assets/models/trace/trace-1.glb" id="29_u3h7f"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_xia7n"]
 viewport_path = NodePath("SubViewport")
@@ -120,6 +124,9 @@ shadow_mesh = SubResource("ArrayMesh_638np")
 [node name="LevelTest" type="Node3D"]
 script = ExtResource("1_expyj")
 
+[node name="CarLight" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.5016, 299.573, 4125.53)
+
 [node name="Extras" type="Node3D" parent="."]
 
 [node name="Move" parent="Extras" instance=ExtResource("2_uv6fq")]
@@ -164,9 +171,6 @@ script = ExtResource("7_u3h7f")
 shape = SubResource("BoxShape3D_a4ecv")
 debug_color = Color(1, 1, 1, 1)
 
-[node name="Spotlight" parent="Extras" instance=ExtResource("8_c0u1e")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 15.1012, 247.068, 4058.58)
-
 [node name="Spotlight2" parent="Extras" instance=ExtResource("8_c0u1e")]
 transform = Transform3D(0.455902, 0, -0.89003, 0, 1, 0, 0.89003, 0, 0.455902, 27.5965, 247.068, 3640.11)
 
@@ -187,8 +191,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 266.165, 0)
 curve = SubResource("Curve3D_ycb0r")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.999618, 0, -0.0263021, 0, 0.999996, 0, 0.0263019, 0, 0.999624, -6.60748, 0.000274658, 4323.12)
+transform = Transform3D(0.999597, 0, -0.0263015, 0, 0.999996, 0, 0.0263014, 0, 0.999604, -6.42605, -0.00112361, 4317.67)
 visible = false
+progress = 7.7
 
 [node name="_Node3D_71306" type="Node3D" parent="Path3D/PathFollow3D"]
 transform = Transform3D(0.999925, 0, 0.0129737, -2.17092e-09, 1, 1.67319e-07, -0.0129736, -1.67334e-07, 0.999919, -0.509972, 1.69229, -109.653)
@@ -209,6 +214,12 @@ size = Vector3(7.29468, 1.06244, 232.014)
 transform = Transform3D(-0.999882, 0.00790637, 0.0129731, -0.00790563, -0.99996, 0.000102889, 0.0129735, 1.67327e-07, 0.999912, -0.795337, -4.21686, 0)
 size = Vector3(29.9971, 1.06244, 232.014)
 
+[node name="Star4" parent="Path3D/PathFollow3D/_Node3D_71306" instance=ExtResource("27_oqouj")]
+transform = Transform3D(0.114993, -2.49656e-10, 0.00153317, 5.06169e-10, 0.115, -1.92372e-08, -0.00153317, 1.92418e-08, 0.114993, -9.54846, -1.16385, -0.781738)
+
+[node name="Star5" parent="Path3D/PathFollow3D/_Node3D_71306" instance=ExtResource("27_oqouj")]
+transform = Transform3D(0.114993, -2.49656e-10, 0.00153317, 5.06169e-10, 0.115, -1.92372e-08, -0.00153317, 1.92418e-08, 0.114993, 1.97997, -1.03424, -80.6079)
+
 [node name="Player" parent="Path3D" instance=ExtResource("9_q61xj")]
 unique_name_in_owner = true
 transform = Transform3D(0.999638, 0, -0.0263026, 0, 0.999997, 0, 0.0263024, 0, 0.999644, -6.60748, 0.000274658, 4323.12)
@@ -216,6 +227,7 @@ slide_on_ceiling = false
 wall_min_slide_angle = 0.872665
 floor_stop_on_slope = false
 floor_block_on_wall = false
+progress = 100.0
 camera_offset = 0.7
 camera_vertical_offset = 0.4
 limits = Vector2(5, 10)
@@ -421,8 +433,38 @@ skeleton = NodePath("")
 
 [node name="StaticBody3D" parent="Cube_0460/Cube_047" instance=ExtResource("20_xkkkd")]
 
-[node name="CityPack1" parent="." instance=ExtResource("24_uv6fq")]
-transform = Transform3D(0.455, 0, 0, 0, 0.455, 0, 0, 0, 0.455, -140.725, 255.08, 3519.94)
+[node name="Landscape_013" parent="." instance=ExtResource("25_7nxqd")]
+transform = Transform3D(1.83, 0, 0, 0, 1.83, 0, 0, 0, 1.83, -80.4289, 253.408, 4165.44)
+
+[node name="Landscape_014" parent="." instance=ExtResource("25_7nxqd")]
+transform = Transform3D(1.47438, 0, -1.08403, 0, 1.83, 0, 1.08403, 0, 1.47438, -128.496, 249.137, 4241.64)
+
+[node name="Torus_001" parent="." instance=ExtResource("26_4l3m5")]
+transform = Transform3D(0.497, 0, 0, 0, 0.497, 0, 0, 0, 0.497, -10.9653, 258.962, 4123.87)
+
+[node name="Star4" parent="." instance=ExtResource("27_oqouj")]
+transform = Transform3D(0.115, 0, 0, 0, 0.115, 0, 0, 0, 0.115, -6.05269, 265.988, 4293.52)
+
+[node name="Star5" parent="." instance=ExtResource("27_oqouj")]
+transform = Transform3D(0.115, 0, 0, 0, 0.115, 0, 0, 0, 0.115, -14.1577, 266.071, 4273)
+
+[node name="Spotlight2" parent="." instance=ExtResource("28_q8dl7")]
+transform = Transform3D(-6.79712e-08, 0, -1.555, 0, 1.555, 0, 1.555, 0, -6.79712e-08, 32.4778, 234.079, 4102.99)
+
+[node name="Spotlight3" parent="." instance=ExtResource("28_q8dl7")]
+transform = Transform3D(0.135527, 0, 1.54908, 0, 1.555, 0, -1.54908, 0, 0.135527, -34.4425, 234.079, 4049.64)
+
+[node name="trace-1" parent="." instance=ExtResource("29_u3h7f")]
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 5.62794, 240.137, 4274.13)
+
+[node name="trace-2" parent="." instance=ExtResource("29_u3h7f")]
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 5.62794, 240.137, 4242.05)
+
+[node name="trace-3" parent="." instance=ExtResource("29_u3h7f")]
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 5.62794, 240.137, 4210.78)
+
+[node name="trace-4" parent="." instance=ExtResource("29_u3h7f")]
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 5.62794, 240.137, 4178.71)
 
 [editable path="Path3D/DamageUpgrade"]
 [editable path="Path3D/HealthPad"]

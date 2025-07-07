@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://banan8qt2xe18"]
+
+[ext_resource type="Script" uid="uid://cvd7frrweqoqc" path="res://game/driving/prefabs/spotlight3D.gd" id="1_p8m6q"]
+[ext_resource type="PackedScene" uid="uid://kkqq8rmk4kie" path="res://game/EnvirinmScene/demo/assets/models/light/CarLight.glb" id="3_7vnf4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a4ecv"]
+transparency = 1
+blend_mode = 1
+depth_draw_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(3, 3, 3, 0.1)
+grow_amount = 2.735
+
+[sub_resource type="PrismMesh" id="PrismMesh_a46kp"]
+left_to_right = 0.2
+size = Vector3(46.885, 52.005, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_aljdv"]
+data = PackedVector3Array(-14.0655, 26.0025, -0.5, -23.4425, -26.0025, -0.5, 23.4425, -26.0025, -0.5, -14.0655, 26.0025, 0.5, -23.4425, -26.0025, 0.5, -23.4425, -26.0025, -0.5, -23.4425, -26.0025, 0.5, 23.4425, -26.0025, 0.5, -23.4425, -26.0025, -0.5, -14.0655, 26.0025, 0.5, 23.4425, -26.0025, 0.5, -23.4425, -26.0025, 0.5, -14.0655, 26.0025, -0.5, -14.0655, 26.0025, 0.5, -23.4425, -26.0025, -0.5, -14.0655, 26.0025, 0.5, -14.0655, 26.0025, -0.5, 23.4425, -26.0025, 0.5, 23.4425, -26.0025, 0.5, 23.4425, -26.0025, -0.5, -23.4425, -26.0025, -0.5, -14.0655, 26.0025, -0.5, 23.4425, -26.0025, -0.5, 23.4425, -26.0025, 0.5)
+
+[node name="Spotlight" type="Area3D"]
+transform = Transform3D(-4.35451e-08, 0.0871557, -0.996195, 3.8097e-09, 0.996195, 0.0871557, 1, 0, -4.37114e-08, 2, 0, 0)
+script = ExtResource("1_p8m6q")
+
+[node name="Light" type="CSGMesh3D" parent="."]
+transform = Transform3D(-3.14634e-09, 5.07319e-09, -1, 0.310063, 0.950716, -8.90768e-09, 0.950716, -0.310063, -4.68164e-08, -3.97082e-07, 22.4105, 23.6421)
+material_override = SubResource("StandardMaterial3D_a4ecv")
+mesh = SubResource("PrismMesh_a46kp")
+
+[node name="LampPost" parent="." instance=ExtResource("3_7vnf4")]
+transform = Transform3D(-1.44802e-08, 1.04572e-08, -0.31, -0.0260426, 0.308904, 1.16367e-08, 0.308904, 0.0260426, -1.35505e-08, 1.6552, -4.09858, -8.3902)
+
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(4.15571e-08, -1.35533e-08, -1, 0.310062, 0.950716, 2.66454e-15, 0.950716, -0.310062, 4.37114e-08, 1.03343e-06, 22.4105, 23.6421)
+shape = SubResource("ConcavePolygonShape3D_aljdv")
