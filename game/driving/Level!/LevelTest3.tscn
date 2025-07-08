@@ -129,6 +129,26 @@ script = ExtResource("1_expyj")
 transform = Transform3D(0.999871, -8.16188e-06, -0.0157352, 2.05215e-06, 1, -0.000388296, 0.0157352, 0.000388217, 0.999871, -6.08385, 266.178, 4302.72)
 progress = 37.72
 
+[node name="BoostPad5" parent="." instance=ExtResource("16_q61xj")]
+transform = Transform3D(0.999871, -8.16188e-06, -0.0157352, 2.05215e-06, 1, -0.000388296, 0.0157352, 0.000388217, 0.999871, 6.41615, 266.578, 3500.02)
+progress = 37.72
+
+[node name="BoostPad6" parent="." instance=ExtResource("16_q61xj")]
+transform = Transform3D(0.999871, -8.16188e-06, -0.0157352, 2.05215e-06, 1, -0.000388296, 0.0157352, 0.000388217, 0.999871, -5.40089, 266.578, 3446.07)
+progress = 37.72
+
+[node name="BoostPad7" parent="." instance=ExtResource("16_q61xj")]
+transform = Transform3D(0.999871, -8.16188e-06, -0.0157352, 2.05215e-06, 1, -0.000388296, 0.0157352, 0.000388217, 0.999871, 6.39911, 266.578, 3384.07)
+progress = 37.72
+
+[node name="BoostPad8" parent="." instance=ExtResource("16_q61xj")]
+transform = Transform3D(0.999871, -8.16188e-06, -0.0157352, 2.05215e-06, 1, -0.000388296, 0.0157352, 0.000388217, 0.999871, -4.17786, 266.578, 3311.97)
+progress = 37.72
+
+[node name="BoostPad9" parent="." instance=ExtResource("16_q61xj")]
+transform = Transform3D(0.999871, -8.16188e-06, -0.0157352, 2.05215e-06, 1, -0.000388296, 0.0157352, 0.000388217, 0.999871, 8.72214, 266.578, 3239.27)
+progress = 37.72
+
 [node name="BoostPad4" parent="." instance=ExtResource("16_q61xj")]
 transform = Transform3D(0.999871, -8.16188e-06, -0.0157352, 2.05215e-06, 1, -0.000388296, 0.0157352, 0.000388217, 0.999871, -6.08385, 266.178, 4181.38)
 progress = 37.72
@@ -183,9 +203,6 @@ debug_color = Color(1, 1, 1, 1)
 [node name="Spotlight5" parent="Extras" instance=ExtResource("8_c0u1e")]
 transform = Transform3D(0.0501921, 0, 0.99874, 0, 1, 0, -0.99874, 0, 0.0501921, -22.5028, 243.763, 3204.04)
 
-[node name="Spotlight6" parent="Extras" instance=ExtResource("8_c0u1e")]
-transform = Transform3D(-0.050192, 0, -0.99874, 0, 1, 0, 0.99874, 0, -0.050192, 34.3344, 243.763, 3208.87)
-
 [node name="Spotlight7" parent="Extras" instance=ExtResource("8_c0u1e")]
 transform = Transform3D(-0.050192, 0, -0.99874, 0, 1, 0, 0.99874, 0, -0.050192, 22.5697, 243.763, 3198.76)
 
@@ -194,11 +211,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 266.165, 0)
 curve = SubResource("Curve3D_ycb0r")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.999595, 0, -0.0263015, 0, 0.999996, 0, 0.0263013, 0, 0.999602, -6.60748, 0.000274658, 4323.12)
+transform = Transform3D(0.999893, -8.71027e-06, -0.00979808, 8.70787e-06, 0.999996, -2.38106e-07, 0.00979801, 1.52776e-07, 0.9999, -1.75558, 0.102305, 3512.04)
+progress = 810.81
 
 [node name="_Node3D_71306" type="Node3D" parent="Path3D/PathFollow3D"]
 transform = Transform3D(0.999925, 0, 0.0129737, -2.17092e-09, 1, 1.67319e-07, -0.0129736, -1.67334e-07, 0.999919, -0.509972, 1.69229, -109.653)
-visible = false
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="Path3D/PathFollow3D/_Node3D_71306"]
 transform = Transform3D(-0.999882, 0.00790637, 0.0129731, -0.00790563, -0.99996, 0.000102889, 0.0129735, 1.67327e-07, 0.999912, -0.795337, 1.77008, 0)
@@ -260,16 +277,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.29995, 0, -0.0124512)
 [node name="BoostPad2" parent="Path3D" instance=ExtResource("16_f7n5p")]
 transform = Transform3D(0.999968, -8.71219e-06, -0.0073229, 8.70918e-06, 1, -4.37682e-07, 0.0073229, 3.73895e-07, 0.999968, 0.348919, 0.102429, 3247.08)
 progress = 1074.34
-
-[node name="HealthPad" parent="Path3D" instance=ExtResource("17_ilt7u")]
-transform = Transform3D(0.999984, -8.71079e-06, 0.00497854, 8.71218e-06, 1, -2.63606e-07, -0.00497854, 3.06978e-07, 0.999984, -5.55586, 0.102229, 3854.45)
-progress = 471.587
-
-[node name="Movable" parent="Path3D/HealthPad" index="0"]
-transform = Transform3D(1, 0, 4.65661e-10, 0, 1, 0, -4.65661e-10, 0, 1, 0, 0, -0.011)
-
-[node name="Cube" parent="Path3D/HealthPad/Movable/Health" index="0"]
-transform = Transform3D(0.7, 2.01728e-13, 2.32831e-10, -1.15441e-12, 0.7, -1.77636e-14, -9.31323e-10, 1.13687e-13, 0.175, -3.511, -1.52588e-05, -68.1042)
 
 [node name="HealthPad2" parent="Path3D" instance=ExtResource("17_ilt7u")]
 transform = Transform3D(0.999947, -8.7103e-06, -0.00979854, 8.70834e-06, 1, -2.38117e-07, 0.00979854, 1.52777e-07, 0.999947, -2.93264, 0.10228, 3628.88)
@@ -337,7 +344,7 @@ size = Vector3(1087.6, 1002.9, 1)
 transform = Transform3D(0.177207, 0.176147, -0.00836251, -0.157978, 0.153302, -0.118496, -0.0783633, 0.0892776, 0.219974, 9.04152, 274.118, 3519.39)
 
 [node name="Cube_045" parent="Cube_0453" index="0"]
-transform = Transform3D(40.2619, 9.53674e-07, 0, 9.53674e-07, 40.2619, -9.53674e-07, 1.90735e-06, -9.53674e-07, 40.2619, -29.125, 74.3218, 134.981)
+transform = Transform3D(40.2619, -4.76837e-07, 0, 9.53674e-07, 40.2619, -2.86102e-06, 1.90735e-06, -9.53674e-07, 40.2619, -162.951, -58.7046, 141.296)
 
 [node name="StaticBody3D" parent="Cube_0453/Cube_045" index="0" instance=ExtResource("20_xkkkd")]
 
@@ -353,7 +360,7 @@ transform = Transform3D(40.2619, 1.43051e-06, -9.53674e-07, -9.53674e-07, 40.261
 transform = Transform3D(-0.158241, 0.153041, -0.118484, -0.176972, -0.176375, 0.00853829, -0.0783633, 0.0892776, 0.219974, -22.6609, 274.118, 3431.49)
 
 [node name="Cube_045" parent="Cube_0455" index="0"]
-transform = Transform3D(40.2619, -4.76837e-07, 0, 9.53674e-07, 40.2619, 0, 0, -1.90735e-06, 40.2619, 6.16309, 62.8511, -23.3125)
+transform = Transform3D(30.2743, -25.6432, 6.84944, 23.1636, 30.5986, 12.1737, -12.959, -5.21318, 37.7612, 3.63135, 65.2993, -25.209)
 
 [node name="StaticBody3D" parent="Cube_0455/Cube_045" index="0" instance=ExtResource("20_xkkkd")]
 
@@ -361,7 +368,7 @@ transform = Transform3D(40.2619, -4.76837e-07, 0, 9.53674e-07, 40.2619, 0, 0, -1
 transform = Transform3D(0.154526, 0.191922, 0.0422821, -0.157978, 0.153302, -0.118496, -0.116896, 0.0465246, 0.216034, 24.0736, 274.118, 3374.5)
 
 [node name="Cube_045" parent="Cube_0457" index="0"]
-transform = Transform3D(40.2619, 1.43051e-06, -9.53674e-07, -9.53674e-07, 40.2619, 9.53674e-07, 1.90735e-06, 0, 40.2619, -48.4102, 55.1523, 135.892)
+transform = Transform3D(40.2619, -1.43051e-06, -1.90735e-06, 2.14577e-06, 40.2619, 1.90735e-06, 1.90735e-06, -9.53674e-07, 40.2619, -100.331, -9.33325, 121.686)
 
 [node name="StaticBody3D" parent="Cube_0457/Cube_045" index="0" instance=ExtResource("20_xkkkd")]
 
@@ -389,15 +396,8 @@ transform = Transform3D(40.2619, -4.76837e-07, 0, 9.53674e-07, 40.2619, 0, 0, -1
 
 [node name="StaticBody3D" parent="Cube_0460/Cube_045" index="0" instance=ExtResource("20_xkkkd")]
 
-[node name="Cube_046" type="MeshInstance3D" parent="Cube_0460"]
-transform = Transform3D(40.2619, -9.53674e-07, 0, 9.53674e-07, 40.2619, 0, 0, -4.76837e-06, 40.2619, -153.605, 158.942, 217.076)
-mesh = SubResource("ArrayMesh_v0mss")
-skeleton = NodePath("")
-
-[node name="StaticBody3D" parent="Cube_0460/Cube_046" instance=ExtResource("20_xkkkd")]
-
 [node name="Cube_047" type="MeshInstance3D" parent="Cube_0460"]
-transform = Transform3D(40.2619, -9.53674e-07, 0, 9.53674e-07, 40.2619, 0, 0, -7.62939e-06, 40.2619, -121.574, 243.532, 283.561)
+transform = Transform3D(40.2587, -0.185289, -0.475116, 0.179576, 40.2586, -0.484486, 0.477308, 0.482318, 40.2562, -131.852, 233.289, 284.057)
 mesh = SubResource("ArrayMesh_v0mss")
 skeleton = NodePath("")
 
@@ -420,6 +420,9 @@ transform = Transform3D(-6.79712e-08, 0, -1.555, 0, 1.555, 0, 1.555, 0, -6.79712
 
 [node name="Spotlight4" parent="." instance=ExtResource("28_q8dl7")]
 transform = Transform3D(-6.79712e-08, 0, -1.555, 0, 1.555, 0, 1.555, 0, -6.79712e-08, 32.4778, 234.079, 3805.69)
+
+[node name="Spotlight5" parent="." instance=ExtResource("28_q8dl7")]
+transform = Transform3D(-6.79712e-08, 0, -1.555, 0, 1.555, 0, 1.555, 0, -6.79712e-08, 32.4778, 234.079, 3569.39)
 
 [node name="Spotlight3" parent="." instance=ExtResource("28_q8dl7")]
 transform = Transform3D(0.135527, 0, 1.54908, 0, 1.555, 0, -1.54908, 0, 0.135527, -34.4425, 234.079, 4049.64)
@@ -578,8 +581,6 @@ transform = Transform3D(-0.00200947, 0, -0.0699712, 0, 0.07, 0, 0.0699712, 0, -0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1250.19, 158.794, 4056.82)
 
 [editable path="Path3D/DamageUpgrade"]
-[editable path="Path3D/HealthPad"]
-[editable path="Path3D/HealthPad/Movable/Health"]
 [editable path="Path3D/HealthPad2"]
 [editable path="Path3D/HealthPad2/Movable/Health"]
 [editable path="Path3D/HealthPad3"]
